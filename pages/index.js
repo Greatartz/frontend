@@ -1,3 +1,5 @@
+import Layout from "../components/Layout";
+
 export default function Home() {
-  return <>Next App project</>;
+  return <Layout title="Home">Next App project</Layout>;
 }
