@@ -9,7 +9,7 @@ export default function Header() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    axios.get(`${API_URL}/catagories`).then((res) => {
+    axios.get(`${API_URL}/categories`).then((res) => {
       setData(res.data);
       setLoad(true);
     });

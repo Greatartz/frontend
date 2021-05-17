@@ -8,7 +8,7 @@ export default function HomeCatagory({ catId }) {
   const [load, setLoad] = useState(false);
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get(`${API_URL}/posts?catagory=${catId}&_limit=6`).then((res) => {
+    axios.get(`${API_URL}/posts?category=${catId}&_limit=6`).then((res) => {
       setData(res.data);
       setLoad(true);
     });
@@ -24,7 +24,7 @@ export default function HomeCatagory({ catId }) {
                   <img
                     alt="Placeholder"
                     className="cardImage"
-                    src={`${API_URL}${part.image[0].url}`}
+                    src={`${API_URL}${part.featured_image.url}`}
                   />
                 </a>
               </Link>

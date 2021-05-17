@@ -9,7 +9,7 @@ export default function Home({ resCatagory }) {
       {resCatagory.map((i) => (
         <>
           <div key={`home-${i.id}`} className="w-full ml-2 py-2">
-            <Link href="/catagory/name">
+            <Link href="/category/name">
               <span className="font-bold">{i.name}</span>
             </Link>
           </div>
@@ -21,7 +21,7 @@ export default function Home({ resCatagory }) {
 }
 
 export async function getStaticProps() {
-  const reqCatagory = await fetch(`${API_URL}/catagories`);
+  const reqCatagory = await fetch(`${API_URL}/categories`);
   const resCatagory = await reqCatagory.json();
 
   return {
