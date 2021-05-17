@@ -43,7 +43,7 @@ export default function Header() {
           <div className="text-md font-bold text-blue-700 lg:flex-grow">
             {data.map((data) => (
               <Link href={`/category/${data.name}`} key={`${data.id}`}>
-                <a className="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
+                <a className="block capitalize mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
                   {data.name}
                 </a>
               </Link>
