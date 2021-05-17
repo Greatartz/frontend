@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+<<<<<<< HEAD
 @layer base {
   h1 {
     @apply text-2xl;
@@ -19,3 +20,18 @@
     max-height: 300px;
   }
 }
+=======
+@layer utilities {
+    .catImage{
+        width: 100%;
+        height: auto;
+        -o-object-fit: cover;
+        object-fit: cover;
+        min-height: 220px;
+        max-height: 250px;
+    }
+    .catTitle:hover , .catMore:hover{
+        border-bottom:2px solid #FFA028;
+    }
+  }
+>>>>>>> 6ba594c8ef3d5fe7f19bc6331c3d22b48541f848
