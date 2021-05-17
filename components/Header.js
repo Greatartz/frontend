@@ -24,7 +24,9 @@ export default function Header() {
         <div className="bg-bgColor w-full">
              <div className="container mx-auto">
                   <div className="flex-grow flex items-center">
-                      <h1 className="text-3xl uppercase py-5 px-7">Navbar</h1>
+                      <h1 className="text-3xl uppercase py-5 px-7 cursor-pointer">
+                        <Link href="/">Navbar</Link>
+                      </h1>
                       <h3 className="text-lg px-5">Some description about website</h3>
                   </div>
              </div> 
