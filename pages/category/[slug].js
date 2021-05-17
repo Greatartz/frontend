@@ -1,6 +1,7 @@
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 import {API_URL} from '../../config/index'
+import Link from 'next/link'
 
 const Categories = ({posts}) => {
 
@@ -12,16 +13,28 @@ const Categories = ({posts}) => {
             <section className="container my-10 mx-auto grid grid-cols-3 gap-10">
                   {posts.map((post) => (
                       <div className="text-center shadow border-b-2 border-borderColor">
-                          <div className="w-full">
-                              <img 
-                                className="catImage rounded-t"
-                                src={`${API_URL}${post.featured_image.url}`} />
+                          <div className="w-full cursor-pointer">
+                              <Link href={`/single/${post.slug}`}>
+                                <img 
+                                    className="catImage rounded-t"
+                                    src={`${API_URL}${post.featured_image.url}`} />
+                              </Link>
                           </div>
                           <div className="content">
-                               <span className="text-subTitle block my-3">{slug}</span>
-                               <h2 className="text-title text-lg mb-2 py-3 catTitle inline-block">{post.title}</h2>
+                               <span className="text-subTitle block my-3">
+                                    {slug}
+                               </span>
+                               <h2 className="text-title text-lg mb-2 py-3 catTitle inline-block">
+                                   <Link href={`/single/${post.slug}`}>
+                                        {post.title}
+                                   </Link>
+                               </h2>
                                <p className="text-subTitle mb-5 px-2 text-center">{post.excerpt}</p>
-                               <a className="block mb-5 catMore py-2 inline-block">More</a>
+                               <a className="block mb-5 catMore py-2 inline-block">
+                                    <Link href={`/single/${post.slug}`}>
+                                        More
+                                   </Link>
+                               </a>
                           </div>
                       </div>
                   ))}  
