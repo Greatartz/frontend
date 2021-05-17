@@ -19,12 +19,20 @@ export default function Header() {
   if(load){
     return (
 
-      <nav
-        className="flex items-center justify-between flex-wrap bg-white py-4 lg:px-12 shadow border-solid                   border-t-2 border-blue-700">
-        <div className="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 border-solid border-b-2                   border-gray-300 pb-5 lg:pb-0">
-            <div className="flex items-center flex-shrink-0 text-gray-800 mr-16">
-                <span className="font-semibold text-xl tracking-tight">My Navbar</span>
-            </div>
+      <nav className="flex items-center justify-between flex-wrap bg-white shadow">
+
+        <div className="bg-bgColor w-full">
+             <div className="container mx-auto">
+                  <div className="flex-grow flex items-center">
+                      <h1 className="text-3xl uppercase py-5 px-7 cursor-pointer">
+                        <Link href="/">Navbar</Link>
+                      </h1>
+                      <h3 className="text-lg px-5">Some description about website</h3>
+                  </div>
+             </div> 
+        </div>
+
+        <div className="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 border-solid border-b-2 border-gray-300 pb-5 lg:pb-0">
             <div className="block lg:hidden ">
                 <button
                     id="nav"
@@ -36,36 +44,39 @@ export default function Header() {
             </div>
         </div>
   
-        <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8">
-            <div className="text-md font-bold text-blue-700 lg:flex-grow">
+        <div className="menu w-full lg:block flex-grow lg:flex lg:items-center text-lg lg:w-auto uppercase text-title py-3">
+
+            <div className="text-md lg:flex-grow">
+
                 {data.map((data)=> (
                   <Link href={`/category/${data.name}`}
                   key={`${data.id}`}
                   >
                       <a
-                        className="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
+                        category = {data.id}
+                        className="block mt-4 lg:inline-block lg:mt-0 px-4 py-2 mr-2">
                           {data.name}
                       </a>
                   </Link>
                 ))}
                 
             </div> 
-            <div className="flex ">
+
+            <div className="flex mr-8">
                 <a href="#"
-                  className="block text-md px-4 py-2 rounded text-blue-700 ml-2 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0">Sign
-                    in</a>
+                  className="block text-md px-4 py-2 ml-2 mt-4 lg:mt-0">Sign In</a>
   
                 <a href="#"
-                  className=" block text-md px-4  ml-2 py-2 rounded text-blue-700 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0">login</a>
+                  className=" block text-md px-4  ml-2 py-2 mt-4 lg:mt-0">Sign Up</a>
             </div>
+
         </div>
   
     </nav>
   
     );
   }else{
-    return(<>Loading</>)
+    return(<h1>Loading data</h1>)
   }
 
 }
-
