@@ -3,15 +3,16 @@
 @tailwind utilities;
 
 @layer utilities {
-    .catImage{
-        width: 100%;
-        height: auto;
-        -o-object-fit: cover;
-        object-fit: cover;
-        min-height: 220px;
-        max-height: 250px;
-    }
-    .catTitle:hover , .catMore:hover{
-        border-bottom:2px solid #FFA028;
-    }
+  .catImage {
+    width: 100%;
+    height: auto;
+    -o-object-fit: cover;
+    object-fit: cover;
+    min-height: 220px;
+    max-height: 250px;
   }
+  .catTitle:hover,
+  .catMore:hover {
+    border-bottom: 2px solid #ffa028;
+  }
+}
