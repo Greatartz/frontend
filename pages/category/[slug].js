@@ -1,10 +1,11 @@
 import Layout from '../../components/Layout'
 
-const Categories = () => {
+const Categories = ({category}) => {
 
     return (
         <Layout title="Categories">
             Categories
+            {category }
         </Layout>
     );
 }
