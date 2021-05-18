@@ -57,13 +57,12 @@ export default function Header({categories, load}) {
             ))}
 
             <div className="searchComponent">
-              <form role="search" method="get" className="search-form flex" action="#">
+              <form role="search" method="get" className="search-form flex bg-bgColor" action="#">
                   <a href="#" class="search-form-link">
                       <img src="/search.svg" alt="Search Icon" className="search-icon" />
                   </a>
                 <div className="search-field-group">
-                    <input type="search" className="search-field focus-none" placeholder="Search ..." value="" name="s" title="Search for:" />
-                    <input type="submit" className="search-submit hidden" value="Search" />
+                    <input type="text" className="pl-3 focus:outline-none bg-bgColor" placeholder="Search ..."  name="s" title="Search for:" autocomplete="off" />
                 </div>
               </form>   
             </div>        
