@@ -6,15 +6,8 @@ import Link from "next/link";
 export default function Home({ resCatagory }) {
   return (
     <Layout title="Home">
-      {resCatagory.map((i) => (
-        <>
-          <div key={`home-${i.id}`} className="w-full ml-2 py-2">
-            <Link href="/category/name">
-              <span className="font-bold">{i.name}</span>
-            </Link>
-          </div>
-          <HomeCatagory catId={i.id} />
-        </>
+      {resCatagory.map((i) => (          
+          <HomeCatagory catId={i.id} catName={i.name} />
       ))}
     </Layout>
   );

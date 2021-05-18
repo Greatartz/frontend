@@ -2,7 +2,7 @@ import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 import {API_URL} from '../../config/index'
 import Link from 'next/link'
-
+import ArticleBox from '../../components/ArticleBox'
 const Categories = ({posts}) => {
 
     const router = useRouter()
@@ -10,35 +10,12 @@ const Categories = ({posts}) => {
 
     return (
         <Layout title={`${slug}`}>
-            <section className="container my-10 mx-auto grid grid-cols-3 gap-10">
+            {posts.length > 0 ? <section className="container my-10 mx-auto grid grid-cols-3 gap-10">
                   {posts.map((post) => (
-                      <div className="text-center shadow border-b-2 border-borderColor">
-                          <div className="w-full cursor-pointer">
-                              <Link href={`/single/${post.slug}`}>
-                                <img 
-                                    className="catImage rounded-t"
-                                    src={`${API_URL}${post.featured_image.url}`} />
-                              </Link>
-                          </div>
-                          <div className="content">
-                               <span className="text-subTitle block my-3">
-                                    {slug}
-                               </span>
-                               <h2 className="text-title text-lg mb-2 py-3 catTitle inline-block">
-                                   <Link href={`/single/${post.slug}`}>
-                                        {post.title}
-                                   </Link>
-                               </h2>
-                               <p className="text-subTitle mb-5 px-2 text-center">{post.excerpt}</p>
-                               <a className="block mb-5 catMore py-2 inline-block">
-                                    <Link href={`/single/${post.slug}`}>
-                                        More
-                                   </Link>
-                               </a>
-                          </div>
-                      </div>
-                  ))}  
-            </section>
+                      <ArticleBox post={post} />
+                  )) }
+            </section> : <h1 className="text-5xl text-borderColor m-10">No Posts Found in {slug} Category! </h1> }
+            
         </Layout>
     );
 }

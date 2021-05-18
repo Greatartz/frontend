@@ -10,10 +10,15 @@
     object-fit: cover;
     min-height: 220px;
     max-height: 250px;
+    transition: 1s ease;
   }
-  .catTitle:hover,
-  .catMore:hover {
-    border-bottom: 2px solid #ffa028;
+  .catImage:hover{
+    -webkit-transform: rotateZ(-1deg);
+    -ms-transform: rotateZ(-1deg);
+    transform: rotateZ(-1deg);
+    -webkit-filter: blur(1px);
+    filter: blur(1px);
+    transition: 1s ease;
   }
   .searchComponent{
     padding-top: 0.5rem;
