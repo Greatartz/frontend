@@ -30,7 +30,7 @@ const ArticleBox = ({post}) => {
                     <p className="px-2">{post.excerpt}</p>
                     <span className="inline-block mt-3">
                         <Link href={`/single/${post.slug}`}>
-                            <a className="border-b-2 border-white hover:border-borderColor"> More </a>
+                            <a className="text-borderColor font-bold"> More </a>
                         </Link>
                     </span>
                 </div>

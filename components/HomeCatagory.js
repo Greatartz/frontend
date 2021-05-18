@@ -31,9 +31,7 @@ export default function HomeCatagory({ catId , catName}) {
             </h1>
             <section className="container mb-10 mx-auto grid grid-cols-3 gap-10">
                 {data.map((part) => (
-                    <div>
-                      <ArticleBox post={part} />
-                    </div>
+                    <ArticleBox post={part} />
                 ))}
             </section>
           </main>
