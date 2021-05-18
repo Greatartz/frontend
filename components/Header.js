@@ -1,20 +1,10 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { API_URL } from "../config/index";
 import Skeleton from "react-loading-skeleton";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-export default function Header() {
-  const [load, setLoad] = useState(false);
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    axios.get(`${API_URL}/categories`).then((res) => {
-      setData(res.data);
-      setLoad(true);
-    });
-  }, []);
-
+export default function Header({categories, load}) {
+  const router = useRouter();
+  console.log(router.asPath)
   if (load) {
     return (
       <nav className="flex items-center justify-between flex-wrap bg-white shadow">
@@ -22,7 +12,7 @@ export default function Header() {
           <div className="container mx-auto">
             <div className="flex-grow flex items-center">
               <h1 className="text-3xl uppercase py-5 px-7 cursor-pointer">
-                <Link href="/">Navbar</Link>
+                <Link href="/">Mitch Cumm</Link>
               </h1>
               <h3 className="text-lg px-5">Some description about website</h3>
             </div>
@@ -48,17 +38,36 @@ export default function Header() {
         </div>
 
         <div className="menu w-full lg:block flex-grow lg:flex lg:items-center text-lg lg:w-auto uppercase text-title py-3">
-          <div className="text-md lg:flex-grow">
-            {data.map((data) => (
+
+          <div className="text-md lg:flex-grow flex">
+
+            {categories.map((data) => (
               <Link href={`/category/${data.name}`} key={`${data.id}`}>
                 <a
                   category={data.id}
-                  className="block mt-4 lg:inline-block lg:mt-0 px-4 py-2 mr-2"
+                  className= {`anchorTag  ${
+                    router.asPath === `/category/${data.name}`
+                      ? "text-borderColor hover:text-borderColor border-b border-borderColor"
+                      : ""
+                  }`}
                 >
                   {data.name}
                 </a>
               </Link>
             ))}
+
+            <div className="searchComponent">
+              <form role="search" method="get" className="search-form flex" action="#">
+                  <a href="#" class="search-form-link">
+                      <img src="/search.svg" alt="Search Icon" className="search-icon" />
+                  </a>
+                <div className="search-field-group">
+                    <input type="search" className="search-field focus-none" placeholder="Search ..." value="" name="s" title="Search for:" />
+                    <input type="submit" className="search-submit hidden" value="Search" />
+                </div>
+              </form>   
+            </div>        
+
           </div>
 
           <div className="flex mr-8">

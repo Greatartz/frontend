@@ -15,4 +15,22 @@
   .catMore:hover {
     border-bottom: 2px solid #ffa028;
   }
+  .searchComponent{
+    padding-top: 0.5rem;
+    background: #eaeaea;
+    padding: 1px;
+  }
+  .searchComponent img{
+    width: 30px;
+  }
+  .searchComponent a{
+    border-left: 1px solid #555;
+    padding-left:8px;
+  }
+}
+
+@layer components {
+  .anchorTag {
+    @apply block mt-4 lg:inline-block lg:mt-0 px-4 py-2 mr-2 hover:text-title border-b border-white hover:border-borderColor;
+  }
 }
