@@ -54,10 +54,22 @@ const SinglePage = ({ post }) => {
 };
 
 export async function getServerSideProps({ params }) {
-  const { slug } = params;
-  const request_post = await fetch(`${API_URL}/posts?slug=${slug}`);
-  const res_post = await request_post.json();
-  return { props: { post: res_post } };
+    const {slug} = params
+
+    const request_post = await fetch(`${API_URL}/posts?slug=${slug}`)
+    const res_post = await request_post.json()
+    
+    const cat = res_post[0].category.id
+    
+    const req_related_posts = await fetch(`${API_URL}/posts?category=${cat}&_limit=3`)
+    const res_related_posts = await req_related_posts.json()
+    
+    return {
+        props: { 
+            post: res_post,
+            rel_posts: res_related_posts
+         }
+    }
 }
 
 export default SinglePage;
