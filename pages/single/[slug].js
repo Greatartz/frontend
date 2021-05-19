@@ -7,13 +7,13 @@ import  ArticleBox from '../../components/ArticleBox'
 import TimeAgo from 'react-timeago'
 
 const SinglePage = ({ post, rel_posts }) => {
-  
+
   const myRender = (doc) => {
     let md = new mark();
     md.renderer.rules.image = function (tokens, idx, options, env, slf) {
       let token = tokens[idx];
       token.attrSet("src", `${API_URL}${token.attrGet("src")}`);
-      token.attrPush(["className", "w-2/4 my-2"]);
+      token.attrPush(["id", "content_image"]);
 
       token.attrs[token.attrIndex("alt")][1] = slf.renderInlineAsText(
         token.children,
@@ -94,7 +94,7 @@ const SinglePage = ({ post, rel_posts }) => {
               Related Posts:
           </h1>                        
           <section className="related_posts mb-10 mt-5 container mx-auto grid grid-cols-3 gap-10">
-              {rel_posts.map((post)=>(
+              {rel_posts.filter(rel_posts => rel_posts.id != post[0].id ).map((post)=>(
                   <ArticleBox post={post} />
               ))}
           </section>
@@ -118,7 +118,7 @@ export async function getServerSideProps({ params }) {
     return {
         props: { 
             post: res_post,
-            rel_posts: res_related_posts
+            rel_posts: res_related_posts,
          }
     }
 }
