@@ -11,7 +11,7 @@ const SinglePage = ({ post }) => {
     md.renderer.rules.image = function (tokens, idx, options, env, slf) {
       let token = tokens[idx];
       token.attrSet("src", `${API_URL}${token.attrGet("src")}`);
-      token.attrPush(["class", "w-2/4 my-2"]);
+      token.attrPush(["className", "w-2/4 my-2"]);
 
       token.attrs[token.attrIndex("alt")][1] = slf.renderInlineAsText(
         token.children,
@@ -33,7 +33,7 @@ const SinglePage = ({ post }) => {
               {post[0].category.name}
             </Link>
           </h3>
-          <h1 className="text-5xl">{post[0].title}</h1>
+          <h1 className="text-5xl capitalize">{post[0].title}</h1>
           <p className="singleDate text-subTitle mt-5">
             <span>{new Date(post[0].updated_at).toLocaleDateString()}</span> -
             <span>
