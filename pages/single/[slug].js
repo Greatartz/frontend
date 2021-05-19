@@ -5,15 +5,15 @@ import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 import {API_URL} from '../../config/index'
 import Link from 'next/link'
+import  ArticleBox from '../../components/ArticleBox'
 
 
-
-const SinglePage = ({ post }) => {
+const SinglePage = ({ post, rel_posts }) => {
     const router = useRouter()
     const { slug } = router.query
 
     const md = new MarkdownIt()
-
+    
     return (
         <Layout title={`Single | ${post[0].title}`}>
             <main className="container mx-auto py-10">
@@ -32,11 +32,7 @@ const SinglePage = ({ post }) => {
                     <p className="singleDate text-subTitle mt-5 text-xl">
                         <span>
                             {new Date(post[0].updated_at).toLocaleDateString()}
-                        </span>
-
-                            - 
-
-                        <span> 
+                        </span> - <span> 
                             {post[0].author.firstname} {post[0].author.lastname}
                         </span>
                     </p>
@@ -63,22 +59,32 @@ const SinglePage = ({ post }) => {
                             </section>
                             
                              <hr className="my-5" />           
-                            <section className="location">
-                                <p className="text-title font-bold">
-                                    Location: <span>{post[0].location}</span>
+                            <section className="location flex gap-5">
+                                <p className="text-title">
+                                    Location: <span className="font-bold">{post[0].location}</span>
                                 </p>
-                                <p className="text-title font-bold mt-2">
-                                    Posted: <TimeAgo date={new Date(post[0].updated_at).toUTCString()} />
-                                </p>
-                                <p className="text-title font-bold mt-2">
-                                    Author: <span> {post[0].author.firstname} {post[0].author.lastname} </span>
-                                </p>      
+                                <p className="text-title">
+                                    Author: <span className="font-bold"> {post[0].author.firstname} {post[0].author.lastname} </span>
+                                </p>  
+                                <p className="text-title">
+                                    Posted: <span className="font-bold">
+                                            <TimeAgo date={new Date(post[0].updated_at).toUTCString()} />
+                                        </span>
+                                </p>    
                             </section>
 
                         </div>
                      </div> {/* / col */}
+                </section>
 
-                     <div className="sidebar"></div>
+                <hr className="my-5" /> 
+                <h1>
+                    Related Posts:
+                </h1>                        
+                <section className="related_posts mb-10 mt-5 container mx-auto grid grid-cols-3 gap-10">
+                    {rel_posts.map((post)=>(
+                        <ArticleBox post={post} />
+                    ))}
                 </section>
 
             </main>
@@ -88,9 +94,21 @@ const SinglePage = ({ post }) => {
 
 export async function getServerSideProps({ params }) {
     const {slug} = params
+
     const request_post = await fetch(`${API_URL}/posts?slug=${slug}`)
     const res_post = await request_post.json()
-    return { props: { post: res_post } }
+    
+    const cat = res_post[0].category.id
+    
+    const req_related_posts = await fetch(`${API_URL}/posts?category=${cat}&_limit=3`)
+    const res_related_posts = await req_related_posts.json()
+    
+    return {
+        props: { 
+            post: res_post,
+            rel_posts: res_related_posts
+         }
+    }
 }
 
 export default SinglePage;
