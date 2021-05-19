@@ -10,9 +10,30 @@
     object-fit: cover;
     min-height: 220px;
     max-height: 250px;
+    transition: 1s ease;
   }
-  .catTitle:hover,
-  .catMore:hover {
-    border-bottom: 2px solid #ffa028;
+  .catImage:hover{
+    -webkit-transform: rotateZ(-1deg);
+    -ms-transform: rotateZ(-1deg);
+    transform: rotateZ(-1deg);
+    -webkit-filter: blur(1px);
+    filter: blur(1px);
+    transition: 1s ease;
+  }
+  .searchComponent{
+    padding-top: 0.5rem;
+  }
+  .searchComponent img{
+    width: 30px;
+  }
+  .searchComponent a{
+    border-left: 1px solid #555;
+    padding-left:8px;
+  }
+}
+
+@layer components {
+  .anchorTag {
+    @apply block mt-4 lg:inline-block lg:mt-0 px-3 py-2 mr-2 hover:text-title border-b border-white hover:border-borderColor;
   }
 }

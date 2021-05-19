@@ -8,13 +8,19 @@
     "start": "next start"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^14.1.3",
     "axios": "^0.21.1",
+    "marked": "^2.0.3",
     "next": "10.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-loading-skeleton": "^2.2.0",
+<<<<<<< HEAD
     "react-query": "^3.16.0",
     "react-timeago": "^6.1.1"
+=======
+    "storyblok-rich-text-react-renderer": "^2.3.1"
+>>>>>>> b012063c810ff2388cff0bf9e19bd5718d138d90
   },
   "devDependencies": {
     "autoprefixer": "^10.2.5",
