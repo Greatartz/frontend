@@ -1,14 +1,19 @@
-import { render } from 'storyblok-rich-text-react-renderer';
+import MarkdownIt from 'markdown-it'
+import parse from 'html-react-parser';
+import TimeAgo from 'react-timeago'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 import {API_URL} from '../../config/index'
 import Link from 'next/link'
 
-const SinglePage = ({ post }) => {
 
+
+const SinglePage = ({ post }) => {
     const router = useRouter()
     const { slug } = router.query
-    
+
+    const md = new MarkdownIt()
+
     return (
         <Layout title={`Single | ${post[0].title}`}>
             <main className="container mx-auto py-10">
@@ -19,26 +24,61 @@ const SinglePage = ({ post }) => {
                             {post[0].category.name} 
                         </Link>
                     </h3>
-                    <h1 className="text-5xl">
-                        {post[0].title}
+                    <h1 className="text-6xl">
+                        <span className="border-b-2 border-white hover:border-borderColor">
+                            {post[0].title}
+                        </span>
                     </h1>
-                    <p className="singleDate text-subTitle mt-5">
+                    <p className="singleDate text-subTitle mt-5 text-xl">
                         <span>
                             {new Date(post[0].updated_at).toLocaleDateString()}
-                        </span> - 
+                        </span>
+
+                            - 
+
                         <span> 
                             {post[0].author.firstname} {post[0].author.lastname}
                         </span>
                     </p>
                 </section>
 
-                <section className="singleContent">
-                    <div className="singleFeatureImage">
-                        <img src={`${API_URL}${post[0].featured_image.url}`} />
-                    </div>
-                    <div className="content">
-                    {render(post[0].content)}
-                    </div>
+                <section className="singleContent grid grid-cols-4 gap-2">
+
+                    <div className="col-span-3">
+                        <div className="singleFeatureImage my-10">
+                            <img src={`${API_URL}${post[0].featured_image.url}`} />
+                        </div>
+                        <div className="content">
+
+                            <section className="tags mb-5">
+                                {post[0].tags.map((tag) => (
+                                    <span className="bg-borderColor p-2 rounded text-white mr-2">
+                                        {tag.title}
+                                    </span>
+                                ))} 
+                            </section>
+
+                            <section id="content">
+                                {parse(md.render(post[0].content))}
+                            </section>
+                            
+                             <hr className="my-5" />           
+                            <section className="location">
+                                <h1 className="text-title font-bold">
+                                    Location: <span>{post[0].location}</span>
+                                </h1>
+                                <h1 className="text-title font-bold mt-2">
+                                    Posted: <TimeAgo date={new Date(post[0].updated_at).toUTCString()} />
+                                </h1>
+                                <h1 className="text-title font-bold mt-2">
+                                    Author: <span> {post[0].author.firstname} {post[0].author.lastname} </span>
+                                </h1>      
+                            </section>
+
+                        </div>
+                     </div> {/* / col */}
+
+                     <div className="sidebar"></div>
                 </section>
 
             </main>
