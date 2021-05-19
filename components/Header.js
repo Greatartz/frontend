@@ -47,7 +47,7 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="menu w-full lg:block flex-grow lg:flex lg:items-center text-lg lg:w-auto uppercase text-title py-3">
+        <div className="menu w-full flex-grow lg:flex lg:items-center text-lg lg:w-auto uppercase text-title py-3">
           <div className="text-md lg:flex-grow">
             {data.map((data) => (
               <Link href={`/category/${data.name}`} key={`${data.id}`}>
