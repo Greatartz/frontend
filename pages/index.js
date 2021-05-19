@@ -1,13 +1,12 @@
 import HomeCatagory from "../components/HomeCatagory";
 import Layout from "../components/Layout";
 import { API_URL } from "../config/index";
-import Link from "next/link";
 
 export default function Home({ resCatagory }) {
   return (
     <Layout title="Home">
-      {resCatagory.map((i) => (          
-          <HomeCatagory catId={i.id} catName={i.name} />
+      {resCatagory.map((i) => (
+        <HomeCatagory catId={i.id} catName={i.name} />
       ))}
     </Layout>
   );
@@ -16,7 +15,6 @@ export default function Home({ resCatagory }) {
 export async function getServerSideProps() {
   const reqCatagory = await fetch(`${API_URL}/categories`);
   const resCatagory = await reqCatagory.json();
-
   return {
     props: {
       resCatagory,
