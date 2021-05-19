@@ -13,7 +13,7 @@ export default function Home({ resCatagory }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const reqCatagory = await fetch(`${API_URL}/categories`);
   const resCatagory = await reqCatagory.json();
 

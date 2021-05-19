@@ -46,16 +46,7 @@ const SinglePage = ({ post }) => {
     );
 }
 
-export async function getStaticPaths() {
-    const res = await fetch(`${API_URL}/posts`)
-    const posts = await res.json()
-    const paths = posts.map((post) => ({
-        params: { slug: post.slug },
-    }))
-    return { paths, fallback: false }
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     const {slug} = params
     const request_post = await fetch(`${API_URL}/posts?slug=${slug}`)
     const res_post = await request_post.json()
