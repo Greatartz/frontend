@@ -64,15 +64,15 @@ const SinglePage = ({ post }) => {
                             
                              <hr className="my-5" />           
                             <section className="location">
-                                <h1 className="text-title font-bold">
+                                <p className="text-title font-bold">
                                     Location: <span>{post[0].location}</span>
-                                </h1>
-                                <h1 className="text-title font-bold mt-2">
+                                </p>
+                                <p className="text-title font-bold mt-2">
                                     Posted: <TimeAgo date={new Date(post[0].updated_at).toUTCString()} />
-                                </h1>
-                                <h1 className="text-title font-bold mt-2">
+                                </p>
+                                <p className="text-title font-bold mt-2">
                                     Author: <span> {post[0].author.firstname} {post[0].author.lastname} </span>
-                                </h1>      
+                                </p>      
                             </section>
 
                         </div>
