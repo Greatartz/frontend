@@ -1,7 +1,6 @@
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 import {API_URL} from '../../config/index'
-import Link from 'next/link'
 import ArticleBox from '../../components/ArticleBox'
 const Categories = ({posts}) => {
 

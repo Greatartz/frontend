@@ -1,10 +1,13 @@
 import Skeleton from "react-loading-skeleton";
+import { signIn, signOut, useSession } from "next-auth/client";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function Header({categories, load}) {
+export default function Header({ categories, load }) {
+  const [session, loading] = useSession();
+  console.log(session);
   const router = useRouter();
-  console.log(router.asPath)
   if (load) {
     return (
       <nav className="flex items-center justify-between flex-wrap bg-white shadow">
@@ -37,15 +40,13 @@ export default function Header({categories, load}) {
           </div>
         </div>
 
-        <div className="menu w-full lg:block flex-grow lg:flex lg:items-center text-lg lg:w-auto uppercase text-title py-3">
-
+        <div className="menu w-full  flex-grow lg:flex lg:items-center text-lg lg:w-auto uppercase text-title py-3">
           <div className="text-md lg:flex-grow flex">
-
             {categories.map((data) => (
               <Link href={`/category/${data.name}`} key={`${data.id}`}>
                 <a
                   category={data.id}
-                  className= {`anchorTag  ${
+                  className={`anchorTag  ${
                     router.asPath === `/category/${data.name}`
                       ? "text-borderColor hover:text-borderColor border-b border-borderColor"
                       : ""
@@ -57,26 +58,52 @@ export default function Header({categories, load}) {
             ))}
 
             <div className="searchComponent">
-              <form role="search" method="get" className="search-form flex bg-bgColor" action="#">
-                  <a href="#" class="search-form-link">
-                      <img src="/search.svg" alt="Search Icon" className="search-icon" />
-                  </a>
+              <form
+                role="search"
+                method="get"
+                className="search-form flex bg-bgColor"
+                action="#"
+              >
+                <a href="#" className="search-form-link">
+                  <img
+                    src="/search.svg"
+                    alt="Search Icon"
+                    className="search-icon"
+                  />
+                </a>
                 <div className="search-field-group">
-                    <input type="text" className="pl-3 focus:outline-none bg-bgColor" placeholder="Search ..."  name="s" title="Search for:" autocomplete="off" />
+                  <input
+                    type="text"
+                    className="pl-3 focus:outline-none bg-bgColor"
+                    placeholder="Search ..."
+                    name="s"
+                    title="Search for:"
+                    autoComplete="off"
+                  />
                 </div>
-              </form>   
-            </div>        
-
+              </form>
+            </div>
           </div>
 
           <div className="flex mr-8">
-            <a href="#" className="block text-md px-4 py-2 ml-2 mt-4 lg:mt-0">
-              Sign In
-            </a>
-
-            <a href="#" className=" block text-md px-4  ml-2 py-2 mt-4 lg:mt-0">
-              Sign Up
-            </a>
+            {!session && (
+              <>
+                <a
+                  className="block
+                   text-md px-4 py-2 ml-2
+                    mt-4 lg:mt-0"
+                  onClick={() => router.push("/login")}
+                >
+                  Sign in
+                </a>
+              </>
+            )}
+            {session && (
+              <>
+                Signed in as {session.user.username} <br />
+                <button onClick={() => signOut()}>Sign out</button>
+              </>
+            )}
           </div>
         </div>
       </nav>
