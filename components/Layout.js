@@ -1,8 +1,22 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { API_URL } from "../config/index";
 import Header from "./Header";
 import Footer from "./Footer";
 import Head from "next/head";
 
 const Layout = ({ title, children }) => {
+
+  const [load, setLoad] = useState(false);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    axios.get(`${API_URL}/categories`).then((res) => {
+      setData(res.data);
+      setLoad(true);
+    });
+  }, []);
+
   return (
     <>
       <Head>
@@ -16,13 +30,13 @@ const Layout = ({ title, children }) => {
         />
       </Head>
       <header>
-        <Header />
+        <Header categories={data} load={load} />
       </header>
 
       <main>{children}</main>
 
       <footer>
-        <Footer />
+        <Footer categories={data} load={load} />
       </footer>
     </>
   );
