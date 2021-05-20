@@ -11,7 +11,7 @@ export default function HomeCatagory({ catId , catName}) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(`${API_URL}/posts?category=${catId}&_limit=6`).then((res) => {
+    axios.get(`${API_URL}/posts?category=${catId}&_limit=6&_sort=id:DESC`).then((res) => {
 
       setData(res.data);
       setLoad(true);

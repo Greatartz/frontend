@@ -23,7 +23,7 @@ export async function getServerSideProps({ params }) {
 
     const {id} = params
 
-    const res = await fetch(`${API_URL}/posts?author=${id}&_limit=6`)
+    const res = await fetch(`${API_URL}/posts?author=${id}&_limit=6&_sort=id:DESC`)
     const posts = await res.json()
 
     return { props: { posts } }
