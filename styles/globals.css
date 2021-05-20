@@ -46,9 +46,16 @@
   .searchComponent img{
     width: 30px;
   }
-  .searchComponent a{
+  .searchComponent button{
     border-left: 1px solid #555;
     padding-left:8px;
+  }
+  #content_image{
+    width: 90%;
+    height: auto;
+    object-fit:cover;
+    margin-top:15px;
+    margin-bottom:15px;
   }
 }
 

@@ -13,13 +13,11 @@
     "markdown-it": "^12.0.6",
     "next": "10.2.0",
     "next-auth": "^3.23.1",
+    "qs": "^6.10.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-loading-skeleton": "^2.2.0",
-<<<<<<< HEAD
     "react-query": "^3.16.0",
-=======
->>>>>>> 91eabec6441e29dd09f58526b2d618e99eaf1b1b
     "react-timeago": "^6.1.1"
   },
   "devDependencies": {
