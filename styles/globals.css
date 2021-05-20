@@ -46,7 +46,7 @@
   .searchComponent img{
     width: 30px;
   }
-  .searchComponent a{
+  .searchComponent button{
     border-left: 1px solid #555;
     padding-left:8px;
   }

@@ -45,7 +45,11 @@ const SinglePage = ({ post, rel_posts }) => {
                   <span>
                       {new Date(post[0].updated_at).toLocaleDateString()}
                   </span> - <span> 
-                      {post[0].author.firstname} {post[0].author.lastname}
+                     <Link href={`/author/${post[0].author.id}`} >
+                        <a className="cursor-pointer border-b-2 border-white hover:border-borderColor">
+                            {post[0].author.firstname} {post[0].author.lastname}
+                        </a>
+                     </Link>
                   </span>
               </p>
           </section>
@@ -76,7 +80,13 @@ const SinglePage = ({ post, rel_posts }) => {
                               Location: <span className="font-bold">{post[0].location}</span>
                           </p>
                           <p className="text-title">
-                              Author: <span className="font-bold"> {post[0].author.firstname} {post[0].author.lastname} </span>
+                              Author: <span className="font-bold border-b-2 border-white hover:border-borderColor">
+                                <Link href={`/author/${post[0].author.id}`}>
+                                    <a className="cursor-pointer">
+                                        {post[0].author.firstname} {post[0].author.lastname}
+                                    </a>
+                                </Link>
+                              </span>
                           </p>  
                           <p className="text-title">
                               Posted: <span className="font-bold">
