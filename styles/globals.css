@@ -2,24 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
+@layer base {
   h1 {
     font-size: 35px;
   }
-  h2{
+  h2 {
     font-size: 30px;
   }
-  h3{
+  h3 {
     font-size: 25px;
   }
-  h4{
-    font-size:22px;
+  h4 {
+    font-size: 22px;
   }
-  h5, h6{
-    font-size:20px;
+  h5,
+  h6 {
+    font-size: 20px;
   }
-  p{
-    font-size:18px;
+  p {
+    font-size: 18px;
   }
 }
 @layer utilities {
@@ -32,7 +33,7 @@
     max-height: 250px;
     transition: 1s ease;
   }
-  .catImage:hover{
+  .catImage:hover {
     -webkit-transform: rotateZ(-1deg);
     -ms-transform: rotateZ(-1deg);
     transform: rotateZ(-1deg);
@@ -40,15 +41,15 @@
     filter: blur(1px);
     transition: 1s ease;
   }
-  .searchComponent{
+  .searchComponent {
     padding-top: 0.5rem;
   }
-  .searchComponent img{
+  .searchComponent img {
     width: 30px;
   }
   .searchComponent button{
     border-left: 1px solid #555;
-    padding-left:8px;
+    padding-left: 8px;
   }
   #content_image{
     width: 90%;

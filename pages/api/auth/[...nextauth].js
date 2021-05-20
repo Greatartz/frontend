@@ -15,7 +15,6 @@ const providers = [
         });
 
         if (user) {
-          console.log("user => --------------", user.data);
           return { status: "success", data: user.data };
         }
       } catch (e) {
@@ -30,6 +29,8 @@ const callbacks = {
   async jwt(token, user) {
     if (user) {
       token.accessToken = user.data.jwt;
+      token.name = user.data.user.username;
+      token.email = user.data.user.email;
     }
 
     return token;

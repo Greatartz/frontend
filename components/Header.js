@@ -96,19 +96,18 @@ export default function Header({ categories, load }) {
           <div className="flex mr-8">
             {!session && (
               <>
-                <a
+                <button
                   className="block
                    text-md px-4 py-2 ml-2
                     mt-4 lg:mt-0"
                   onClick={() => router.push("/login")}
                 >
                   Sign in
-                </a>
+                </button>
               </>
             )}
             {session && (
               <>
-                Signed in as {session.user.username} <br />
                 <button onClick={() => signOut()}>Sign out</button>
               </>
             )}
