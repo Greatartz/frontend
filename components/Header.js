@@ -1,13 +1,22 @@
 import Skeleton from "react-loading-skeleton";
 import { signIn, signOut, useSession } from "next-auth/client";
-
 import Link from "next/link";
 import { useRouter } from "next/router";
+import {useState} from 'react';
 
 export default function Header({ categories, load }) {
   const [session, loading] = useSession();
   console.log(session);
   const router = useRouter();
+
+  const [term, setTerm] = useState('')
+  const handleSubmit = (e) => {
+      e.preventDefault()
+      router.push(`/search?term=${term}`)
+      setTerm('')
+  }
+
+
   if (load) {
     return (
       <nav className="flex items-center justify-between flex-wrap bg-white shadow">
@@ -59,24 +68,23 @@ export default function Header({ categories, load }) {
 
             <div className="searchComponent">
               <form
-                role="search"
-                method="get"
+                onSubmit={handleSubmit}
                 className="search-form flex bg-bgColor"
-                action="#"
               >
-                <a href="#" className="search-form-link">
+                <button type="submit" className="search-form-link focus:outline-none">
                   <img
                     src="/search.svg"
                     alt="Search Icon"
                     className="search-icon"
                   />
-                </a>
+                </button>
                 <div className="search-field-group">
                   <input
                     type="text"
                     className="pl-3 focus:outline-none bg-bgColor"
                     placeholder="Search ..."
-                    name="s"
+                    value={term} 
+                    onChange={ (e) => setTerm(e.target.value) }
                     title="Search for:"
                     autoComplete="off"
                   />
