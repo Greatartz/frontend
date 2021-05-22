@@ -12,16 +12,22 @@ const Categories = ({posts, total_length, page }) => {
     const lastPage = Math.ceil(total_length / PER_PAGE)
     return (
         <Layout title={` Category | ${slug}`}>
-            { posts.length === 0 && <h3> <h1 className="text-5xl text-borderColor m-10">No Posts Found in {slug} Category! </h1> </h3> }
-            <section className="row">
+            { posts.length === 0 && <h1 className="text-5xl text-borderColor m-10">No Posts Found in {slug} Category! </h1> }
+            
+            {posts.length > 0 && <h1 className="text-center mt-10">
+                <span className="border-2 border-borderColor p-1 rounded">{slug}</span>
+            </h1>  }
+
+            <section className="row mt-10">
                   {posts.map((post) => (
                       <ArticleBox post={post} />
                   )) }
             </section>
+
             <section className="container mx-auto my-10 flex space-between">
                 {page > 1 && (
                     <Link href={`/category/${slug}?page=${page - 1}`}>
-                    <a className='bg-borderColor text-white rounded py-2 px-5'>Prev</a>
+                        <a className='bg-borderColor text-white rounded py-2 px-5'>Prev</a>
                     </Link>
                 )}
 

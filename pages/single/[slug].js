@@ -8,6 +8,7 @@ import TimeAgo from 'react-timeago'
 
 const SinglePage = ({ post, rel_posts }) => {
 
+    
   const myRender = (doc) => {
     let md = new mark();
     md.renderer.rules.image = function (tokens, idx, options, env, slf) {
@@ -64,9 +65,11 @@ const SinglePage = ({ post, rel_posts }) => {
 
                       <section className="tags mb-5">
                           {post[0].tags.map((tag) => (
-                              <span className="bg-borderColor p-2 rounded text-white mr-2">
-                                  {tag.title}
-                              </span>
+                              <Link href={`/tag/${tag.id}`}>
+                                    <a className="bg-borderColor p-2 rounded text-white mr-2">
+                                        {tag.title}
+                                    </a>
+                              </Link>
                           ))} 
                       </section>
 

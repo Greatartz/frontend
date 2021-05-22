@@ -32,7 +32,7 @@ export default function HomeCatagory({ catId, catName }) {
             </h1>
             <section className="row">
                 {data.map((part) => (
-                    <ArticleBox post={part} />
+                    <ArticleBox post={part} key={part.id}/>
                 ))}
             </section>
           </main>

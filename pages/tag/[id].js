@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 const PER_PAGE = 6
 
-const AuthorPosts = ({ posts, total_length, page }) => {
+const TagPosts = ({ posts, total_length, page, tag_title }) => {
 
     const lastPage = Math.ceil(total_length / PER_PAGE)
 
@@ -13,32 +13,32 @@ const AuthorPosts = ({ posts, total_length, page }) => {
     const { id } = router.query
 
     return (
-        <Layout title={`Author Posts`}>
+        <Layout title={`Tag's Posts | ${tag_title}`}>
 
             <h1 className="text-center mt-10">
-                <span className="border-2 border-borderColor p-1 rounded">{posts[0].author.firstname}  {posts[0].author.lastname}</span>
+                <span className="border-2 border-borderColor p-1 rounded">{tag_title}</span>
             </h1>
 
             <section className="row mt-10">
                   {posts.map((post) => (
-                      <ArticleBox post={post} />
+                      <ArticleBox post={post} key={post.id} />
                   )) }
             </section>
 
             <section className="container mx-auto my-10 flex space-between">
                 {page > 1 && (
-                    <Link href={`/author/${id}?page=${page - 1}`}>
+                    <Link href={`/tag/${id}?page=${page - 1}`}>
                         <a className='bg-borderColor text-white rounded py-2 px-5'>Prev</a>
                     </Link>
                 )}
 
                 {page < lastPage && (
-                    <Link href={`/author/${id}?page=${page + 1}`}>
+                    <Link href={`/tag/${id}?page=${page + 1}`}>
                         <a className='bg-borderColor text-white rounded py-2 px-5'>Next</a>
                     </Link>
                 )}
             </section>
-           
+
         </Layout>
     );
 }
@@ -46,20 +46,23 @@ const AuthorPosts = ({ posts, total_length, page }) => {
 export async function getServerSideProps({ params, query: { page = 1 } }) {
 
     const {id} = params
+    const tagName = await fetch(`${API_URL}/tags?id=${id}`)
+    const tag = await tagName.json()
+    const tag_title = tag[0].title
 
     // Calculate start page
     const start = +page === 1 ? 0 : (+page - 1) * PER_PAGE
 
      // Fetch total/count
-     const totalRes = await fetch(`${API_URL}/posts?author=${id}`)
+     const totalRes = await fetch(`${API_URL}/posts?tags=${id}`)
      const total = await totalRes.json()
      const total_length = total.length
-
-    const res = await fetch(`${API_URL}/posts?author=${id}&_limit=${PER_PAGE}&_start=${start}&_sort=id:DESC`)
+    
+    const res = await fetch(`${API_URL}/posts?tags=${id}&_limit=${PER_PAGE}&_start=${start}&_sort=id:DESC`)
     const posts = await res.json()
 
-    return { props: { posts, page: +page, total_length } }
+    return { props: { posts, page: +page, total_length, tag_title } }
 
 }
  
-export default AuthorPosts;
+export default TagPosts;
