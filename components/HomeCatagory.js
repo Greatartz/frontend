@@ -30,10 +30,10 @@ export default function HomeCatagory({ catId, catName }) {
                 </a>
               </Link>
             </h1>
-            <section className="container mb-10 mx-auto grid grid-cols-3 gap-10">
-              {data.map((part) => (
-                <ArticleBox key={`part-${part.id}`} post={part} />
-              ))}
+            <section className="row">
+                {data.map((part) => (
+                    <ArticleBox post={part} />
+                ))}
             </section>
           </main>
         ) : (
