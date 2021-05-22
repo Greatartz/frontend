@@ -29,7 +29,7 @@ export default function HomeCatagory({ catId , catName}) {
                     <a className="border-b-2 border-borderColor inline-block pb-2">{catName}</a>
                 </Link>
             </h1>
-            <section className="container mb-10 mx-auto grid grid-cols-3 gap-10">
+            <section className="row">
                 {data.map((part) => (
                     <ArticleBox post={part} />
                 ))}

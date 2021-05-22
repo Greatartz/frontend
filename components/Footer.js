@@ -4,7 +4,7 @@ export default function Footer({ categories, load }) {
   return (
     <footer>
       <section className="bg-bgColor w-full py-5">
-        <div className="container mx-auto grid md:grid-cols-4 grid-cols-2">
+        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           <div className="w-full text-left">
             <h1 className="text-2xl text-title pt-5 border-b-2 border-borderColor inline-block py-2">
               About us

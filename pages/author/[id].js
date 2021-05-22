@@ -10,7 +10,7 @@ const AuthorPosts = ({ posts }) => {
 
     return (
         <Layout title={`Author Posts`}>
-            {posts.length > 0 ? <section className="container my-10 mx-auto grid grid-cols-3 gap-10">
+            {posts.length > 0 ? <section className="row">
                   {posts.map((post) => (
                       <ArticleBox post={post} />
                   )) }
