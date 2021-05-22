@@ -6,7 +6,7 @@ export default function Home({ resCatagory }) {
   return (
     <Layout title="Home">
       {resCatagory.map((i) => (
-        <HomeCatagory catId={i.id} key={`h-${i.id}`} catName={i.name} />
+        <HomeCatagory category={i} key={`h-${i.id}`}/>
       ))}
     </Layout>
   );

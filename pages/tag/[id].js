@@ -25,7 +25,7 @@ const TagPosts = ({ posts, total_length, page, tag_title }) => {
                   )) }
             </section>
 
-            <section className="container mx-auto my-10 flex space-between">
+            <section className="container mx-auto my-10 flex justify-between">
                 {page > 1 && (
                     <Link href={`/tag/${id}?page=${page - 1}`}>
                         <a className='bg-borderColor text-white rounded py-2 px-5'>Prev</a>

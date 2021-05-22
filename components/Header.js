@@ -15,12 +15,7 @@ export default function Header({ categories, load }) {
       router.push(`/search?term=${term}`)
       setTerm('')
   }
-	const [showMe, setShowMe] = useState(false);
 	
-	const handleToggle = () => {
-		setShowMe(!showMe);
-	}	
-
   if (load) {
     return (
 		<nav className="bg-white shadow">
@@ -37,12 +32,6 @@ export default function Header({ categories, load }) {
 			</div>	
 			
 			<div className="container mx-auto flex flex-wrap items-center">
-				
-				{/* <div className="flex md:hidden">
-				  <button id="hamburger" onClick={ handleToggle }>
-					<img className="toggle" src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png" width="40" height="40" />
-				  </button>
-				</div> */}
 				
 				<div 
 					className="md:flex w-full md:w-auto text-right text-bold mt-5 md:mt-0 uppercase text-title py-3 text-lg"> 
