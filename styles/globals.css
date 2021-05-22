@@ -2,24 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
+@layer base {
   h1 {
     font-size: 35px;
   }
-  h2{
+  h2 {
     font-size: 30px;
   }
-  h3{
+  h3 {
     font-size: 25px;
   }
-  h4{
-    font-size:22px;
+  h4 {
+    font-size: 22px;
   }
-  h5, h6{
-    font-size:20px;
+  h5,
+  h6 {
+    font-size: 20px;
   }
-  p{
-    font-size:18px;
+  p {
+    font-size: 18px;
   }
 }
 @layer utilities {
@@ -32,7 +33,7 @@
     max-height: 250px;
     transition: 1s ease;
   }
-  .catImage:hover{
+  .catImage:hover {
     -webkit-transform: rotateZ(-1deg);
     -ms-transform: rotateZ(-1deg);
     transform: rotateZ(-1deg);
@@ -40,15 +41,15 @@
     filter: blur(1px);
     transition: 1s ease;
   }
-  .searchComponent{
+  .searchComponent {
     padding-top: 0.5rem;
   }
-  .searchComponent img{
+  .searchComponent img {
     width: 30px;
   }
   .searchComponent button{
     border-left: 1px solid #555;
-    padding-left:8px;
+    padding-left: 8px;
   }
   #content_image{
     width: 90%;
@@ -63,7 +64,11 @@
   .anchorTag {
     @apply block mt-4 lg:inline-block lg:mt-0 px-3 py-2 mr-2 hover:text-title border-b border-white hover:border-borderColor;
   }
+<<<<<<< HEAD
   .row{
     @apply container mx-auto mb-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 
   }
 }
+=======
+}
+>>>>>>> 572e2bbd8cf66c240c7fa2eb93f8e5a009974ffd
