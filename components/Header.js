@@ -2,20 +2,18 @@ import Skeleton from "react-loading-skeleton";
 import { signIn, signOut, useSession } from "next-auth/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import {useState} from 'react';
+import { useState } from "react";
 
 export default function Header({ categories, load }) {
   const [session, loading] = useSession();
-  console.log(session);
   const router = useRouter();
 
-  const [term, setTerm] = useState('')
+  const [term, setTerm] = useState("");
   const handleSubmit = (e) => {
-      e.preventDefault()
-      router.push(`/search?term=${term}`)
-      setTerm('')
-  }
-
+    e.preventDefault();
+    router.push(`/search?term=${term}`);
+    setTerm("");
+  };
 
   if (load) {
     return (
@@ -71,7 +69,10 @@ export default function Header({ categories, load }) {
                 onSubmit={handleSubmit}
                 className="search-form flex bg-bgColor"
               >
-                <button type="submit" className="search-form-link focus:outline-none">
+                <button
+                  type="submit"
+                  className="search-form-link focus:outline-none"
+                >
                   <img
                     src="/search.svg"
                     alt="Search Icon"
@@ -83,8 +84,8 @@ export default function Header({ categories, load }) {
                     type="text"
                     className="pl-3 focus:outline-none bg-bgColor"
                     placeholder="Search ..."
-                    value={term} 
-                    onChange={ (e) => setTerm(e.target.value) }
+                    value={term}
+                    onChange={(e) => setTerm(e.target.value)}
                     title="Search for:"
                     autoComplete="off"
                   />
@@ -100,7 +101,7 @@ export default function Header({ categories, load }) {
                   className="block
                    text-md px-4 py-2 ml-2
                     mt-4 lg:mt-0"
-                  onClick={() => router.push("/login")}
+                  onClick={() => signIn("credentials")}
                 >
                   Sign in
                 </button>

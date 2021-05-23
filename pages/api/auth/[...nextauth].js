@@ -47,6 +47,10 @@ const options = {
   callbacks,
   page: {
     error: "/login",
+    signIn: "/poai",
+  },
+  path: {
+    signIn: "/polad",
   },
 };
 

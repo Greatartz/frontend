@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../config/index";
 import Skeleton from "react-loading-skeleton";
+import Spinner from "@material-ui/core/CircularProgress";
 import axios from "axios";
 import ArticleBox from "../components/ArticleBox";
 import Link from "next/link";
@@ -43,8 +44,8 @@ export default function HomeCatagory({ catId, catName }) {
     );
   } else {
     return (
-      <div>
-        <Skeleton count={1} />
+      <div className="container mx-auto mt-10">
+        {catId < 3 ? <Spinner /> : ""}
       </div>
     );
   }

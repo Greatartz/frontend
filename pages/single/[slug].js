@@ -54,7 +54,7 @@ const SinglePage = ({ post, rel_posts }) => {
         <section className="singleContent grid grid-cols-4 gap-2">
           <div className="col-span-3">
             <div className="singleFeatureImage my-10">
-              <img src={`${API_URL}${post[0].featured_image.url}`} />
+              <img src={`${API_URL}${post[0].featured_image[0].url}`} />
             </div>
             <div className="content">
               <section className="tags mb-5">
@@ -65,7 +65,7 @@ const SinglePage = ({ post, rel_posts }) => {
                 ))}
               </section>
 
-              <section id="content">{parse(myRender(post[0].context))}</section>
+              <section id="content">{parse(myRender(post[0].content))}</section>
 
               <hr className="my-5" />
               <section className="location flex gap-5">
@@ -116,14 +116,13 @@ export async function getServerSideProps({ params }) {
 
   const request_post = await fetch(`${API_URL}/posts?slug=${slug}`);
   const res_post = await request_post.json();
-
+  console.log("post ", res_post[0].featured_image);
   const cat = res_post[0].category.id;
 
   const req_related_posts = await fetch(
     `${API_URL}/posts?category=${cat}&_limit=3`
   );
   const res_related_posts = await req_related_posts.json();
-
   return {
     props: {
       post: res_post,
