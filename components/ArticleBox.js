@@ -21,17 +21,26 @@ const ArticleBox = ({ post }) => {
               <a>{post.category.name}</a>
             </Link>
           </span>
-          <h2 className="text-4xl mb-3">
+          <h2 className="text-3xl mb-3">
             <Link href={`/single/${post.slug}`}>
               <a className="border-b-2 border-white hover:border-borderColor">
-                {post.title}
+                {post.title.length > 30
+                  ? `${post.title.substring(0, 30)}...`
+                  : post.title}
               </a>
             </Link>
           </h2>
-          <p className="px-2">{post.excerpt}</p>
+          <p className="px-2">
+            {post.excerpt.length > 150
+              ? `${post.excerpt.substring(0, 150)}...`
+              : post.excerpt}
+          </p>
           <span className="inline-block mt-3">
             <Link href={`/single/${post.slug}`}>
-              <a className="text-borderColor font-bold"> More </a>
+              <a className="text-borderColor font-bold border-b-2 border-white hover:border-borderColor">
+                {" "}
+                More{" "}
+              </a>
             </Link>
           </span>
         </div>

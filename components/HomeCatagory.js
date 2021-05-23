@@ -6,13 +6,13 @@ import axios from "axios";
 import ArticleBox from "../components/ArticleBox";
 import Link from "next/link";
 
-export default function HomeCatagory({ catId, catName }) {
+export default function HomeCatagory({ category }) {
   const [load, setLoad] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/posts?category=${catId}&_limit=6&_sort=id:DESC`)
+      .get(`${API_URL}/posts?category=${category.id}&_limit=6&_sort=id:DESC`)
       .then((res) => {
         setData(res.data);
         setLoad(true);
@@ -25,15 +25,20 @@ export default function HomeCatagory({ catId, catName }) {
         {data.length > 0 ? (
           <main>
             <h1 className="container mx-auto text-3xl mt-10 mb-5">
-              <Link href={`/category/${catName}`}>
+              <Link href={`/category/${category.name}`}>
                 <a className="border-b-2 border-borderColor inline-block pb-2">
-                  {catName}
+                  {category.name}
                 </a>
               </Link>
+
+              <span className="block text-lg mt-2">
+                  {category.description}
+              </span>
+
             </h1>
             <section className="row">
                 {data.map((part) => (
-                    <ArticleBox post={part} />
+                    <ArticleBox post={part} key={part.id}/>
                 ))}
             </section>
           </main>
