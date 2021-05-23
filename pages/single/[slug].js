@@ -37,9 +37,9 @@ const SinglePage = ({ post, rel_posts }) => {
                       {post[0].category.name} 
                   </Link>
               </h3>
-              <h1 className="text-6xl">
+              <h1 className="text-5xl leading-snug">
                   <span className="border-b-2 border-white hover:border-borderColor">
-                      {post[0].title}
+                        {post[0].title}
                   </span>
               </h1>
               <p className="singleDate text-subTitle mt-5 text-xl">
