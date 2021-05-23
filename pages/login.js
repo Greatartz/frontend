@@ -7,7 +7,7 @@ import Visible from "@material-ui/icons/Visibility";
 import Blind from "@material-ui/icons/VisibilityOff";
 import Link from "next/link";
 
-export default function login() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);

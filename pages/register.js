@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import { signIn } from "next-auth/client";
 import Link from "next/link";
 import { API_URL } from "../config/index";
-function register() {
+
+function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -156,4 +157,4 @@ function register() {
   );
 }
 
-export default register;
+export default Register;

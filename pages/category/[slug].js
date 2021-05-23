@@ -13,7 +13,7 @@ const Categories = ({posts, total_length, page }) => {
     return (
         <Layout title={` Category | ${slug}`}>
             { posts.length === 0 && <h3> <h1 className="text-5xl text-borderColor m-10">No Posts Found in {slug} Category! </h1> </h3> }
-            <section className="container my-10 mx-auto grid grid-cols-3 gap-10">
+            <section className="row">
                   {posts.map((post) => (
                       <ArticleBox post={post} />
                   )) }
