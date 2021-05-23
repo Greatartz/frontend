@@ -47,16 +47,16 @@
   .searchComponent img {
     width: 30px;
   }
-  .searchComponent button{
+  .searchComponent button {
     border-left: 1px solid #555;
     padding-left: 8px;
   }
-  #content_image{
+  #content_image {
     width: 90%;
     height: auto;
-    object-fit:cover;
-    margin-top:15px;
-    margin-bottom:15px;
+    object-fit: cover;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 }
 
@@ -64,11 +64,4 @@
   .anchorTag {
     @apply block mt-4 lg:inline-block lg:mt-0 px-3 py-2 mr-2 hover:text-title border-b border-white hover:border-borderColor;
   }
-<<<<<<< HEAD
-  .row{
-    @apply container mx-auto mb-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 
-  }
 }
-=======
-}
->>>>>>> 572e2bbd8cf66c240c7fa2eb93f8e5a009974ffd
