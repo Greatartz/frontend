@@ -2,7 +2,6 @@ import { API_URL } from "../config/index";
 import Link from "next/link";
 
 const ArticleBox = ({ post }) => {
-  console.log("post", post);
   return (
     <>
       <div className="text-center shadow border-b-4 border-borderColor pb-5">
@@ -38,8 +37,7 @@ const ArticleBox = ({ post }) => {
           <span className="inline-block mt-3">
             <Link href={`/single/${post.slug}`}>
               <a className="text-borderColor font-bold border-b-2 border-white hover:border-borderColor">
-                {" "}
-                More{" "}
+                More
               </a>
             </Link>
           </span>

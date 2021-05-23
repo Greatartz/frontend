@@ -2,9 +2,9 @@ import Layout from "../../components/Layout";
 import { API_URL } from "../../config/index";
 import parse from "html-react-parser";
 import mark from "markdown-it";
-import Link from "next/link";
 import ArticleBox from "../../components/ArticleBox";
 import TimeAgo from "react-timeago";
+import Link from "next/link";
 
 const SinglePage = ({ post, rel_posts }) => {
   const myRender = (doc) => {

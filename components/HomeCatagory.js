@@ -31,15 +31,12 @@ export default function HomeCatagory({ category }) {
                 </a>
               </Link>
 
-              <span className="block text-lg mt-2">
-                  {category.description}
-              </span>
-
+              <span className="block text-lg mt-2">{category.description}</span>
             </h1>
             <section className="row">
-                {data.map((part) => (
-                    <ArticleBox post={part} key={part.id}/>
-                ))}
+              {data.map((part) => (
+                <ArticleBox post={part} key={part.id} />
+              ))}
             </section>
           </main>
         ) : (
@@ -50,7 +47,7 @@ export default function HomeCatagory({ category }) {
   } else {
     return (
       <div className="container mx-auto mt-10">
-        {catId < 3 ? <Spinner /> : ""}
+        {category.id < 3 ? <Spinner /> : ""}
       </div>
     );
   }
