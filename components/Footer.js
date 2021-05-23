@@ -108,7 +108,7 @@ export default function Footer({ categories, load }) {
       </section>
       <section className="w-full border-t border-borderColor flex justify-center bg-title">
         <p className="text-white py-5">
-          © Company name | Powered by Next.js, Strapi
+          © TheCodeGiant | Powered by Next.js vs Strapi
         </p>
       </section>
     </footer>

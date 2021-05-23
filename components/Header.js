@@ -15,12 +15,7 @@ export default function Header({ categories, load }) {
       router.push(`/search?term=${term}`)
       setTerm('')
   }
-	const [showMe, setShowMe] = useState(false);
 	
-	const handleToggle = () => {
-		setShowMe(!showMe);
-	}	
-
   if (load) {
     return (
 		<nav className="bg-white shadow">
@@ -36,18 +31,10 @@ export default function Header({ categories, load }) {
 			  </div>
 			</div>	
 			
-			<div className="container mx-auto flex flex-wrap items-center justify-between">
-				
-				<div className="flex md:hidden">
-				  <button id="hamburger" onClick={ handleToggle }>
-					<img className="toggle" src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png" width="40" height="40" />
-				  </button>
-				</div>
+			<div className="container mx-auto flex flex-wrap items-center">
 				
 				<div 
-					className="hidden md:flex w-full md:w-auto text-right text-bold mt-5 md:mt-0 uppercase text-title py-3 text-lg"
-					style={{ display: showMe ? "block" : "hidden" }}
-					> 
+					className="md:flex w-full md:w-auto text-right text-bold mt-5 md:mt-0 uppercase text-title py-3 text-lg"> 
 				
 					{categories.map((data) => (
 					  <Link href={`/category/${data.name}`} key={`${data.id}`}>
@@ -64,48 +51,49 @@ export default function Header({ categories, load }) {
 					  </Link>
 					))}
 				  
-					<div className="searchComponent">
-					  <form
-						onSubmit={handleSubmit}
-						className="search-form flex bg-bgColor"
-					  >
-						<button type="submit" className="search-form-link focus:outline-none">
-						  <img
-							src="/search.svg"
-							alt="Search Icon"
-							className="search-icon"
-						  />
-						</button>
-						<div className="search-field-group">
-						  <input
-							type="text"
-							className="pl-3 focus:outline-none bg-bgColor"
-							placeholder="Search ..."
-							value={term} 
-							onChange={ (e) => setTerm(e.target.value) }
-							title="Search for:"
-							autoComplete="off"
-						  />
-						</div>
-					  </form>
+				</div>
+
+				<div className="searchComponent flex lg:flex-grow sm:ml-5 sm:mb-5">
+					<form
+					onSubmit={handleSubmit}
+					className="search-form flex bg-bgColor"
+					>
+					<button type="submit" className="search-form-link focus:outline-none">
+						<img
+						src="/search.svg"
+						alt="Search Icon"
+						className="search-icon"
+						/>
+					</button>
+					<div className="search-field-group">
+						<input
+						type="text"
+						className="pl-3 focus:outline-none bg-bgColor"
+						placeholder="Search ..."
+						value={term} 
+						onChange={ (e) => setTerm(e.target.value) }
+						title="Search for:"
+						autoComplete="off"
+						/>
 					</div>
-				  
+					</form>
 				</div>
 				
-				{!session && (
-					<a
-					  className="mr-2"
-					  onClick={() => router.push("/login")}
-					>
-					  Sign in
+				<div className="mr-2 sm:ml-5 sm:mb-5">
+					{!session && (
+						<Link href="/login">
+							<a>
+								Sign in
+							</a>
+						</Link>
+					)}
+					{session && (
+					<a>
+						Signed in as {session.user.username} <br />
+						<button onClick={() => signOut()}>Sign out</button>
 					</a>
-				)}
-				{session && (
-				  <a className="mr-2">
-					Signed in as {session.user.username} <br />
-					<button onClick={() => signOut()}>Sign out</button>
-				  </a>
-				)}	
+					)}	  
+				</div>	
 				
 			</div>
 		</nav> 
