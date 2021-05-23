@@ -6,7 +6,6 @@ import Footer from "./Footer";
 import Head from "next/head";
 
 const Layout = ({ title, children }) => {
-
   const [load, setLoad] = useState(false);
   const [data, setData] = useState(null);
 
@@ -18,7 +17,7 @@ const Layout = ({ title, children }) => {
   }, []);
 
   return (
-    <>
+    <main className="min-h-screen">
       <Head>
         <title>{title}</title>
         <meta
@@ -33,12 +32,12 @@ const Layout = ({ title, children }) => {
         <Header categories={data} load={load} />
       </header>
 
-      <main>{children}</main>
+      <section>{children}</section>
 
       <footer>
         <Footer categories={data} load={load} />
       </footer>
-    </>
+    </main>
   );
 };
 
