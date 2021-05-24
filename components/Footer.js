@@ -4,8 +4,9 @@ export default function Footer({ categories, load }) {
   return (
     <footer>
       <section className="bg-bgColor w-full py-5">
-        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-          <div className="w-full text-left">
+        <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+		
+          <div className="w-full text-center sm:text-center md:text-left lg:text-left xl:text-left">
             <h1 className="text-2xl text-title pt-5 border-b-2 border-borderColor inline-block py-2">
               About us
             </h1>
@@ -15,6 +16,7 @@ export default function Footer({ categories, load }) {
               improve the product based on your feedback
             </p>
           </div>
+		  
           <div className="w-full text-center">
             <h1 className="text-2xl text-title pt-5 border-b-2 border-borderColor inline-block py-2">
               Categories
@@ -87,7 +89,7 @@ export default function Footer({ categories, load }) {
               </li>
             </ul>
           </div>
-          <div className="w-full text-left">
+          <div className="w-full text-center sm:text-center md:text-left lg:text-left xl:text-left">
             <h1 className="text-2xl text-title pt-5 mb-5 border-b-2 border-borderColor inline-block py-2">
               Subscribe
             </h1>
@@ -107,7 +109,7 @@ export default function Footer({ categories, load }) {
         </div>
       </section>
       <section className="w-full border-t border-borderColor flex justify-center bg-title">
-        <p className="text-white py-5">
+        <p className="text-white py-5 text-center">
           © TheCodeGiant | Powered by Next.js vs Strapi
         </p>
       </section>
