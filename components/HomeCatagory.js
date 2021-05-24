@@ -26,7 +26,7 @@ export default function HomeCatagory({ category }) {
           <main>
             <h1 className="container mx-auto text-3xl mt-10 mb-5">
               <Link href={`/category/${category.name}`}>
-                <a className="border-b-2 border-borderColor inline-block pb-2">
+                <a className="border-b-2 border-borderColor inline-block pb-2 capitalize">
                   {category.name}
                 </a>
               </Link>
