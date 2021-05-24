@@ -8,7 +8,7 @@ import TimeAgo from "react-timeago";
 const SinglePage = ({ post, rel_posts }) => {
   return (
     <Layout title={`Single | ${post[0].title}`}>
-      <main className="container mx-auto py-10">
+      <main className="w-11/12 mx-auto py-10">
         <section className="singleHeader">
           <h3 className="text-xl border-b-2 border-borderColor inline-block my-5 py-1">
             <Link href={`/category/${post[0].category.name}`}>
@@ -84,7 +84,7 @@ const SinglePage = ({ post, rel_posts }) => {
 
         <hr className="my-5" />
         <h1>Related Posts:</h1>
-        <section className="related_posts mb-10 mt-5 container mx-auto grid grid-cols-3 gap-10">
+        <section className="related_posts mb-10 mt-5 w-full grid grid-cols-3 gap-10">
           {rel_posts
             .filter((rel_posts) => rel_posts.id != post[0].id)
             .map((post) => (

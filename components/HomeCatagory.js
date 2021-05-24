@@ -24,9 +24,9 @@ export default function HomeCatagory({ category }) {
       <>
         {data.length > 0 ? (
           <main>
-            <h1 className="container mx-auto text-3xl mt-10 mb-5">
+            <h1 className="w-11/12 mx-auto text-3xl mt-10 mb-5">
               <Link href={`/category/${category.name}`}>
-                <a className="border-b-2 border-borderColor inline-block pb-2">
+                <a className="border-b-2 border-borderColor inline-block pb-2 capitalize">
                   {category.name}
                 </a>
               </Link>
@@ -46,7 +46,7 @@ export default function HomeCatagory({ category }) {
     );
   } else {
     return (
-      <div className="container mx-auto mt-10">
+      <div className="w-11/12 mx-auto mt-10">
         {category.id < 3 ? <Spinner /> : ""}
       </div>
     );
