@@ -45,9 +45,6 @@ const callbacks = {
 const options = {
   providers,
   callbacks,
-  page: {
-    error: "/login",
-  },
 };
 
 export default (req, res) => NextAuth(req, res, options);

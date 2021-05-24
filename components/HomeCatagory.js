@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../config/index";
 import Skeleton from "react-loading-skeleton";
+import Spinner from "@material-ui/core/CircularProgress";
 import axios from "axios";
 import ArticleBox from "../components/ArticleBox";
 import Link from "next/link";
@@ -30,15 +31,12 @@ export default function HomeCatagory({ category }) {
                 </a>
               </Link>
 
-              <span className="block text-lg mt-2">
-                  {category.description}
-              </span>
-
+              <span className="block text-lg mt-2">{category.description}</span>
             </h1>
             <section className="row">
-                {data.map((part) => (
-                    <ArticleBox post={part} key={part.id}/>
-                ))}
+              {data.map((part) => (
+                <ArticleBox post={part} key={part.id} />
+              ))}
             </section>
           </main>
         ) : (
@@ -48,8 +46,8 @@ export default function HomeCatagory({ category }) {
     );
   } else {
     return (
-      <div>
-        <Skeleton count={1} />
+      <div className="container mx-auto mt-10">
+        {category.id < 3 ? <Spinner /> : ""}
       </div>
     );
   }

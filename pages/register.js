@@ -137,7 +137,7 @@ function Register() {
               By signing up, you agree to the
               <Link
                 className="no-underline border-b border-grey-dark text-grey-dark ml-1"
-                href="/privacy"
+                href="/privacy-policy"
               >
                 Privacy Policy
               </Link>

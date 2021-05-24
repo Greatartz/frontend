@@ -1,21 +1,24 @@
 import Skeleton from "react-loading-skeleton";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { signOut, useSession } from "next-auth/client";
 import Link from "next/link";
+
 import { useRouter } from "next/router";
-import {useState} from 'react';
+import { useState } from "react";
+import Drop from "./Drop";
+// let DropdownTrigger = D;
+// let DropdownContent = Dropdown.DropdownContent;
 
 export default function Header({ categories, load }) {
   const [session, loading] = useSession();
   const [navbarOpen, setNavbarOpen] = useState(false);
   const router = useRouter();
-
-  const [term, setTerm] = useState('')
+  const [term, setTerm] = useState("");
   const handleSubmit = (e) => {
-      e.preventDefault()
-      router.push(`/search?term=${term}`)
-      setTerm('')
-  }
-	
+    e.preventDefault();
+    router.push(`/search?term=${term}`);
+    setTerm("");
+  };
+
   if (load) {
     return (
 		<nav className="relative flex flex-wrap items-center justify-between bg-white shadow">
