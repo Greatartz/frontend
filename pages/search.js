@@ -10,7 +10,7 @@ const SearchPage = ({ posts }) => {
     return (
         <Layout title={`Search | ${router.query.term}`}>
             
-            <section className="container mx-auto mt-5">
+            <section className="w-11/12 mx-auto mt-5">
                 <Link href="/">
                     <a className="text-blue-500 border-b border-blue-500">Go Back</a>
                 </Link>
@@ -18,7 +18,7 @@ const SearchPage = ({ posts }) => {
                 <h1 className="my-5 text-red-500">{posts.length === 0 && <h3>Sorry No Items match</h3>} </h1>
             </section>
 
-             <section className="container my-10 mx-auto grid grid-cols-3 gap-10">
+             <section className="row">
 
              {posts.map((post) => (
                     <ArticleBox post={post} />

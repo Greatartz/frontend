@@ -25,7 +25,7 @@ const AuthorPosts = ({ posts, total_length, page }) => {
                   )) }
             </section>
 
-            <section className="container mx-auto my-10 flex justify-between">
+            <section className="w-11/12 mx-auto my-10 flex justify-between">
                 {page > 1 && (
                     <Link href={`/author/${id}?page=${page - 1}`}>
                         <a className='bg-borderColor text-white rounded py-2 px-5'>Prev</a>
