@@ -1,30 +1,11 @@
+import Link from "next/link";
 import Layout from "../../components/Layout";
 import { API_URL } from "../../config/index";
-import parse from "html-react-parser";
-import mark from "markdown-it";
+import RichText from "../../components/RichText";
 import ArticleBox from "../../components/ArticleBox";
 import TimeAgo from "react-timeago";
-import Link from "next/link";
 
 const SinglePage = ({ post, rel_posts }) => {
-  const myRender = (doc) => {
-    let md = new mark();
-    md.renderer.rules.image = function (tokens, idx, options, env, slf) {
-      let token = tokens[idx];
-      token.attrSet("src", `${API_URL}${token.attrGet("src")}`);
-      token.attrPush(["id", "content_image"]);
-
-      token.attrs[token.attrIndex("alt")][1] = slf.renderInlineAsText(
-        token.children,
-        options,
-        env
-      );
-
-      return slf.renderToken(tokens, idx, options);
-    };
-    let result = md.render(doc);
-    return result;
-  };
   return (
     <Layout title={`Single | ${post[0].title}`}>
       <main className="container mx-auto py-10">
@@ -54,7 +35,7 @@ const SinglePage = ({ post, rel_posts }) => {
         <section className="singleContent grid grid-cols-4 gap-2">
           <div className="col-span-3">
             <div className="singleFeatureImage my-10">
-              <img src={`${API_URL}${post[0].featured_image.url}`} />
+              <img src={`${API_URL}${post[0].featured_image[0].url}`} />
             </div>
             <div className="content">
               <section className="tags mb-5">
@@ -67,7 +48,9 @@ const SinglePage = ({ post, rel_posts }) => {
                 ))}
               </section>
 
-              <section id="content">{parse(myRender(post[0].content))}</section>
+              <section id="content">
+                <RichText doc={post[0].content} />
+              </section>
 
               <hr className="my-5" />
               <section className="location flex gap-5">

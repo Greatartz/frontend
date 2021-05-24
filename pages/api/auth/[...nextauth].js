@@ -45,13 +45,6 @@ const callbacks = {
 const options = {
   providers,
   callbacks,
-  page: {
-    error: "/login",
-    signIn: "/poai",
-  },
-  path: {
-    signIn: "/polad",
-  },
 };
 
 export default (req, res) => NextAuth(req, res, options);
