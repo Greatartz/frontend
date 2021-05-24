@@ -64,10 +64,13 @@
 }
 
 @layer components {
-  .anchorTag {
-    @apply block mt-4 lg:inline-block lg:mt-0 px-3 py-2 mr-2 hover:text-title border-b border-white hover:border-borderColor;
-  }
-  .row {
+  .row{
     @apply container mx-auto mb-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10;
+  }
+  .anchor{
+    @apply pr-4 py-5 flex items-center text-xs uppercase leading-snug text-title text-lg hover:text-borderColor;
+  }
+  .anchorActive{
+    @apply pr-4 py-5 border-b border-borderColor flex items-center text-xs uppercase leading-snug text-title text-lg hover:text-borderColor;
   }
 }

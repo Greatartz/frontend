@@ -51,7 +51,7 @@ export default function Footer({ categories, load }) {
                 </Link>
               </li>
               <li className="py-1">
-                <Link href="/">
+                <Link href="/about">
                   <a className="hover:text-title hover:border-borderColor border-b">
                     About US
                   </a>
