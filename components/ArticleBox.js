@@ -9,7 +9,7 @@ const ArticleBox = ({ post }) => {
           <Link href={`/single/${post.slug}`}>
             <img
               className="catImage rounded-t"
-              src={`${API_URL}${post.featured_image[0].url}`}
+              src={`${API_URL}${post.featured_image.url}`}
             />
           </Link>
         </div>

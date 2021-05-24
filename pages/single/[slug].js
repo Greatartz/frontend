@@ -35,7 +35,7 @@ const SinglePage = ({ post, rel_posts }) => {
         <section className="singleContent grid grid-cols-4 gap-2">
           <div className="col-span-3">
             <div className="singleFeatureImage my-10">
-              <img src={`${API_URL}${post[0].featured_image[0].url}`} />
+              <img src={`${API_URL}${post[0].featured_image.url}`} />
             </div>
             <div className="content">
               <section className="tags mb-5">
@@ -49,7 +49,7 @@ const SinglePage = ({ post, rel_posts }) => {
               </section>
 
               <section id="content">
-                <RichText doc={post[0].content} />
+                <RichText doc={post[0].context} />
               </section>
 
               <hr className="my-5" />
