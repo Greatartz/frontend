@@ -21,7 +21,7 @@ export default function Header({ categories, load }) {
     return (
       <nav className="relative flex flex-wrap items-center justify-between bg-white shadow">
         <div className="bg-bgColor w-full">
-          <div className="container mx-auto">
+          <div className="w-11/12 mx-auto">
             <h1 className="text-3xl uppercase py-5">
               <Link href="/">
                 <a>Mitch Cumm</a>
@@ -30,7 +30,7 @@ export default function Header({ categories, load }) {
           </div>
         </div>
 
-        <div className="container mx-auto flex flex-wrap items-center justify-between">
+        <div className="w-11/12 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <button
               className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
