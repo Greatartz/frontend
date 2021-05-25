@@ -60,7 +60,7 @@ export default function Footer({ categories, load }) {
                 </Link>
               </li>
               <li className="py-1">
-                <Link href="/">
+                <Link href="/contact">
                   <a className="hover:text-title hover:border-borderColor border-b">
                     Contact Us
                   </a>

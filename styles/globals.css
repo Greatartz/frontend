@@ -61,6 +61,13 @@
     margin-top: 15px;
     margin-bottom: 15px;
   }
+  .inputField:focus{
+    border-bottom: 1px solid #FFA028;
+  }
+  .facebook , .twitter, .linkedin, .youtube{
+	  color: #115294;
+  }
+
 }
 
 @layer components {
