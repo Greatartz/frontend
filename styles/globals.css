@@ -45,7 +45,6 @@
     transition: 1s ease;
   }
   .searchComponent {
-    
   }
   .searchComponent img {
     width: 30px;
@@ -61,23 +60,29 @@
     margin-top: 15px;
     margin-bottom: 15px;
   }
-  .inputField:focus{
-    border-bottom: 1px solid #FFA028;
+  .inputField:focus {
+    border-bottom: 1px solid #ffa028;
   }
-  .facebook , .twitter, .linkedin, .youtube{
-	  color: #115294;
+  .facebook,
+  .twitter,
+  .linkedin,
+  .youtube {
+    color: #115294;
   }
-
 }
 
 @layer components {
-  .row{
+  .row {
     @apply w-11/12 mx-auto mb-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10;
   }
-  .anchor{
+  .anchor {
     @apply px-5 py-5 flex items-center text-xs capitalize leading-snug text-title text-lg hover:text-borderColor;
   }
-  .anchorActive{
+  .anchorActive {
     @apply px-5 py-5 border-b border-borderColor flex items-center text-xs capitalize leading-snug text-title text-lg hover:text-borderColor;
   }
+}
+
+.InputContainer {
+  width: 500px;
 }

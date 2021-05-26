@@ -11,6 +11,8 @@
     "@headlessui/react": "^1.2.0",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
+    "@stripe/react-stripe-js": "^1.4.1",
+    "@stripe/stripe-js": "^1.15.0",
     "axios": "^0.21.1",
     "html-react-parser": "^1.2.6",
     "markdown-it": "^12.0.6",
@@ -24,6 +26,7 @@
     "react-query": "^3.16.0",
     "react-simple-dropdown": "^3.2.3",
     "react-timeago": "^6.1.1",
+    "stripe": "^8.149.0",
     "sweetalert2": "^11.0.8"
   },
   "devDependencies": {
