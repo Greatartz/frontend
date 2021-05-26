@@ -15,15 +15,15 @@ const ContactPage = () => {
 					</div>
 
 					<div>
-						<input type="name" className="inputField w-full my-2 py-3 px-2 rounded-md focus:outline-none" placeholder="Your Name" />
+						<input type="text" className="inputField w-full my-2 py-3 px-2 rounded-md focus:outline-none" placeholder="Your Name" />
 					</div>
 
 					<div>
-						<input type="name" className="inputField w-full my-2 py-3 px-2 rounded-md focus:outline-none" placeholder="Your Email" />
+						<input type="email" className="inputField w-full my-2 py-3 px-2 rounded-md focus:outline-none" placeholder="Your Email" />
 					</div>
 
 					<div>
-						<input type="name" className="inputField w-full my-2 py-3 px-2 rounded-md focus:outline-none" placeholder="Subject" />
+						<input type="text" className="inputField w-full my-2 py-3 px-2 rounded-md focus:outline-none" placeholder="Subject" />
 					</div>
 
 					<div>
@@ -39,36 +39,32 @@ const ContactPage = () => {
 				<div>
 					
 					<div>
-						<h1 className="capitalize mt-8 mb-3"> contact details </h1>
+						<h1 className="capitalize mt-8 text-center sm:text-center md:text-left lg:text-left"> contact details </h1>
 					</div>
 					
-					<div className="flex mb-3">
-						<p className="capitalize mr-10 text-title text-xl">phone number: </p>
-						<p className=""> +93 780088163 </p>
-					</div>
-
-					<div className="flex mb-3">
-						<p className="capitalize mr-12 text-title text-xl">Email Address: </p>
-						<p className=""> hassanim430@gmail.com </p>
+					<div className="text-center sm:text-center md:text-left lg:text-left">
+						<h3 className="capitalize mt-8 mb-3">Email & Phone</h3>
+						<p>+93 780088163</p>
+						<p>hassanim430@gmail.com</p>
 					</div>
 						
-					<div className="flex mb-3">
-						<p className="capitalize mr-20 text-title text-xl">follow us: </p>
-						<p className="flex gap-2 ml-1">
+					<div className="text-center sm:text-center md:text-left lg:text-left">
+						<h3 className="capitalize mt-8 mb-3">follow us</h3>
+						<p className="flex gap-2 ml-1 justify-center sm:justify-center md:justify-start lg:justify-start">
 							<a href="/" className="facebook"><FacebookIcon /></a>
 							<a href="/" className="twitter"><TwitterIcon  /></a>
 							<a href="/" className="linkedin"><LinkedInIcon /></a>
 							<a href="/" className="youtube"><YouTubeIcon /></a>
 						</p>
 					</div>
-
-					<div className="mb-3">
-						<p className="capitalize mb-2 text-title text-xl">contact info: </p>
-						<p className="leading-relaxed">
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
-						</p>
-					</div>	
 					
+					<div className="text-center sm:text-center md:text-left lg:text-left">
+						<h3 className="capitalize mt-8 mb-3">Adress</h3>
+						<p>
+							In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available
+						</p>
+					</div>
+
 				</div> 
 				
 			</section>
