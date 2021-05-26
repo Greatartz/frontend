@@ -2,9 +2,10 @@ import Skeleton from "react-loading-skeleton";
 import { signOut, useSession } from "next-auth/client";
 import { BASE_URL } from "../config/index";
 import Link from "next/link";
-
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { useRouter } from "next/router";
 import { useState } from "react";
+import PersonIcon from '@material-ui/icons/Person';
 
 export default function Header({ categories, load }) {
   const [session, loading] = useSession();
@@ -20,15 +21,32 @@ export default function Header({ categories, load }) {
   if (load) {
     return (
       <nav className="relative flex flex-wrap items-center justify-between bg-white shadow">
-        <div className="bg-bgColor w-full">
-          <div className="w-11/12 mx-auto">
-            <h1 className="text-3xl uppercase py-5">
-              <Link href="/">
-                <a>Mitch Cumm</a>
-              </Link>
-            </h1>
-          </div>
+	  
+        <div className="w-11/12 mx-auto grid grid-cols-3 py-8">
+			
+			<div className="flex">
+				<div className="self-center">
+					<p><MailOutlineIcon className="mr-1" /> hassanim430@gmail.com</p>
+				</div>
+			</div>
+			
+            <div className="text-center">
+				<h1 className="text-5xl uppercase">
+				  <Link href="/">
+					<a>Mitch Cumm</a>
+				  </Link>
+				</h1>
+			</div>
+			
+			<div className="flex ml-auto">
+				<p className="self-center">
+					<PersonIcon />
+				</p>
+			</div>
+			
         </div>
+		
+		<hr className="mb-6 w-11/12 mx-auto border-blueGray-300" />	
 
         <div className="w-11/12 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
@@ -80,36 +98,38 @@ export default function Header({ categories, load }) {
                 )}
               </li>
             </ul>
-
-            <div className="searchComponent">
-              <form
-                onSubmit={handleSubmit}
-                className="search-form flex bg-bgColor"
-              >
-                <button
-                  type="submit"
-                  className="search-form-link focus:outline-none"
-                >
-                  <img
-                    src="/search.svg"
-                    alt="Search Icon"
-                    className="search-icon"
-                  />
-                </button>
-                <div className="search-field-group">
-                  <input
-                    type="text"
-                    className="pl-3 focus:outline-none bg-bgColor"
-                    placeholder="Search ..."
-                    value={term}
-                    onChange={(e) => setTerm(e.target.value)}
-                    title="Search for:"
-                    autoComplete="off"
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
+				
+			<div className="searchComponent py-5">
+			  <form
+				onSubmit={handleSubmit}
+				className="search-form flex bg-bgColor"
+			  >
+				<button
+				  type="submit"
+				  className="search-form-link focus:outline-none"
+				>
+				  <img
+					src="/search.svg"
+					alt="Search Icon"
+					className="search-icon"
+				  />
+				</button>
+				<div className="search-field-group">
+				  <input
+					type="text"
+					className="pl-3 focus:outline-none bg-bgColor"
+					placeholder="Search ..."
+					value={term}
+					onChange={(e) => setTerm(e.target.value)}
+					title="Search for:"
+					autoComplete="off"
+				  />
+				</div>
+			  </form>
+			</div>	
+			
+          </div> {/*  menu collapse */}
+		  
         </div>
       </nav>
     );

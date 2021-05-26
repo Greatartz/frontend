@@ -45,7 +45,7 @@
     transition: 1s ease;
   }
   .searchComponent {
-    padding-top: 0.5rem;
+    
   }
   .searchComponent img {
     width: 30px;
@@ -75,9 +75,9 @@
     @apply w-11/12 mx-auto mb-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10;
   }
   .anchor{
-    @apply pr-4 py-5 flex items-center text-xs uppercase leading-snug text-title text-lg hover:text-borderColor;
+    @apply px-5 py-5 flex items-center text-xs capitalize leading-snug text-title text-lg hover:text-borderColor;
   }
   .anchorActive{
-    @apply pr-4 py-5 border-b border-borderColor flex items-center text-xs uppercase leading-snug text-title text-lg hover:text-borderColor;
+    @apply px-5 py-5 border-b border-borderColor flex items-center text-xs capitalize leading-snug text-title text-lg hover:text-borderColor;
   }
 }
