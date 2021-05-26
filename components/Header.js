@@ -6,6 +6,7 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { useRouter } from "next/router";
 import { useState } from "react";
 import PersonIcon from '@material-ui/icons/Person';
+import MenuIcon from '@material-ui/icons/Menu';
 
 export default function Header({ categories, load }) {
   const [session, loading] = useSession();
@@ -22,9 +23,9 @@ export default function Header({ categories, load }) {
     return (
       <nav className="relative flex flex-wrap items-center justify-between bg-white shadow">
 	  
-        <div className="w-11/12 mx-auto grid grid-cols-3 py-8">
+        <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 py-8">
 			
-			<div className="flex">
+			<div className="hidden sm:hidden md:hidden lg:flex">
 				<div className="self-center">
 					<p><MailOutlineIcon className="mr-1" /> hassanim430@gmail.com</p>
 				</div>
@@ -38,7 +39,7 @@ export default function Header({ categories, load }) {
 				</h1>
 			</div>
 			
-			<div className="flex ml-auto">
+			<div className="hidden sm:hidden md:hidden lg:flex ml-auto">
 				<p className="self-center">
 					<PersonIcon />
 				</p>
@@ -46,16 +47,17 @@ export default function Header({ categories, load }) {
 			
         </div>
 		
-		<hr className="mb-6 w-11/12 mx-auto border-blueGray-300" />	
+		<hr className="mb-2 w-11/12 mx-auto border-blueGray-300" />	
 
         <div className="w-11/12 mx-auto flex flex-wrap items-center justify-between">
-          <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+		
+          <div className="mb-2 w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <button
               className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
               type="button"
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
-              Menu
+              <MenuIcon />
             </button>
           </div>
 
@@ -74,8 +76,8 @@ export default function Header({ categories, load }) {
                       category={data.id}
                       className={`${
                         router.asPath === `/category/${data.name}`
-                          ? "anchorActive"
-                          : "anchor "
+                          ? "anchorActive border-b border-borderColor sm:border-borderColor md:border-borderColor lg:border-white"
+                          : "anchor border-b border-borderColor sm:border-borderColor md:border-borderColor lg:border-white"
                       }`}
                     >
                       {data.name}

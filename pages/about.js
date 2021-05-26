@@ -13,7 +13,7 @@ const AboutPage = () => {
 			<main>
 				
 				<section className="py-20">
-				  <div className="container mx-auto px-4">
+				  <div className="w-11/12 mx-auto px-4">
 				  
 					<div className="flex flex-wrap items-center">
 					  <div className="w-full md:w-5/12 px-4 mr-auto ml-auto">
@@ -39,7 +39,7 @@ const AboutPage = () => {
 						</Link>
 					  </div>
 
-					  <div className="w-full md:w-4/12 px-4 mr-auto ml-auto">
+					  <div className="w-full md:w-4/12 px-4 mr-auto ml-auto mt-5 sm:mt-5 md:mt-0 lg:mt-5">
 						<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500">
 						  <img
 							alt="..."

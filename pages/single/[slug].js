@@ -9,6 +9,7 @@ const SinglePage = ({ post, rel_posts }) => {
   return (
     <Layout title={`Single | ${post[0].title}`}>
       <main className="w-11/12 mx-auto py-10">
+	  
         <section className="singleHeader">
           <h3 className="text-xl border-b-2 border-borderColor inline-block my-5 py-1">
             <Link href={`/category/${post[0].category.name}`}>
@@ -32,8 +33,9 @@ const SinglePage = ({ post, rel_posts }) => {
           </p>
         </section>
 
-        <section className="singleContent grid grid-cols-4 gap-2">
-          <div className="col-span-3">
+        <section className="singleContent flex flex-wrap">
+		
+          <div className="w-full sm:w-full md:w-full lg:w-10/12">
             <div className="singleFeatureImage my-10">
               <img src={`${API_URL}${post[0].featured_image.url}`} />
             </div>
@@ -53,7 +55,7 @@ const SinglePage = ({ post, rel_posts }) => {
               </section>
 
               <hr className="my-5" />
-              <section className="location flex gap-5">
+              <section className="location grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <p className="text-title">
                   Location:{" "}
                   <span className="font-bold">{post[0].location}</span>
@@ -78,20 +80,28 @@ const SinglePage = ({ post, rel_posts }) => {
                 </p>
               </section>
             </div>
-          </div>{" "}
-          {/* / col */}
+          </div> {/* / col-1 */}
+		  
+		  <div className="w-full sm:w-full md:w-full lg:w-2/12">
+				sidebar
+		  </div> {/* / col-2 */}
+		  
         </section>
 
-        <hr className="my-5" />
-        <h1>Related Posts:</h1>
-        <section className="related_posts mb-10 mt-5 w-full grid grid-cols-3 gap-10">
-          {rel_posts
-            .filter((rel_posts) => rel_posts.id != post[0].id)
-            .map((post) => (
-              <ArticleBox post={post} />
-            ))}
-        </section>
-      </main>
+    </main>
+	  
+	<main className="w-11/12 mx-auto">
+		<hr className="my-5" />
+		<h1>Related Posts:</h1>
+		<section className="related_posts row mt-5">
+		  {rel_posts
+			.filter((rel_posts) => rel_posts.id != post[0].id)
+			.map((post) => (
+			  <ArticleBox post={post} />
+			))}
+		</section>
+	</main>	
+	
     </Layout>
   );
 };

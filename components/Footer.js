@@ -99,7 +99,7 @@ export default function Footer({ categories, load }) {
 							</Link>
 						</li>
 						<li>
-							<Link href="/">
+							<Link href="/privacy-policy">
 							  <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm capitalize">
 								Privacy Policy
 							  </a>
