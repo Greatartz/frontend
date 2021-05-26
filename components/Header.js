@@ -91,7 +91,11 @@ export default function Header({ categories, load }) {
                 )}
                 {session && (
                   <a className="anchor">
-                    <button onClick={() => signOut({ callbackUrl: BASE_URL })}>
+                    <button
+                      onClick={() =>
+                        signOut({ callbackUrl: BASE_URL, redirect: false })
+                      }
+                    >
                       Sign out
                     </button>
                   </a>
