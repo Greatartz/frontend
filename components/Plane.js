@@ -13,7 +13,6 @@ export default function Plane({ name, priceId, productId, desc, cost, image }) {
             <a
               className="px-5 py-3 rounded-lg shadow-lg bg-indigo-500 
         text-white uppercase tracking-wider font-semibold text-sm sm:text-base"
-              onClick={() => handlePayment(priceId)}
             >
               Subscribe Now!
             </a>
