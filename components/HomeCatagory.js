@@ -19,7 +19,6 @@ export default function HomeCatagory({ category }) {
     return <div>Loading</div>;
   }
   if (isFetched) {
-    console.log("cat ", data.data);
     return (
       <>
         <main>

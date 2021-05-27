@@ -20,7 +20,7 @@ export default function Footer({ categories, about }) {
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href={about[0].facebook} target="_blank">
+                  <a href={"/"} target="_blank">
                     <FacebookIcon />
                   </a>
                 </button>
@@ -28,7 +28,7 @@ export default function Footer({ categories, about }) {
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href={about[0].twitter} target="_blank">
+                  <a href={"/"} target="_blank">
                     <TwitterIcon />
                   </a>
                 </button>
@@ -36,7 +36,7 @@ export default function Footer({ categories, about }) {
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href={about[0].linkedin} target="_blank">
+                  <a href={"/"} target="_blank">
                     <LinkedInIcon />
                   </a>
                 </button>
@@ -44,7 +44,7 @@ export default function Footer({ categories, about }) {
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href={about[0].youtube} target="_blank">
+                  <a href={"/"} target="_blank">
                     <YouTubeIcon />
                   </a>
                 </button>
@@ -134,10 +134,7 @@ export default function Footer({ categories, about }) {
         <div className="w-full md:w-4/12 px-4 mx-auto text-center">
           <div className="text-sm text-blueGray-500 font-semibold py-1">
             Copyright © {new Date().getFullYear()} Reserved by{" "}
-            <a className="text-blueGray-500 hover:text-blueGray-800">
-              {about[0].name}
-            </a>
-            .
+            <a className="text-blueGray-500 hover:text-blueGray-800"></a>.
           </div>
         </div>
       </div>

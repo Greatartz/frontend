@@ -11,7 +11,10 @@ const Layout = ({ title, children }) => {
     axios.get(`${API_URL}/categories`)
   );
   //fetch about data
-  const about = useQuery("about", () => axios.get(`${API_URL}/about-uses`));
+  // const about = useQuery("about", () => axios.get(`${API_URL}/about-uses`));
+  // if (about.isError) {
+  //   alert("about is error ..");
+  // }
   return (
     <main className="min-h-screen">
       <Head>
@@ -26,8 +29,8 @@ const Layout = ({ title, children }) => {
       </Head>
       <header>
         {/* if both request load */}
-        {header.isFetched && about.isFetched ? (
-          <Header categories={header.data.data} about={about.data.data} />
+        {header.isFetched ? (
+          <Header categories={header.data.data} />
         ) : (
           <div className="flex h-screen">
             <div className="m-auto">
@@ -37,12 +40,12 @@ const Layout = ({ title, children }) => {
         )}
       </header>
       {/* both request load show content */}
-      {header.isFetched && about.isFetched ? <section>{children}</section> : ""}
+      {header.isFetched ? <section>{children}</section> : ""}
 
       <footer>
         {/* both query load */}
-        {header.isFetched && about.isFetched ? (
-          <Footer categories={header.data.data} about={about.data.data} />
+        {header.isFetched ? (
+          <Footer categories={header.data.data} />
         ) : (
           <div className="flex h-screen">
             <div className="m-auto">
