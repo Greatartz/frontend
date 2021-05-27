@@ -4,7 +4,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 
-export default function Footer({ categories, load }) {
+export default function Footer({ categories, load, about }) {
   return (
     <footer className="border-t-2 border-bgColor pb-6">
 
@@ -21,25 +21,33 @@ export default function Footer({ categories, load }) {
 					  className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
 					  type="button"
 					>
-					  <FacebookIcon />
+					  <a href={load ? about[0].facebook : "#"} target="_blank" >
+						 <FacebookIcon />	
+					  </a>
 					</button>
 					<button
 					  className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
 					  type="button"
 					>
-					  <TwitterIcon />
+					  <a href={load ? about[0].twitter : "#"} target="_blank" >
+						<TwitterIcon />
+					  </a>
 					</button>
 					<button
 					  className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
 					  type="button"
 					>
-					  <LinkedInIcon />
+					  <a href={load ? about[0].linkedin : "#"} target="_blank" >
+						<LinkedInIcon />
+					  </a>
 					</button>
 					<button
 					  className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
 					  type="button"
 					>
-					  <YouTubeIcon />
+						<a href={load ? about[0].youtube : "#"} target="_blank" >
+							<YouTubeIcon />
+						</a>
 					</button>
 				  </div>
 				</div>
@@ -136,7 +144,7 @@ export default function Footer({ categories, load }) {
                 <a
                   className="text-blueGray-500 hover:text-blueGray-800"
                 >
-                  Mitch Cumm
+					{load ? about[0].name : " "}
                 </a>
                 .
               </div>
