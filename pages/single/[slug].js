@@ -5,7 +5,8 @@ import RichText from "../../components/RichText";
 import ArticleBox from "../../components/ArticleBox";
 import TimeAgo from "react-timeago";
 
-const SinglePage = ({ post, rel_posts }) => {
+const SinglePage = ({ post, rel_posts, rel_user }) => {
+
   return (
     <Layout title={`Single | ${post[0].title}`}>
       <main className="w-11/12 mx-auto py-10">
@@ -35,7 +36,7 @@ const SinglePage = ({ post, rel_posts }) => {
 
         <section className="singleContent flex flex-wrap">
 		
-          <div className="w-full sm:w-full md:w-full lg:w-10/12">
+          <div className="w-full sm:w-full md:w-full lg:w-9/12">
             <div className="singleFeatureImage my-10">
               <img src={`${API_URL}${post[0].featured_image.url}`} />
             </div>
@@ -82,8 +83,22 @@ const SinglePage = ({ post, rel_posts }) => {
             </div>
           </div> {/* / col-1 */}
 		  
-		  <div className="w-full sm:w-full md:w-full lg:w-2/12">
-				sidebar
+		  <div className="w-full sm:w-full md:w-full lg:w-3/12"> 
+
+            <h2 className="border-2 border-borderColor p-1 rounded text-center w-11/12 mx-auto my-5">
+                <Link href={`/author/${rel_user[0].author.id}`}>
+                    <a className="cursor-pointer">
+                        {rel_user[0].author.firstname} {rel_user[0].author.lastname}
+                    </a>
+                </Link>
+            </h2>
+
+				  <div className="grid grid-cols-1 gap-5 w-11/12 mx-auto">
+              {rel_user.map((data)=>(
+                  <ArticleBox post={data} />
+              ))}
+          </div>
+
 		  </div> {/* / col-2 */}
 		  
         </section>
@@ -113,16 +128,22 @@ export async function getServerSideProps({ params }) {
   const res_post = await request_post.json();
 
   const cat = res_post[0].category.id;
-
   const req_related_posts = await fetch(
     `${API_URL}/posts?category=${cat}&_limit=3`
   );
   const res_related_posts = await req_related_posts.json();
 
+  const user = res_post[0].author.id;
+  const req_user_posts = await fetch(
+    `${API_URL}/posts?author=${user}&_limit=2`
+  );
+  const res_user_posts = await req_user_posts.json();
+
   return {
     props: {
       post: res_post,
       rel_posts: res_related_posts,
+      rel_user : res_user_posts
     },
   };
 }
