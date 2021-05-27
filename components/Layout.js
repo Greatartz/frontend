@@ -1,20 +1,16 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import axios from "axios";
 import { API_URL } from "../config/index";
+import Spinner from "@material-ui/core/CircularProgress";
+import { useContext } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Head from "next/head";
-
 const Layout = ({ title, children }) => {
-  const [load, setLoad] = useState(false);
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    axios.get(`${API_URL}/categories`).then((res) => {
-      setData(res.data);
-      setLoad(true);
-    });
-  }, []);
+  //fetch categories using React-query
+  const { isLoading, error, data, isFetched } = useQuery("headerCat", () =>
+    axios.get(`${API_URL}/categories`)
+  );
 
   return (
     <main className="min-h-screen">
@@ -29,14 +25,18 @@ const Layout = ({ title, children }) => {
         />
       </Head>
       <header>
-        <Header categories={data} load={load} />
+        {isFetched ? (
+          <Header categories={data.data} />
+        ) : (
+          <div className="flex h-screen">
+            <div className="m-auto">
+              <Spinner />
+            </div>
+          </div>
+        )}
       </header>
-
-      <section>{children}</section>
-
-      <footer>
-        <Footer categories={data} load={load} />
-      </footer>
+      {isFetched ? <section>{children}</section> : ""}
+      <footer>{isFetched ? <Footer categories={data.data} /> : ""}</footer>
     </main>
   );
 };
