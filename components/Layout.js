@@ -8,13 +8,32 @@ import Head from "next/head";
 const Layout = ({ title, children }) => {
   const [load, setLoad] = useState(false);
   const [data, setData] = useState(null);
+  const [about, setAbout] = useState(null);
 
   useEffect(() => {
-    axios.get(`${API_URL}/categories`).then((res) => {
-      setData(res.data);
-      setLoad(true);
-    });
+    
+    let one = `${API_URL}/categories`;
+    let two = `${API_URL}/about-uses`;
+
+    const requestOne = axios.get(one);
+    const requestTwo = axios.get(two);
+
+    axios
+      .all([requestOne, requestTwo])
+      .then(
+        axios.spread((...responses) => {
+          setData(responses[0].data)
+          setAbout(responses[1].data)
+          setLoad(true)
+
+        })
+      )
+      .catch(errors => {
+        console.error(errors);
+      });
+
   }, []);
+
 
   return (
     <main className="min-h-screen">

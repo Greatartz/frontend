@@ -9,6 +9,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import MenuIcon from '@material-ui/icons/Menu';
 
 export default function Header({ categories, load }) {
+  
   const [session, loading] = useSession();
   const [navbarOpen, setNavbarOpen] = useState(false);
   const router = useRouter();
@@ -31,7 +32,7 @@ export default function Header({ categories, load }) {
 				</div>
 			</div>
 			
-            <div className="text-center">
+      <div className="text-center">
 				<h1 className="text-5xl uppercase">
 				  <Link href="/">
 					<a>Mitch Cumm</a>
@@ -105,34 +106,34 @@ export default function Header({ categories, load }) {
               </li>
             </ul>
 				
-			<div className="searchComponent py-5">
-			  <form
-				onSubmit={handleSubmit}
-				className="search-form flex bg-bgColor"
-			  >
-				<button
-				  type="submit"
-				  className="search-form-link focus:outline-none"
-				>
-				  <img
-					src="/search.svg"
-					alt="Search Icon"
-					className="search-icon"
-				  />
-				</button>
-				<div className="search-field-group">
-				  <input
-					type="text"
-					className="pl-3 focus:outline-none bg-bgColor"
-					placeholder="Search ..."
-					value={term}
-					onChange={(e) => setTerm(e.target.value)}
-					title="Search for:"
-					autoComplete="off"
-				  />
-				</div>
-			  </form>
-			</div>	
+  			<div className="searchComponent py-5">
+  			  <form
+  				onSubmit={handleSubmit}
+  				className="search-form flex bg-bgColor"
+  			  >
+  				<button
+  				  type="submit"
+  				  className="search-form-link focus:outline-none"
+  				>
+  				  <img
+  					src="/search.svg"
+  					alt="Search Icon"
+  					className="search-icon"
+  				  />
+  				</button>
+  				<div className="search-field-group">
+  				  <input
+  					type="text"
+  					className="pl-3 focus:outline-none bg-bgColor"
+  					placeholder="Search ..."
+  					value={term}
+  					onChange={(e) => setTerm(e.target.value)}
+  					title="Search for:"
+  					autoComplete="off"
+  				  />
+  				</div>
+  			  </form>
+  			</div>	
 			
           </div> {/*  menu collapse */}
 		  
