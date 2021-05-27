@@ -61,11 +61,13 @@ export default function Payment({ product, secret }) {
 
 export async function getServerSideProps({ params }) {
   const { slug } = params;
-  console.log("Product id", slug);
   const stripe = new Stripe(SK_STRIPE, {
     apiVersion: "2020-08-27",
   });
-
+  const cs = await stripe.customers.list({
+    email: "ahmad@gmail.com",
+  });
+  console.log("cs ", cs);
   let prices = await stripe.prices.list({
     active: true,
     limit: 2,
@@ -82,11 +84,12 @@ export async function getServerSideProps({ params }) {
     };
   });
 
+  const searchCustomer = await stripe.customers.retrieve("ahmad@gmail.com");
+  console.log("searched ", searchCustomer);
   const paymentIntent = await stripe.paymentIntents.create({
     amount: prices.data[0].unit_amount,
     currency: "usd",
   });
-
   return {
     props: {
       product: product[0],

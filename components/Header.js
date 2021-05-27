@@ -7,18 +7,25 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import PersonIcon from "@material-ui/icons/Person";
 import MenuIcon from "@material-ui/icons/Menu";
+import CloseIcon from "@material-ui/icons/Close";
+import LoginPopup from "./LoginPopup";
 
 export default function Header({ categories }) {
   const [session, loading] = useSession();
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
   const [term, setTerm] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     router.push(`/search?term=${term}`);
     setTerm("");
   };
-
+  const handleCloseIcon = () => {
+    console.log("Clicked close");
+    setOpen(false);
+  };
   return (
     <nav className="relative flex flex-wrap items-center justify-between bg-white shadow">
       <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 py-8">
@@ -43,24 +50,25 @@ export default function Header({ categories }) {
 
         <div className="hidden sm:hidden md:hidden lg:flex ml-auto">
           <p className="self-center">
-
             {!session && (
-                <Link href="/login">
-                  <a className="anchor"> Sign in <PersonIcon /></a>
-                </Link>
-              )}
-              {session && (
-                <a className="anchor">
-                  <button
-                    onClick={() =>
-                      signOut({ callbackUrl: BASE_URL, redirect: false })
-                    }
-                  >
-                    Sign out  <PersonIcon />
-                  </button>
-                </a>
+              <a
+                className="anchor cursor-pointer"
+                onClick={() => setShowModal(true)}
+              >
+                Sign in <PersonIcon />
+              </a>
             )}
-
+            {session && (
+              <a className="anchor">
+                <button
+                  onClick={() =>
+                    signOut({ callbackUrl: BASE_URL, redirect: false })
+                  }
+                >
+                  Sign out <PersonIcon />
+                </button>
+              </a>
+            )}
           </p>
         </div>
       </div>
@@ -68,9 +76,7 @@ export default function Header({ categories }) {
       <hr className="mb-2 w-11/12 mx-auto border-blueGray-300" />
 
       <div className="w-11/12 mx-auto flex flex-wrap items-center justify-between">
-
         <div className="mb-2 w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-
           <button
             className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
             type="button"
@@ -80,26 +86,26 @@ export default function Header({ categories }) {
           </button>
 
           <p className="self-center lg:hidden">
-
             {!session && (
-                <Link href="/login">
-                  <a className="anchor"> Sign in <PersonIcon /></a>
-                </Link>
-              )}
-              {session && (
-                <a className="anchor">
-                  <button
-                    onClick={() =>
-                      signOut({ callbackUrl: BASE_URL, redirect: false })
-                    }
-                  >
-                    Sign out  <PersonIcon />
-                  </button>
-                </a>
+              <a
+                className="anchor cursor-pointer"
+                onClick={() => setShowModal(true)}
+              >
+                Sign in <PersonIcon />
+              </a>
             )}
-
+            {session && (
+              <a className="anchor">
+                <button
+                  onClick={() =>
+                    signOut({ callbackUrl: BASE_URL, redirect: false })
+                  }
+                >
+                  Sign out <PersonIcon />
+                </button>
+              </a>
+            )}
           </p>
-
         </div>
 
         <div
@@ -111,11 +117,11 @@ export default function Header({ categories }) {
         >
           <ul className="flex flex-col lg:flex-row list-none lg:mr-auto">
             <li className="nav-item">
-                <Link href="/">
-                    <a className="anchor border-b border-borderColor sm:border-borderColor md:border-borderColor lg:border-white">
-                      Home
-                    </a>
-                </Link>
+              <Link href="/">
+                <a className="anchor border-b border-borderColor sm:border-borderColor md:border-borderColor lg:border-white">
+                  Home
+                </a>
+              </Link>
             </li>
             {categories.map((data) => (
               <li className="nav-item" key={`${data.id}`}>
@@ -133,6 +139,53 @@ export default function Header({ categories }) {
                 </Link>
               </li>
             ))}
+            {showModal ? (
+              <>
+                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                  <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                    {/*content*/}
+                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                      {/*header*/}
+                      <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                        <h3 className="text-3xl font-semibold">Login</h3>
+                        <button
+                          className="p-1 ml-auto bg-transparent border-0  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                          onClick={() => setShowModal(false)}
+                        >
+                          <CloseIcon className="text-black" />
+                        </button>
+                      </div>
+                      {/*body*/}
+                      <div className="relative p-6 flex-auto">
+                        <LoginPopup />
+                      </div>
+                      {/*footer*/}
+                      <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                        <div className="text-center pt-12 pb-12">
+                          <p>
+                            Don't have an account?
+                            <Link
+                              href="/register"
+                              className="underline font-semibold hover:underline"
+                            >
+                              Register here.
+                            </Link>
+                          </p>
+                        </div>
+                        <button
+                          className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                          type="button"
+                          onClick={() => setShowModal(false)}
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+              </>
+            ) : null}
           </ul>
 
           <div className="searchComponent py-5">
@@ -163,7 +216,7 @@ export default function Header({ categories }) {
               </div>
             </form>
           </div>
-        </div>{" "}
+        </div>
         {/*  menu collapse */}
       </div>
     </nav>
