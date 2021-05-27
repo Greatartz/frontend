@@ -8,8 +8,8 @@ import { useState } from "react";
 import PersonIcon from '@material-ui/icons/Person';
 import MenuIcon from '@material-ui/icons/Menu';
 
-export default function Header({ categories, load }) {
-  
+export default function Header({ categories, load, about }) {
+	
   const [session, loading] = useSession();
   const [navbarOpen, setNavbarOpen] = useState(false);
   const router = useRouter();
@@ -28,14 +28,14 @@ export default function Header({ categories, load }) {
 			
 			<div className="hidden sm:hidden md:hidden lg:flex">
 				<div className="self-center">
-					<p><MailOutlineIcon className="mr-1" /> hassanim430@gmail.com</p>
+					<p><MailOutlineIcon className="mr-1" />{about[0].email}</p>
 				</div>
 			</div>
 			
       <div className="text-center">
 				<h1 className="text-5xl uppercase">
 				  <Link href="/">
-					<a>Mitch Cumm</a>
+					<a>{about[0].name}</a>
 				  </Link>
 				</h1>
 			</div>

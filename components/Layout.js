@@ -48,13 +48,13 @@ const Layout = ({ title, children }) => {
         />
       </Head>
       <header>
-        <Header categories={data} load={load} />
+        <Header categories={data} about={about} load={load} />
       </header>
 
       <section>{children}</section>
 
       <footer>
-        <Footer categories={data} load={load} />
+        <Footer categories={data} about={about} load={load} />
       </footer>
     </main>
   );
