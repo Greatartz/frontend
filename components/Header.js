@@ -8,7 +8,7 @@ import { useState } from "react";
 import PersonIcon from "@material-ui/icons/Person";
 import MenuIcon from "@material-ui/icons/Menu";
 
-export default function Header({ categories, about }) {
+export default function Header({ categories }) {
   const [session, loading] = useSession();
   const [navbarOpen, setNavbarOpen] = useState(false);
   const router = useRouter();
@@ -36,11 +36,31 @@ export default function Header({ categories, about }) {
               <a>Mitch Cumm</a>
             </Link>
           </h1>
+          <p className="text-center mt-5 lg:hidden">
+            <MailOutlineIcon className="mr-1" /> hassanim430@gmail.com
+          </p>
         </div>
 
         <div className="hidden sm:hidden md:hidden lg:flex ml-auto">
           <p className="self-center">
-            <PersonIcon />
+
+            {!session && (
+                <Link href="/login">
+                  <a className="anchor"> Sign in <PersonIcon /></a>
+                </Link>
+              )}
+              {session && (
+                <a className="anchor">
+                  <button
+                    onClick={() =>
+                      signOut({ callbackUrl: BASE_URL, redirect: false })
+                    }
+                  >
+                    Sign out  <PersonIcon />
+                  </button>
+                </a>
+            )}
+
           </p>
         </div>
       </div>
@@ -48,7 +68,9 @@ export default function Header({ categories, about }) {
       <hr className="mb-2 w-11/12 mx-auto border-blueGray-300" />
 
       <div className="w-11/12 mx-auto flex flex-wrap items-center justify-between">
+
         <div className="mb-2 w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+
           <button
             className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
             type="button"
@@ -56,7 +78,30 @@ export default function Header({ categories, about }) {
           >
             <MenuIcon />
           </button>
+
+          <p className="self-center lg:hidden">
+
+            {!session && (
+                <Link href="/login">
+                  <a className="anchor"> Sign in <PersonIcon /></a>
+                </Link>
+              )}
+              {session && (
+                <a className="anchor">
+                  <button
+                    onClick={() =>
+                      signOut({ callbackUrl: BASE_URL, redirect: false })
+                    }
+                  >
+                    Sign out  <PersonIcon />
+                  </button>
+                </a>
+            )}
+
+          </p>
+
         </div>
+
         <div
           className={
             "lg:flex flex-grow items-left flex-col lg:flex-row" +
@@ -65,6 +110,13 @@ export default function Header({ categories, about }) {
           id="example-navbar-danger"
         >
           <ul className="flex flex-col lg:flex-row list-none lg:mr-auto">
+            <li className="nav-item">
+                <Link href="/">
+                    <a className="anchor border-b border-borderColor sm:border-borderColor md:border-borderColor lg:border-white">
+                      Home
+                    </a>
+                </Link>
+            </li>
             {categories.map((data) => (
               <li className="nav-item" key={`${data.id}`}>
                 <Link href={`/category/${data.name}`}>
@@ -81,24 +133,6 @@ export default function Header({ categories, about }) {
                 </Link>
               </li>
             ))}
-            <li className="nav-item">
-              {!session && (
-                <Link href="/login">
-                  <a className="anchor">Sign in</a>
-                </Link>
-              )}
-              {session && (
-                <a className="anchor">
-                  <button
-                    onClick={() =>
-                      signOut({ callbackUrl: BASE_URL, redirect: false })
-                    }
-                  >
-                    Sign out
-                  </button>
-                </a>
-              )}
-            </li>
           </ul>
 
           <div className="searchComponent py-5">
