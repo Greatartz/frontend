@@ -10,7 +10,7 @@ const Layout = ({ title, children }) => {
   const header = useQuery("headerCat", () =>
     axios.get(`${API_URL}/categories`)
   );
-  
+
   return (
     <main className="min-h-screen">
       <Head>

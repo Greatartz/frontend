@@ -44,7 +44,6 @@ export async function getServerSideProps() {
     };
   });
 
-  console.log("Products", products);
   return {
     props: {
       plans: products,

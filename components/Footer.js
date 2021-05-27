@@ -28,7 +28,7 @@ export default function Footer({ categories }) {
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href="#" target="_blank">
+                  <a href={"/"} target="_blank">
                     <TwitterIcon />
                   </a>
                 </button>
@@ -36,7 +36,7 @@ export default function Footer({ categories }) {
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href="#" target="_blank">
+                  <a href={"/"} target="_blank">
                     <LinkedInIcon />
                   </a>
                 </button>
@@ -44,7 +44,7 @@ export default function Footer({ categories }) {
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href='#' target="_blank">
+                  <a href={"/"} target="_blank">
                     <YouTubeIcon />
                   </a>
                 </button>
