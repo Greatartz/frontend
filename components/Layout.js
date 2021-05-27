@@ -2,40 +2,16 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { API_URL } from "../config/index";
 import Spinner from "@material-ui/core/CircularProgress";
-import { useContext } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Head from "next/head";
 const Layout = ({ title, children }) => {
   //fetch categories using React-query
-  const { isLoading, error, data, isFetched } = useQuery("headerCat", () =>
+  const header = useQuery("headerCat", () =>
     axios.get(`${API_URL}/categories`)
   );
-  const [load, setLoad] = useState(false);
-  const [data, setData] = useState(null);
-  const [about, setAbout] = useState(null);
-
-  useEffect(() => {
-    let one = `${API_URL}/categories`;
-    let two = `${API_URL}/about-uses`;
-
-    const requestOne = axios.get(one);
-    const requestTwo = axios.get(two);
-
-    axios
-      .all([requestOne, requestTwo])
-      .then(
-        axios.spread((...responses) => {
-          setData(responses[0].data);
-          setAbout(responses[1].data);
-          setLoad(true);
-        })
-      )
-      .catch((errors) => {
-        console.error(errors);
-      });
-  }, []);
-
+  //fetch about data
+  const about = useQuery("about", () => axios.get(`${API_URL}/about-uses`));
   return (
     <main className="min-h-screen">
       <Head>
@@ -49,8 +25,9 @@ const Layout = ({ title, children }) => {
         />
       </Head>
       <header>
-        {isFetched ? (
-          <Header categories={data.data} />
+        {/* if both request load */}
+        {header.isFetched && about.isFetched ? (
+          <Header categories={header.data.data} about={about.data.data} />
         ) : (
           <div className="flex h-screen">
             <div className="m-auto">
@@ -58,15 +35,21 @@ const Layout = ({ title, children }) => {
             </div>
           </div>
         )}
-        {isFetched ? <section>{children}</section> : ""}
-        <footer>{isFetched ? <Footer categories={data.data} /> : ""}</footer>
-        <Header categories={data} about={about} load={load} />
       </header>
-
-      <section>{children}</section>
+      {/* both request load show content */}
+      {header.isFetched && about.isFetched ? <section>{children}</section> : ""}
 
       <footer>
-        <Footer categories={data} about={about} load={load} />
+        {/* both query load */}
+        {header.isFetched && about.isFetched ? (
+          <Footer categories={header.data.data} about={about.data.data} />
+        ) : (
+          <div className="flex h-screen">
+            <div className="m-auto">
+              <Spinner />
+            </div>
+          </div>
+        )}
       </footer>
     </main>
   );

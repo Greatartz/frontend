@@ -1,13 +1,14 @@
 import { signOut, useSession } from "next-auth/client";
 import { BASE_URL } from "../config/index";
 import Link from "next/link";
+import { useQuery } from "react-query";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import PersonIcon from "@material-ui/icons/Person";
 import MenuIcon from "@material-ui/icons/Menu";
 
-export default function Header({ categories }) {
+export default function Header({ categories, about }) {
   const [session, loading] = useSession();
   const [navbarOpen, setNavbarOpen] = useState(false);
   const router = useRouter();

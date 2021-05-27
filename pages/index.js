@@ -6,7 +6,7 @@ export default function Home({ resCatagory }) {
   return (
     <Layout title="Home">
       {resCatagory.map((i) => (
-        <HomeCatagory category={i} key={`h-${i.id}`}/>
+        <HomeCatagory category={i} key={`h-${i.id}`} />
       ))}
     </Layout>
   );
@@ -15,6 +15,7 @@ export default function Home({ resCatagory }) {
 export async function getServerSideProps() {
   const reqCatagory = await fetch(`${API_URL}/categories`);
   const resCatagory = await reqCatagory.json();
+  console.log(resCatagory);
   return {
     props: {
       resCatagory,
