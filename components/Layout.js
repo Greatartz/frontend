@@ -10,11 +10,7 @@ const Layout = ({ title, children }) => {
   const header = useQuery("headerCat", () =>
     axios.get(`${API_URL}/categories`)
   );
-  //fetch about data
-  // const about = useQuery("about", () => axios.get(`${API_URL}/about-uses`));
-  // if (about.isError) {
-  //   alert("about is error ..");
-  // }
+
   return (
     <main className="min-h-screen">
       <Head>

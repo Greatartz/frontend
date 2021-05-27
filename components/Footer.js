@@ -4,7 +4,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 
-export default function Footer({ categories, about }) {
+export default function Footer({ categories }) {
   return (
     <footer className="border-t-2 border-bgColor pb-6">
       <section className="bg-bgColor pt-8">
@@ -20,7 +20,7 @@ export default function Footer({ categories, about }) {
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href={"/"} target="_blank">
+                  <a href="" target="_blank">
                     <FacebookIcon />
                   </a>
                 </button>
@@ -134,7 +134,10 @@ export default function Footer({ categories, about }) {
         <div className="w-full md:w-4/12 px-4 mx-auto text-center">
           <div className="text-sm text-blueGray-500 font-semibold py-1">
             Copyright © {new Date().getFullYear()} Reserved by{" "}
-            <a className="text-blueGray-500 hover:text-blueGray-800"></a>.
+            <a className="text-blueGray-500 hover:text-blueGray-800">
+              Mitch Cumm
+            </a>
+            .
           </div>
         </div>
       </div>

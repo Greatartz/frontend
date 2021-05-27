@@ -1,6 +1,9 @@
 import { useState } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Swal from "sweetalert2";
+import { signIn } from "next-auth/client";
+import { useRouter } from "next/router";
+
 import Visible from "@material-ui/icons/Visibility";
 import Blind from "@material-ui/icons/VisibilityOff";
 
@@ -9,6 +12,26 @@ export default function LoginPopup() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
+  const router = useRouter();
+
+  const handleLogin = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+    const res = await signIn("credentials", {
+      email: email,
+      password: password,
+      callbackUrl: `/`,
+      redirect: true,
+    });
+    if (res?.error) {
+      setLoading(false);
+      Swal.fire("Invalid Login", "username or password is incorrect");
+    }
+    if (res.url) {
+      router.push("/");
+    }
+  };
+
   const handleVisiblity = () => {
     if (visible == false) {
       setVisible(true);
@@ -53,7 +76,10 @@ export default function LoginPopup() {
             </span>
           </div>
         </div>
-        <button className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">
+        <button
+          className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8"
+          onClick={handleLogin}
+        >
           {loading ? <CircularProgress className="p-2" /> : "Log In"}
         </button>
       </form>
