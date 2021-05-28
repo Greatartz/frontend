@@ -9,13 +9,15 @@ import PersonIcon from "@material-ui/icons/Person";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
 import LoginPopup from "./LoginPopup";
+import RegisterPopup from "./RegisterPopup";
 
 export default function Header({ categories }) {
+  const router = useRouter();
   const [session, loading] = useSession();
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const router = useRouter();
   const [term, setTerm] = useState("");
+  const [toggle, setToggle] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,6 +27,9 @@ export default function Header({ categories }) {
   const handleCloseIcon = () => {
     console.log("Clicked close");
     setOpen(false);
+  };
+  const handleToggle = (value) => {
+    setToggle(value);
   };
   return (
     <nav className="relative flex flex-wrap items-center justify-between bg-white shadow">
@@ -139,53 +144,6 @@ export default function Header({ categories }) {
                 </Link>
               </li>
             ))}
-            {showModal ? (
-              <>
-                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                  <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                    {/*content*/}
-                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                      {/*header*/}
-                      <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                        <h3 className="text-3xl font-semibold">Login</h3>
-                        <button
-                          className="p-1 ml-auto bg-transparent border-0  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                          onClick={() => setShowModal(false)}
-                        >
-                          <CloseIcon className="text-black" />
-                        </button>
-                      </div>
-                      {/*body*/}
-                      <div className="relative p-6 flex-auto">
-                        <LoginPopup />
-                      </div>
-                      {/*footer*/}
-                      <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                        <div className="text-center pt-12 pb-12">
-                          <p>
-                            Don't have an account?
-                            <Link
-                              href="/register"
-                              className="underline font-semibold hover:underline"
-                            >
-                              Register here.
-                            </Link>
-                          </p>
-                        </div>
-                        <button
-                          className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                          type="button"
-                          onClick={() => setShowModal(false)}
-                        >
-                          Close
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-              </>
-            ) : null}
           </ul>
 
           <div className="searchComponent py-5">
@@ -219,6 +177,58 @@ export default function Header({ categories }) {
         </div>
         {/*  menu collapse */}
       </div>
+      {/* model */}
+      {showModal ? (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                  <h3 className="text-3xl font-semibold">
+                    {toggle ? "Register" : "Login"}
+                  </h3>
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={() => setShowModal(false)}
+                  >
+                    <CloseIcon className="text-black" />
+                  </button>
+                </div>
+                {/*body*/}
+                <div className="relative p-6 flex-auto">
+                  {toggle ? (
+                    <>
+                      <RegisterPopup toggle={handleToggle} />
+                    </>
+                  ) : (
+                    <>
+                      <LoginPopup />
+                      <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                        <div className="text-center pt-12 pb-12">
+                          <p>
+                            Don't have an account?
+                            <a
+                              className="underline font-semibold cursor-pointer hover:underline"
+                              onClick={() => handleToggle(true)}
+                            >
+                              Register here.
+                            </a>
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+                {/*footer*/}
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
+      {/* end model */}
     </nav>
   );
 }
