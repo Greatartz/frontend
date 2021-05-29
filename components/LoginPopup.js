@@ -17,18 +17,20 @@ export default function LoginPopup() {
   const handleLogin = async (e) => {
     setLoading(true);
     e.preventDefault();
+
     const res = await signIn("credentials", {
       email: email,
       password: password,
       callbackUrl: `/`,
-      redirect: true,
+      redirect: false,
     });
+
     if (res?.error) {
       setLoading(false);
       Swal.fire("Invalid Login", "username or password is incorrect");
     }
     if (res.url) {
-      router.push("/");
+      router.reload();
     }
   };
 

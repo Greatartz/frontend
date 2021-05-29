@@ -6,13 +6,11 @@ import ArticleBox from "../../components/ArticleBox";
 import TimeAgo from "react-timeago";
 
 const SinglePage = ({ post, rel_posts, rel_user }) => {
-
   return (
     <Layout title={`Single | ${post[0].title}`}>
       <main className="w-11/12 mx-auto py-10">
-	  
         <section className="singleHeader">
-          <h3 className="text-xl border-b-2 border-borderColor inline-block my-5 py-1">
+          <h3 className="text-xl border-b-2 border-borderColor inline-block my-5 py-1 capitalize">
             <Link href={`/category/${post[0].category.name}`}>
               {post[0].category.name}
             </Link>
@@ -35,7 +33,6 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
         </section>
 
         <section className="singleContent flex flex-wrap">
-		
           <div className="w-full sm:w-full md:w-full lg:w-9/12">
             <div className="singleFeatureImage my-10">
               <img src={`${API_URL}${post[0].featured_image.url}`} />
@@ -81,42 +78,38 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
                 </p>
               </section>
             </div>
-          </div> {/* / col-1 */}
-		  
-		  <div className="w-full sm:w-full md:w-full lg:w-3/12"> 
-
+          </div>{" "}
+          {/* / col-1 */}
+          <div className="w-full sm:w-full md:w-full lg:w-3/12">
             <h2 className="border-2 border-borderColor p-1 rounded text-center w-11/12 mx-auto my-5">
-                <Link href={`/author/${rel_user[0].author.id}`}>
-                    <a className="cursor-pointer">
-                        {rel_user[0].author.firstname} {rel_user[0].author.lastname}
-                    </a>
-                </Link>
+              <Link href={`/author/${rel_user[0].author.id}`}>
+                <a className="cursor-pointer">
+                  {rel_user[0].author.firstname} {rel_user[0].author.lastname}
+                </a>
+              </Link>
             </h2>
 
-				  <div className="grid grid-cols-1 gap-5 w-11/12 mx-auto">
-              {rel_user.map((data)=>(
-                  <ArticleBox post={data} />
+            <div className="grid grid-cols-1 gap-5 w-11/12 mx-auto">
+              {rel_user.map((data) => (
+                <ArticleBox post={data} />
               ))}
-          </div>
-
-		  </div> {/* / col-2 */}
-		  
+            </div>
+          </div>{" "}
+          {/* / col-2 */}
         </section>
+      </main>
 
-    </main>
-	  
-	<main className="w-11/12 mx-auto">
-		<hr className="my-5" />
-		<h1>Related Posts:</h1>
-		<section className="related_posts row mt-5">
-		  {rel_posts
-			.filter((rel_posts) => rel_posts.id != post[0].id)
-			.map((post) => (
-			  <ArticleBox post={post} />
-			))}
-		</section>
-	</main>	
-	
+      <main className="w-11/12 mx-auto">
+        <hr className="my-5" />
+        <h1>Related Posts:</h1>
+        <section className="related_posts row mt-5">
+          {rel_posts
+            .filter((rel_posts) => rel_posts.id != post[0].id)
+            .map((post) => (
+              <ArticleBox post={post} />
+            ))}
+        </section>
+      </main>
     </Layout>
   );
 };
@@ -143,7 +136,7 @@ export async function getServerSideProps({ params }) {
     props: {
       post: res_post,
       rel_posts: res_related_posts,
-      rel_user : res_user_posts
+      rel_user: res_user_posts,
     },
   };
 }

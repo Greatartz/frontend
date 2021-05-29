@@ -18,7 +18,7 @@ const providers = [
           return { status: "success", data: user.data };
         }
       } catch (e) {
-        throw new Error("Not found");
+        throw new Error("Not found ");
       }
     },
   }),
