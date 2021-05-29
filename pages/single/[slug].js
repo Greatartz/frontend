@@ -35,7 +35,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
         <section className="singleContent flex flex-wrap">
           <div className="w-full sm:w-full md:w-full lg:w-9/12">
             <div className="singleFeatureImage my-10">
-              <img src={`${API_URL}${post[0].featured_image.url}`} />
+              <img src={`${post[0].featured_image.formats.large.url}`} />
             </div>
             <div className="content">
               <section className="tags mb-5">
