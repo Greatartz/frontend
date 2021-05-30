@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  *{
+     font-family: 'font-serif';
+  }
   h1 {
     font-size: 35px;
   }
