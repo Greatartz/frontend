@@ -8,7 +8,6 @@ import ArticleBox from "../components/ArticleBox";
 import Link from "next/link";
 
 export default function HomeCatagory({ category }) {
-
   const { isLoading, data, isFetched } = useQuery(
     `homeCat-${category.id}`,
     () =>
@@ -21,6 +20,7 @@ export default function HomeCatagory({ category }) {
   }
 
   if (isFetched) {
+    console.log("paiman ", data.data);
     return (
       <>
         {data.data.length > 0 ? (
