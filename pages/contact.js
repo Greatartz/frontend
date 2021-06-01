@@ -124,12 +124,44 @@ const ContactPage = () => {
 						
 					<div className="text-center sm:text-center md:text-left lg:text-left">
 						<h3 className="capitalize mt-8 mb-3">follow us</h3>
-						<p className="flex gap-2 ml-1 justify-center sm:justify-center md:justify-start lg:justify-start">
-							<a href="/" className="facebook"><FacebookIcon /></a>
-							<a href="/" className="twitter"><TwitterIcon  /></a>
-							<a href="/" className="linkedin"><LinkedInIcon /></a>
-							<a href="/" className="youtube"><YouTubeIcon /></a>
-						</p>
+						<div className="lg:mb-0 mb-6">
+
+							<button
+								className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+								type="button"
+							>
+								<a href="" target="_blank">
+									<FacebookIcon />
+								</a>
+							</button>
+
+							<button
+								className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+								type="button"
+							>
+								<a href={"/"} target="_blank">
+									<TwitterIcon />
+								</a>
+							</button>
+
+							<button
+								className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+								type="button"
+							>
+							<a href={"/"} target="_blank">
+								<LinkedInIcon />
+							</a>
+							</button>
+
+							<button
+								className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+								type="button"
+							>
+								<a href={"/"} target="_blank">
+									<YouTubeIcon />
+								</a>
+							</button>
+						</div>
 					</div>
 					
 					<div className="text-center sm:text-center md:text-left lg:text-left">

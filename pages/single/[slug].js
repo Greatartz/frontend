@@ -8,7 +8,7 @@ import TimeAgo from "react-timeago";
 const SinglePage = ({ post, rel_posts, rel_user }) => {
   return (
     <Layout title={`Single | ${post[0].title}`}>
-      <main className="w-11/12 mx-auto py-10">
+      <main className="w-11/12 mx-auto py-10 singlePageContent">
         <section className="singleHeader">
           <h3 className="text-xl border-b-2 border-borderColor inline-block my-5 py-1 capitalize">
             <Link href={`/category/${post[0].category.name}`}>
