@@ -4,18 +4,28 @@ import {API_URL} from '../../config/index'
 import ArticleBox from '../../components/ArticleBox'
 import Link from 'next/link'
 const PER_PAGE = 6
+import { NextSeo } from 'next-seo';
 
-const Categories = ({posts, total_length, page }) => {
-
+const Categories = ({posts, total_length, page, res_category }) => {
+		
     const router = useRouter()
     const { slug } = router.query
     const lastPage = Math.ceil(total_length / PER_PAGE)
+	
+	const SEO = {
+		title: ` Category | ${slug}`,
+		description: ` Description | ${res_category[0].description}`
+	}
+	
     return (
-        <Layout title={` Category | ${slug}`}>
+        <Layout>
+			
+			<NextSeo {...SEO} />	
+		
             { posts.length === 0 && <h1 className="text-5xl text-borderColor m-10">No Posts Found in {slug} Category! </h1> }
             
             {posts.length > 0 && <h1 className="text-center mt-10">
-                <span className="border-2 border-borderColor p-1 rounded">{slug}</span>
+                <span className="border-2 border-borderColor p-1 rounded capitalize">{slug}</span>
             </h1>  }
 
             <section className="row mt-10">
@@ -59,7 +69,7 @@ export async function getServerSideProps({ params, query: { page = 1 } }) {
     const res = await fetch(`${API_URL}/posts?category=${id}&_limit=${PER_PAGE}&_start=${start}&_sort=id:DESC`)
     const posts = await res.json()
     
-    return { props: { posts, page: +page, total_length } }
+    return { props: { posts, page: +page, total_length, res_category } }
 
 }
 

@@ -20,7 +20,6 @@ export default function HomeCatagory({ category }) {
   }
 
   if (isFetched) {
-    console.log("paiman ", data.data);
     return (
       <>
         {data.data.length > 0 ? (
@@ -32,7 +31,7 @@ export default function HomeCatagory({ category }) {
                 </a>
               </Link>
 
-              <span className="block text-lg mt-2">{category.description}</span>
+              <p className="block text-lg mt-2">{category.description}</p>
             </h1>
             <section className="row">
               {data.data.map((part) => (

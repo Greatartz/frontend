@@ -8,8 +8,14 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { API_URL } from "../config/index";
+import { NextSeo } from 'next-seo';
 
 const ContactPage = () => {
+	
+	const SEO = {
+		title: 'Page | Contact',
+		description: 'MITCH CUMM Contact page to be in Touch with visitors'
+	}
 
 	const [name, setName] 		= useState("");
   	const [email, setEmail]		= useState("");
@@ -58,7 +64,10 @@ const ContactPage = () => {
   	};
 
 	return(
-		<Layout title="Page | Contact">
+		<Layout>
+			
+			<NextSeo {...SEO} />	
+			
 			<section className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-5 gap-5">
 				<div className="bg-bgColor w-full p-8 rounded-md">
 					
@@ -124,12 +133,44 @@ const ContactPage = () => {
 						
 					<div className="text-center sm:text-center md:text-left lg:text-left">
 						<h3 className="capitalize mt-8 mb-3">follow us</h3>
-						<p className="flex gap-2 ml-1 justify-center sm:justify-center md:justify-start lg:justify-start">
-							<a href="/" className="facebook"><FacebookIcon /></a>
-							<a href="/" className="twitter"><TwitterIcon  /></a>
-							<a href="/" className="linkedin"><LinkedInIcon /></a>
-							<a href="/" className="youtube"><YouTubeIcon /></a>
-						</p>
+						<div className="lg:mb-0 mb-6">
+
+							<button
+								className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+								type="button"
+							>
+								<a href="" target="_blank">
+									<FacebookIcon />
+								</a>
+							</button>
+
+							<button
+								className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+								type="button"
+							>
+								<a href={"/"} target="_blank">
+									<TwitterIcon />
+								</a>
+							</button>
+
+							<button
+								className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+								type="button"
+							>
+							<a href={"/"} target="_blank">
+								<LinkedInIcon />
+							</a>
+							</button>
+
+							<button
+								className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+								type="button"
+							>
+								<a href={"/"} target="_blank">
+									<YouTubeIcon />
+								</a>
+							</button>
+						</div>
 					</div>
 					
 					<div className="text-center sm:text-center md:text-left lg:text-left">
