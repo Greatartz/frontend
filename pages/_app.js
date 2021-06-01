@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { useRef } from "react";
 import "../styles/globals.css";
+import SEO from '../next-seo.config.js';
+import { DefaultSeo } from 'next-seo';
 
 const promise = loadStripe(PK_STRIPE);
 function MyApp({ Component, pageProps }) {
@@ -18,6 +20,9 @@ function MyApp({ Component, pageProps }) {
       <QueryClientProvider client={queryClientRef.current}>
         <Hydrate state={pageProps.dehydratedState}>
           <Elements stripe={promise}>
+			<DefaultSeo
+				{...SEO}
+			/>
             <Component {...pageProps} />
           </Elements>
         </Hydrate>

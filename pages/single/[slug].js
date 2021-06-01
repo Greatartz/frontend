@@ -4,10 +4,18 @@ import { API_URL } from "../../config/index";
 import RichText from "../../components/RichText";
 import ArticleBox from "../../components/ArticleBox";
 import TimeAgo from "react-timeago";
+import { NextSeo } from 'next-seo';
 
 const SinglePage = ({ post, rel_posts, rel_user }) => {
+	
+	const SEO = {
+		title: `Single | ${post[0].title}`,
+		description: `Description | ${post[0].excerpt}`
+	}
+	
   return (
-    <Layout title={`Single | ${post[0].title}`}>
+    <Layout>
+		<NextSeo {...SEO} />	
       <main className="w-11/12 mx-auto py-10 singlePageContent">
         <section className="singleHeader">
           <h3 className="text-xl border-b-2 border-borderColor inline-block my-5 py-1 capitalize">
@@ -35,7 +43,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
         <section className="singleContent flex flex-wrap">
           <div className="w-full sm:w-full md:w-full lg:w-9/12">
             <div className="singleFeatureImage my-10">
-              <img src={`${post[0].featured_image.formats.large.url}`} />
+				 <img src={`${post[0].featured_image.formats.large.url}`} />
             </div>
             <div className="content">
               <section className="tags mb-5">

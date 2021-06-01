@@ -8,8 +8,14 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { API_URL } from "../config/index";
+import { NextSeo } from 'next-seo';
 
 const ContactPage = () => {
+	
+	const SEO = {
+		title: 'Page | Contact',
+		description: 'MITCH CUMM Contact page to be in Touch with visitors'
+	}
 
 	const [name, setName] 		= useState("");
   	const [email, setEmail]		= useState("");
@@ -58,7 +64,10 @@ const ContactPage = () => {
   	};
 
 	return(
-		<Layout title="Page | Contact">
+		<Layout>
+			
+			<NextSeo {...SEO} />	
+			
 			<section className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-5 gap-5">
 				<div className="bg-bgColor w-full p-8 rounded-md">
 					
