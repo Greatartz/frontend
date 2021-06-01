@@ -15,7 +15,7 @@ export default function Privacy() {
 			
 		<NextSeo {...SEO} />	
 		
-      <div className="w-11/12 mx-auto my-10">
+      <div className="w-11/12 mx-auto my-10 singlePageContent">
 			<h1>Privacy And Policy</h1>
 			<div className="mt-5">
 				The standard Lorem Ipsum passage, used since the 1500s
