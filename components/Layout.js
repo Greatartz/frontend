@@ -5,7 +5,7 @@ import Spinner from "@material-ui/core/CircularProgress";
 import Header from "./Header";
 import Footer from "./Footer";
 import Head from "next/head";
-const Layout = ({ title, children }) => {
+const Layout = ({children }) => {
   //fetch categories using React-query
   const header = useQuery("headerCat", () =>
     axios.get(`${API_URL}/categories`)
@@ -13,8 +13,8 @@ const Layout = ({ title, children }) => {
 
   return (
     <main className="min-h-screen">
+	
       <Head>
-        <title>{title}</title>
         <meta
           name="viewport"
           lang="en"
@@ -23,6 +23,7 @@ const Layout = ({ title, children }) => {
           charSet="UTF-8"
         />
       </Head>
+	  
       <header>
         {/* if both request load */}
         {header.isFetched ? (
@@ -54,7 +55,4 @@ const Layout = ({ title, children }) => {
   );
 };
 
-Layout.defaultProps = {
-  title: "News",
-};
 export default Layout;
