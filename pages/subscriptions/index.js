@@ -2,8 +2,19 @@ import Stripe from "stripe";
 import { SK_STRIPE } from "../../config/index";
 import Layout from "../../components/Layout";
 import Plane from "../../components/Plane";
+import { useSession } from "next-auth/client";
+import { useEffect, useState } from "react";
 export default function subscriptions({ plans }) {
-  // Stripe()
+  const [session, loading] = useSession();
+  const [haveEmail, setHaveEmail] = useState(false);
+  useEffect(() => {
+    if (session) {
+      setHaveEmail(true);
+    } else {
+      setHaveEmail(false);
+    }
+  });
+
   return (
     <Layout title="mitch-cumm | subscribtion">
       <div className="container my-10 mx-auto md:grid md:grid-cols-2 md:gap-4">
@@ -16,6 +27,7 @@ export default function subscriptions({ plans }) {
             desc={item.productDesc}
             cost={item.price}
             image={item.productImage}
+            haveEmail={haveEmail}
           />
         ))}
       </div>
@@ -30,7 +42,6 @@ export async function getServerSideProps() {
 
   let prices = await stripe.prices.list({
     active: true,
-    limit: 2,
     expand: ["data.product"],
   });
   const products = prices.data.map((item) => {

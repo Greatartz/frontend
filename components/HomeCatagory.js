@@ -20,7 +20,6 @@ export default function HomeCatagory({ category }) {
   }
 
   if (isFetched) {
-    console.log("paiman ", data.data);
     return (
       <>
         {data.data.length > 0 ? (

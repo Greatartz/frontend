@@ -4,11 +4,36 @@ import { API_URL } from "../../config/index";
 import RichText from "../../components/RichText";
 import ArticleBox from "../../components/ArticleBox";
 import TimeAgo from "react-timeago";
+import { useState } from "react";
+import AlertSubscribe from "../../components/AlertSubscribe";
+import { useSession } from "next-auth/client";
+import axios from "axios";
 
 const SinglePage = ({ post, rel_posts, rel_user }) => {
+  const [loadAlert, setLoadAlert] = useState(false);
+  const [session, loading] = useSession();
+  setTimeout(() => {
+    console.log("checking started.....");
+    if (!loading) {
+      // session is load
+      if (session) {
+        const email = session.user.email;
+        const check = axios
+          .post(`/api/payment/isSubscribed/${email}`)
+          .then(({ data }) => {
+            console.log("checking inside single", data);
+            if (data.subscribed === false || data.isCustomer === false) {
+              setLoadAlert(true);
+            }
+          });
+      } else {
+        setLoadAlert(true);
+      }
+    }
+  }, 10000);
   return (
     <Layout title={`Single | ${post[0].title}`}>
-      <main className="w-11/12 mx-auto py-10">
+      <main className={`w-11/12 mx-auto py-10 ${loadAlert ? "hidden" : ""}`}>
         <section className="singleHeader">
           <h3 className="text-xl border-b-2 border-borderColor inline-block my-5 py-1 capitalize">
             <Link href={`/category/${post[0].category.name}`}>
@@ -40,10 +65,10 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
             <div className="content">
               <section className="tags mb-5">
                 {post[0].tags.map((tag) => (
-                  <Link href={`/tag/${tag.id}`}>
-                    <a className="bg-borderColor p-2 rounded text-white mr-2">
+                  <Link href={`/tag/${tag.id}`} key={`tag-link-${tag.id}`}>
+                    <span className="bg-borderColor p-2 rounded text-white mr-2">
                       {tag.title}
-                    </a>
+                    </span>
                   </Link>
                 ))}
               </section>
@@ -90,8 +115,8 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
             </h2>
 
             <div className="grid grid-cols-1 gap-5 w-11/12 mx-auto">
-              {rel_user.map((data) => (
-                <ArticleBox post={data} />
+              {rel_user.map((data, n) => (
+                <ArticleBox post={data} key={`single-artical-${n}`} />
               ))}
             </div>
           </div>{" "}
@@ -110,6 +135,8 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
             ))}
         </section>
       </main>
+      {/*model */}
+      {loadAlert ? <AlertSubscribe show={loadAlert} /> : ""}
     </Layout>
   );
 };
