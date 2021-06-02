@@ -1,10 +1,21 @@
 import { API_URL } from "../config/index";
 import RichText from "../components/RichText";
 import Layout from "../components/Layout";
+import { NextSeo } from 'next-seo';
+
 export default function Privacy() {
+	
+	const SEO = {
+		title: 'Page | Privacy',
+		description: 'MITCH CUMM Policy & Privacy'
+	}	
+	
   return (
-    <Layout title="Page | Privacy">
-      <div className="w-11/12 mx-auto my-10">
+    <Layout>
+			
+		<NextSeo {...SEO} />	
+		
+      <div className="w-11/12 mx-auto my-10 singlePageContent">
 			<h1>Privacy And Policy</h1>
 			<div className="mt-5">
 				The standard Lorem Ipsum passage, used since the 1500s

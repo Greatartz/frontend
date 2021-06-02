@@ -31,7 +31,7 @@ export default function HomeCatagory({ category }) {
                 </a>
               </Link>
 
-              <span className="block text-lg mt-2">{category.description}</span>
+              <p className="block text-lg mt-2">{category.description}</p>
             </h1>
             <section className="row">
               {data.data.map((part) => (

@@ -4,6 +4,7 @@ import ArticleBox from '../../components/ArticleBox'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 const PER_PAGE = 6
+import { NextSeo } from 'next-seo';
 
 const AuthorPosts = ({ posts, total_length, page }) => {
 
@@ -11,10 +12,15 @@ const AuthorPosts = ({ posts, total_length, page }) => {
 
     const router = useRouter()
     const { id } = router.query
+	
+	const SEO = {
+		title: `Author | ${posts[0].author.firstname}  ${posts[0].author.lastname}`,
+		description: 'MITCH CUMM list of author posts'
+	}
 
     return (
-        <Layout title={`Author Posts`}>
-
+        <Layout>
+			 <NextSeo {...SEO} />	
             <h1 className="text-center mt-10">
                 <span className="border-2 border-borderColor p-1 rounded">{posts[0].author.firstname}  {posts[0].author.lastname}</span>
             </h1>

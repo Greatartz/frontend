@@ -5,11 +5,20 @@ import YoutubeSearchedForIcon from '@material-ui/icons/YoutubeSearchedFor';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 import GroupIcon from '@material-ui/icons/Group';
 import FastForwardIcon from '@material-ui/icons/FastForward';
+import { NextSeo } from 'next-seo';
 
 const AboutPage = () => {
 	
+	const SEO = {
+		title: 'Page | About',
+		description: 'MITCH CUMM About page, to Tell about MITCH CUMM'
+	}
+	
 	return (
-		<Layout title="Page | About">
+		<Layout>
+		
+			<NextSeo {...SEO} />	
+		
 			<main>
 				
 				<section className="py-20">

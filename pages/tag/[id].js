@@ -4,8 +4,14 @@ import ArticleBox from '../../components/ArticleBox'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 const PER_PAGE = 6
+import { NextSeo } from 'next-seo';
 
 const TagPosts = ({ posts, total_length, page, tag_title }) => {
+	
+	const SEO = {
+		title: `Tag | ${tag_title}`,
+		description: 'Tags posts to show related posts'
+	}
 
     const lastPage = Math.ceil(total_length / PER_PAGE)
 
@@ -13,10 +19,10 @@ const TagPosts = ({ posts, total_length, page, tag_title }) => {
     const { id } = router.query
 
     return (
-        <Layout title={`Tag's Posts | ${tag_title}`}>
-
+        <Layout>
+			<NextSeo {...SEO} />
             <h1 className="text-center mt-10">
-                <span className="border-2 border-borderColor p-1 rounded">{tag_title}</span>
+                <span className="border-2 border-borderColor p-1 rounded capitalize">{tag_title}</span>
             </h1>
 
             <section className="row mt-10">

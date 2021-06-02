@@ -149,17 +149,7 @@ export default function Header({ categories }) {
               onSubmit={handleSubmit}
               className="search-form flex bg-bgColor"
             >
-              <button
-                type="submit"
-                className="search-form-link focus:outline-none"
-              >
-                <img
-                  src="/search.svg"
-                  alt="Search Icon"
-                  className="search-icon"
-                />
-              </button>
-              <div className="search-field-group">
+              <div className="search-field-group w-full">
                 <input
                   type="text"
                   className="pl-3 focus:outline-none bg-bgColor"
@@ -170,6 +160,16 @@ export default function Header({ categories }) {
                   autoComplete="off"
                 />
               </div>
+              <button
+                  type="submit"
+                  className="search-form-link focus:outline-none"
+              >
+                  <img
+                    src="/search.svg"
+                    alt="Search Icon"
+                    className="search-icon"
+                  />
+              </button>
             </form>
           </div>
         </div>

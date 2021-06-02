@@ -4,36 +4,18 @@ import { API_URL } from "../../config/index";
 import RichText from "../../components/RichText";
 import ArticleBox from "../../components/ArticleBox";
 import TimeAgo from "react-timeago";
-import { useState } from "react";
-import AlertSubscribe from "../../components/AlertSubscribe";
-import { useSession } from "next-auth/client";
-import axios from "axios";
+import { NextSeo } from "next-seo";
 
 const SinglePage = ({ post, rel_posts, rel_user }) => {
-  const [loadAlert, setLoadAlert] = useState(false);
-  const [session, loading] = useSession();
-  setTimeout(() => {
-    console.log("checking started.....");
-    if (!loading) {
-      // session is load
-      if (session) {
-        const email = session.user.email;
-        const check = axios
-          .post(`/api/payment/isSubscribed/${email}`)
-          .then(({ data }) => {
-            console.log("checking inside single", data);
-            if (data.subscribed === false || data.isCustomer === false) {
-              setLoadAlert(true);
-            }
-          });
-      } else {
-        setLoadAlert(true);
-      }
-    }
-  }, 10000);
+  const SEO = {
+    title: `Single | ${post[0].title}`,
+    description: `Description | ${post[0].excerpt}`,
+  };
+
   return (
-    <Layout title={`Single | ${post[0].title}`}>
-      <main className={`w-11/12 mx-auto py-10 ${loadAlert ? "hidden" : ""}`}>
+    <Layout>
+      <NextSeo {...SEO} />
+      <main className="w-11/12 mx-auto py-10 singlePageContent">
         <section className="singleHeader">
           <h3 className="text-xl border-b-2 border-borderColor inline-block my-5 py-1 capitalize">
             <Link href={`/category/${post[0].category.name}`}>
