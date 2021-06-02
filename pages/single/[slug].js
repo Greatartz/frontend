@@ -3,14 +3,37 @@ import Layout from "../../components/Layout";
 import { API_URL } from "../../config/index";
 import RichText from "../../components/RichText";
 import ArticleBox from "../../components/ArticleBox";
+import AlertSubscribe from "../../components/AlertSubscribe";
 import TimeAgo from "react-timeago";
 import { NextSeo } from "next-seo";
+import { useState } from "react";
+import { useSession } from "next-auth/client";
+import axios from "axios";
 
 const SinglePage = ({ post, rel_posts, rel_user }) => {
+  const [loadAlert, setLoadAlert] = useState(false);
+  const [session, loading] = useSession();
   const SEO = {
     title: `Single | ${post[0].title}`,
     description: `Description | ${post[0].excerpt}`,
   };
+  setTimeout(() => {
+    console.log("statrt chec ..");
+    if (!loading) {
+      if (session) {
+        const email = session.user.email;
+        axios.post(`/api/payment/isSubscribed/${email}`).then(({ data }) => {
+          if (data.subscribed == false || data.isCustomer == false) {
+            setLoadAlert(true);
+          } else {
+            setLoadAlert(false);
+          }
+        });
+      } else {
+        setLoadAlert(true);
+      }
+    }
+  }, 10000);
 
   return (
     <Layout>
