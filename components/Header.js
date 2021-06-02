@@ -18,14 +18,12 @@ export default function Header({ categories }) {
   const [showModal, setShowModal] = useState(false);
   const [term, setTerm] = useState("");
   const [toggle, setToggle] = useState(false);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     router.push(`/search?term=${term}`);
     setTerm("");
   };
   const handleCloseIcon = () => {
-    console.log("Clicked close");
     setOpen(false);
   };
   const handleToggle = (value) => {
@@ -204,20 +202,7 @@ export default function Header({ categories }) {
                     </>
                   ) : (
                     <>
-                      <LoginPopup />
-                      <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                        <div className="text-center pt-12 pb-12">
-                          <p>
-                            Don't have an account?
-                            <a
-                              className="underline font-semibold cursor-pointer hover:underline"
-                              onClick={() => handleToggle(true)}
-                            >
-                              Register here.
-                            </a>
-                          </p>
-                        </div>
-                      </div>
+                      <LoginPopup toggle={handleToggle} />
                     </>
                   )}
                 </div>

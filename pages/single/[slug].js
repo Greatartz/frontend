@@ -3,19 +3,41 @@ import Layout from "../../components/Layout";
 import { API_URL } from "../../config/index";
 import RichText from "../../components/RichText";
 import ArticleBox from "../../components/ArticleBox";
+import AlertSubscribe from "../../components/AlertSubscribe";
 import TimeAgo from "react-timeago";
-import { NextSeo } from 'next-seo';
+import { NextSeo } from "next-seo";
+import { useState } from "react";
+import { useSession } from "next-auth/client";
+import axios from "axios";
 
 const SinglePage = ({ post, rel_posts, rel_user }) => {
-	
-	const SEO = {
-		title: `Single | ${post[0].title}`,
-		description: `Description | ${post[0].excerpt}`
-	}
-	
+  const [loadAlert, setLoadAlert] = useState(false);
+  const [session, loading] = useSession();
+  const SEO = {
+    title: `Single | ${post[0].title}`,
+    description: `Description | ${post[0].excerpt}`,
+  };
+  setTimeout(() => {
+    console.log("statrt chec ..");
+    if (!loading) {
+      if (session) {
+        const email = session.user.email;
+        axios.post(`/api/payment/isSubscribed/${email}`).then(({ data }) => {
+          if (data.subscribed == false || data.isCustomer == false) {
+            setLoadAlert(true);
+          } else {
+            setLoadAlert(false);
+          }
+        });
+      } else {
+        setLoadAlert(true);
+      }
+    }
+  }, 10000);
+
   return (
     <Layout>
-		<NextSeo {...SEO} />	
+      <NextSeo {...SEO} />
       <main className="w-11/12 mx-auto py-10 singlePageContent">
         <section className="singleHeader">
           <h3 className="text-xl border-b-2 border-borderColor inline-block my-5 py-1 capitalize">
@@ -43,15 +65,15 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
         <section className="singleContent flex flex-wrap">
           <div className="w-full sm:w-full md:w-full lg:w-9/12">
             <div className="singleFeatureImage my-10">
-				 <img src={`${post[0].featured_image.formats.large.url}`} />
+              <img src={`${post[0].featured_image.formats.large.url}`} />
             </div>
             <div className="content">
               <section className="tags mb-5">
                 {post[0].tags.map((tag) => (
-                  <Link href={`/tag/${tag.id}`}>
-                    <a className="bg-borderColor p-2 rounded text-white mr-2">
+                  <Link href={`/tag/${tag.id}`} key={`tag-link-${tag.id}`}>
+                    <span className="bg-borderColor p-2 rounded text-white mr-2">
                       {tag.title}
-                    </a>
+                    </span>
                   </Link>
                 ))}
               </section>
@@ -98,8 +120,8 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
             </h2>
 
             <div className="grid grid-cols-1 gap-5 w-11/12 mx-auto">
-              {rel_user.map((data) => (
-                <ArticleBox post={data} />
+              {rel_user.map((data, n) => (
+                <ArticleBox post={data} key={`single-artical-${n}`} />
               ))}
             </div>
           </div>{" "}
@@ -118,6 +140,8 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
             ))}
         </section>
       </main>
+      {/*model */}
+      {loadAlert ? <AlertSubscribe show={loadAlert} /> : ""}
     </Layout>
   );
 };
