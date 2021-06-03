@@ -10,7 +10,7 @@ import Link from "next/link";
 import { API_URL } from "../config/index";
 import { NextSeo } from 'next-seo';
 
-const ContactPage = () => {
+const ContactPage = ({data}) => {
 	
 	const SEO = {
 		title: 'Page | Contact',
@@ -40,7 +40,7 @@ const ContactPage = () => {
 	        message: message
 	      };
 
-	      const messages = await fetch(`${API_URL}/contact-messages`, {
+	      const messages = await fetch(`${API_URL}/contacts`, {
 	        method: "POST",
 	        headers: {
 	          Accept: "application/json",
@@ -127,8 +127,8 @@ const ContactPage = () => {
 					
 					<div className="text-center sm:text-center md:text-left lg:text-left">
 						<h3 className="capitalize mt-8 mb-3">Email & Phone</h3>
-						<p>+93 780088163</p>
-						<p>hassanim430@gmail.com</p>
+						<p>{data[0].phone}</p>
+						<p>{data[0].email}</p>
 					</div>
 						
 					<div className="text-center sm:text-center md:text-left lg:text-left">
@@ -139,7 +139,7 @@ const ContactPage = () => {
 								className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
 								type="button"
 							>
-								<a href="" target="_blank">
+								<a href={data[0].facebook} target="_blank">
 									<FacebookIcon />
 								</a>
 							</button>
@@ -148,7 +148,7 @@ const ContactPage = () => {
 								className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
 								type="button"
 							>
-								<a href={"/"} target="_blank">
+								<a href={data[0].twitter} target="_blank">
 									<TwitterIcon />
 								</a>
 							</button>
@@ -157,7 +157,7 @@ const ContactPage = () => {
 								className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
 								type="button"
 							>
-							<a href={"/"} target="_blank">
+							<a href={data[0].linkedin} target="_blank">
 								<LinkedInIcon />
 							</a>
 							</button>
@@ -166,7 +166,7 @@ const ContactPage = () => {
 								className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
 								type="button"
 							>
-								<a href={"/"} target="_blank">
+								<a href={data[0].youtube} target="_blank">
 									<YouTubeIcon />
 								</a>
 							</button>
@@ -176,7 +176,7 @@ const ContactPage = () => {
 					<div className="text-center sm:text-center md:text-left lg:text-left">
 						<h3 className="capitalize mt-8 mb-3">Adress</h3>
 						<p>
-							In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available
+							{data[0].address}
 						</p>
 					</div>
 
@@ -186,4 +186,15 @@ const ContactPage = () => {
 		</Layout>
 	);
 }
+
+export async function getStaticProps() {
+	
+  const res = await fetch(`${API_URL}/abouts`)
+  const data = await res.json()
+
+  return {
+    props: { data }, // will be passed to the page component as props
+  }
+}
+
  export default ContactPage;
