@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://strapi-cloudinary-app.herokuapp.com";
 // http://mitch-cumm.herokuapp.com
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "/";
 const PK_STRIPE = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || "";
