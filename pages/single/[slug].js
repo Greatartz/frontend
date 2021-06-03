@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Layout from "../../components/Layout";
 import { API_URL } from "../../config/index";
+import { BASE_URL } from "../../config/index";
 import RichText from "../../components/RichText";
 import ArticleBox from "../../components/ArticleBox";
 import AlertSubscribe from "../../components/AlertSubscribe";
@@ -14,8 +15,9 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
   const [loadAlert, setLoadAlert] = useState(false);
   const [session, loading] = useSession();
   const SEO = {
-    title: `Single | ${post[0].title}`,
-    description: `Description | ${post[0].excerpt}`,
+    title: `Single | ${post[0].seo_title}`,
+    description: `Description | ${post[0].seo_description}`,
+	canonical: `${BASE_URL}/${post[0].slug}`
   };
   useEffect(() => {
     setTimeout(() => {
