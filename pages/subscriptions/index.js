@@ -4,7 +4,7 @@ import Layout from "../../components/Layout";
 import Plane from "../../components/Plane";
 import { useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
-export default function subscriptions({ plans }) {
+export default function subscriptions({ plans, after }) {
   const [session, loading] = useSession();
   const [haveEmail, setHaveEmail] = useState(false);
   useEffect(() => {
@@ -28,6 +28,7 @@ export default function subscriptions({ plans }) {
             cost={item.price}
             image={item.productImage}
             haveEmail={haveEmail}
+            after={after}
           />
         ))}
       </div>
@@ -35,7 +36,7 @@ export default function subscriptions({ plans }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query: { next } }) {
   const stripe = new Stripe(SK_STRIPE, {
     apiVersion: "2020-08-27",
   });
@@ -58,6 +59,7 @@ export async function getServerSideProps() {
   return {
     props: {
       plans: products,
+      after: next || "",
     },
   };
 }
