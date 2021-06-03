@@ -4,9 +4,9 @@ import Layout from "../../components/Layout";
 import Plane from "../../components/Plane";
 import { useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
-import { NextSeo } from 'next-seo';
+import { NextSeo } from "next-seo";
 
-export default function subscriptions({ plans }) {
+export default function subscriptions({ plans, after }) {
   const [session, loading] = useSession();
   const [haveEmail, setHaveEmail] = useState(false);
   useEffect(() => {
@@ -16,17 +16,17 @@ export default function subscriptions({ plans }) {
       setHaveEmail(false);
     }
   });
-  
+
   const SEO = {
-		title: 'Page | Subscription',
-		description: 'MITCH CUMM subscribtion page, to provide subscribtion service for users'
-	}
+    title: "Page | Subscription",
+    description:
+      "MITCH CUMM subscribtion page, to provide subscribtion service for users",
+  };
 
   return (
     <Layout title="mitch-cumm | subscribtion">
-		
-		<NextSeo {...SEO} />	
-		
+      <NextSeo {...SEO} />
+
       <div className="row mt-10">
         {plans.map((item) => (
           <Plane
@@ -38,6 +38,7 @@ export default function subscriptions({ plans }) {
             cost={item.price}
             image={item.productImage}
             haveEmail={haveEmail}
+            after={after}
           />
         ))}
       </div>
@@ -45,7 +46,7 @@ export default function subscriptions({ plans }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query: { next } }) {
   const stripe = new Stripe(SK_STRIPE, {
     apiVersion: "2020-08-27",
   });
@@ -68,6 +69,7 @@ export async function getServerSideProps() {
   return {
     props: {
       plans: products,
+      after: next || "",
     },
   };
 }

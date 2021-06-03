@@ -4,7 +4,9 @@ import RegisterPopup from "./RegisterPopup";
 import CloseIcon from "@material-ui/icons/Close";
 import Link from "next/link";
 import { useSession } from "next-auth/client";
-const AlertSubscribe = ({ show }) => {
+import { BASE_URL } from "../config";
+const AlertSubscribe = ({ show, currentLink }) => {
+  console.log("c", currentLink);
   const [session, loading] = useSession();
   const [showModal, setShowModal] = useState(show);
   const [loginModel, setLoginModel] = useState(false);
@@ -44,12 +46,20 @@ const AlertSubscribe = ({ show }) => {
                 )}
 
                 <h3> Please subscribe inorder to see the content</h3>
-                <div className="mt-3">
-                  <Link href="/subscriptions">
-                    <a className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                      Subscribe
-                    </a>
-                  </Link>
+                <div className="mt-3 flex flex-col justify-center content-between text-center">
+                  <div>
+                    <Link href={`/subscriptions?next=${currentLink}`}>
+                      <a className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Subscribe
+                      </a>
+                    </Link>
+                  </div>
+
+                  <div className="mt-2">
+                    <Link href={BASE_URL || "/"}>
+                      <a className="border-b-2 border-borderColor">Home</a>
+                    </Link>
+                  </div>
                 </div>
               </div>
               {/*footer*/}
