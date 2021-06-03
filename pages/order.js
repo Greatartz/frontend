@@ -5,6 +5,8 @@ import { signIn, useSession } from "next-auth/client";
 import Layout from "../components/Layout";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { NextSeo } from 'next-seo';
+
 function order({
   ok,
   login = true,
@@ -29,12 +31,20 @@ function order({
       }, 10000);
     }
   }, []);
+  
+	
+	const SEO = {
+		title: 'Page | Result',
+		description: 'MITCH CUMM subscription result page, to show subscription result'
+	}
+  
   return (
     <Layout title="mitch-cum finalized">
+	
+		<NextSeo {...SEO} />	
+		
       {ok ? (
-        // <h3 className="w-11/12 mx-auto my-14 ">
-        //   You have successfully completed your payment.
-        // </h3>
+
         <section className="w-11/12 mx-auto my-10 leading-loose">
           <h1>Congratulation: {session && session.user.name}</h1>
           <h3>
