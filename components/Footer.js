@@ -4,7 +4,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 
-export default function Footer({ categories }) {
+export default function Footer({ categories, about }) {
   return (
     <footer className="border-t-2 border-bgColor pb-6">
       <section className="bg-bgColor pt-8">
@@ -20,7 +20,7 @@ export default function Footer({ categories }) {
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href="" target="_blank">
+                  <a href={about[0].facebook} target="_blank">
                     <FacebookIcon />
                   </a>
                 </button>
@@ -28,7 +28,7 @@ export default function Footer({ categories }) {
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href={"/"} target="_blank">
+                  <a href={about[0].twitter} target="_blank">
                     <TwitterIcon />
                   </a>
                 </button>
@@ -36,7 +36,7 @@ export default function Footer({ categories }) {
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href={"/"} target="_blank">
+                  <a href={about[0].linkedin} target="_blank">
                     <LinkedInIcon />
                   </a>
                 </button>
@@ -44,7 +44,7 @@ export default function Footer({ categories }) {
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href={"/"} target="_blank">
+                  <a href={about[0].youtube} target="_blank">
                     <YouTubeIcon />
                   </a>
                 </button>

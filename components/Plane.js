@@ -12,6 +12,7 @@ export default function Plane({
   cost,
   image,
   haveEmail,
+  after,
 }) {
   const [session, loading] = useSession();
   const [processing, setProcessing] = useState(false);
@@ -20,7 +21,7 @@ export default function Plane({
     if (haveEmail) {
       const email = session.user.email;
       const { data } = await axios.post(
-        `/api/payment/createSession/${priceId}/${email}`
+        `/api/payment/createSession/${priceId}/${email}/${after}`
       );
       const recivedId = data.sessionId;
       const stripe = await loadStripe(PK_STRIPE);
@@ -31,7 +32,7 @@ export default function Plane({
       }
     } else {
       const { data } = await axios.post(
-        `/api/payment/createSession/${priceId}`
+        `/api/payment/createSession/${priceId}/${after}`
       );
       const recivedId = data.sessionId;
       const stripe = await loadStripe(PK_STRIPE);

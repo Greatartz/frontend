@@ -20,12 +20,14 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
 	canonical: `${BASE_URL}/${post[0].slug}`
   };
   useEffect(() => {
+    console.log("start checking");
     setTimeout(() => {
       if (!loading) {
         if (session) {
           const email = session.user.email;
           axios.post(`/api/payment/isSubscribed/${email}`).then(({ data }) => {
-            if (data.subscribed == false || data.isCustomer == false) {
+            console.log("d", data);
+            if (data.subscribed == false) {
               setLoadAlert(true);
             } else {
               setLoadAlert(false);
@@ -36,7 +38,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
         }
       }
     }, 5000);
-  }, [session]);
+  }, [loading]);
 
   return (
     <Layout>
@@ -144,7 +146,11 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
         </section>
       </main>
       {/*model */}
-      {loadAlert ? <AlertSubscribe show={loadAlert} /> : ""}
+      {loadAlert ? (
+        <AlertSubscribe show={loadAlert} currentLink={post[0].slug} />
+      ) : (
+        ""
+      )}
     </Layout>
   );
 };
