@@ -6,7 +6,7 @@ import ArticleBox from "../../components/ArticleBox";
 import AlertSubscribe from "../../components/AlertSubscribe";
 import TimeAgo from "react-timeago";
 import { NextSeo } from "next-seo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/client";
 import axios from "axios";
 
@@ -17,23 +17,24 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
     title: `Single | ${post[0].title}`,
     description: `Description | ${post[0].excerpt}`,
   };
-  setTimeout(() => {
-    console.log("statrt chec ..");
-    if (!loading) {
-      if (session) {
-        const email = session.user.email;
-        axios.post(`/api/payment/isSubscribed/${email}`).then(({ data }) => {
-          if (data.subscribed == false || data.isCustomer == false) {
-            setLoadAlert(true);
-          } else {
-            setLoadAlert(false);
-          }
-        });
-      } else {
-        setLoadAlert(true);
+  useEffect(() => {
+    setTimeout(() => {
+      if (!loading) {
+        if (session) {
+          const email = session.user.email;
+          axios.post(`/api/payment/isSubscribed/${email}`).then(({ data }) => {
+            if (data.subscribed == false || data.isCustomer == false) {
+              setLoadAlert(true);
+            } else {
+              setLoadAlert(false);
+            }
+          });
+        } else {
+          setLoadAlert(true);
+        }
       }
-    }
-  }, 10000);
+    }, 5000);
+  }, [session]);
 
   return (
     <Layout>
@@ -85,11 +86,11 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
               <hr className="my-5" />
               <section className="location grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <p className="text-title">
-                  Location:{" "}
+                  Location:
                   <span className="font-bold">{post[0].location}</span>
                 </p>
                 <p className="text-title">
-                  Author:{" "}
+                  Author:
                   <span className="font-bold border-b-2 border-white hover:border-borderColor">
                     <Link href={`/author/${post[0].author.id}`}>
                       <a className="cursor-pointer">
@@ -111,7 +112,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
           </div>{" "}
           {/* / col-1 */}
           <div className="w-full sm:w-full md:w-full lg:w-3/12">
-            <h2 className="border-2 border-borderColor p-1 rounded text-center w-11/12 mx-auto my-5">
+            <h2 className="border-2 border-borderColor p-1 rounded text-center w-11/12 mx-auto mt-10 mb-5">
               <Link href={`/author/${rel_user[0].author.id}`}>
                 <a className="cursor-pointer">
                   {rel_user[0].author.firstname} {rel_user[0].author.lastname}
@@ -136,7 +137,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
           {rel_posts
             .filter((rel_posts) => rel_posts.id != post[0].id)
             .map((post) => (
-              <ArticleBox post={post} />
+              <ArticleBox post={post} key={`aricle-single-${post.id}`} />
             ))}
         </section>
       </main>

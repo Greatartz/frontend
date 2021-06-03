@@ -44,14 +44,21 @@ export default function Plane({
   };
 
   return (
-    <div className="obj1 md:flex md:border md:border-solid md:border-black md:p-4">
-      <img src={image} className="h-auto w-48 md:mx-2" />
-      <div>
-        <h2>{name}</h2>
-        <p>{desc}</p>
-        <p>Cost: {cost} </p>
-        <div className="my-2">
-          <button onClick={handleBuy} disabled={processing}>
+    <div className="shadow rounded text-center">
+      <div className="w-full p-5">
+        <img src={image} className="h-auto max-h-52 w-full object-content" />
+      </div>
+
+      <div className="p-10 pt-0">
+        <h2 className="mb-5">{name}</h2>
+        <p className="leading-loose">{desc}</p>
+        <p className="font-bold">Cost: {cost} </p>
+        <div className="my-5">
+          <button
+            onClick={handleBuy}
+            disabled={processing}
+            className="focus:outline-none"
+          >
             {processing ? (
               <CircularProgress />
             ) : (

@@ -17,7 +17,7 @@ export default function subscriptions({ plans }) {
 
   return (
     <Layout title="mitch-cumm | subscribtion">
-      <div className="container my-10 mx-auto md:grid md:grid-cols-2 md:gap-4">
+      <div className="row mt-10">
         {plans.map((item) => (
           <Plane
             key={`${item.price}-la`}

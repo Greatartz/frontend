@@ -3,7 +3,9 @@ import LoginPopup from "./LoginPopup";
 import RegisterPopup from "./RegisterPopup";
 import CloseIcon from "@material-ui/icons/Close";
 import Link from "next/link";
+import { useSession } from "next-auth/client";
 const AlertSubscribe = ({ show }) => {
+  const [session, loading] = useSession();
   const [showModal, setShowModal] = useState(show);
   const [loginModel, setLoginModel] = useState(false);
   const [toggle, setToggle] = useState(false);
@@ -19,24 +21,34 @@ const AlertSubscribe = ({ show }) => {
   return (
     <>
       {showModal ? (
-        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-black">
           <div className="relative w-auto my-6 mx-auto max-w-3xl">
             {/*content*/}
             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
               {/*header*/}
-              <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                <h3 className="text-3xl font-semibold">Mitch Cumm</h3>
+              <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t bg-bgColor">
+                <h2>Mitch Cumm</h2>
               </div>
               {/*body*/}
-              <div className="relative p-6 flex-auto">
-                <div>
-                  Already subscribed ?{" "}
-                  <button onClick={() => handlePriority(true)}>Sign In</button>
-                </div>
-                <p> please subscribe inorder to see the content</p>
-                <div>
+              <div className="relative p-6 flex-auto leading-loose">
+                {!session && (
+                  <h3>
+                    Already subscribed ?{" "}
+                    <button
+                      onClick={() => handlePriority(true)}
+                      className="border-b-2 border-borderColor"
+                    >
+                      Sign In
+                    </button>
+                  </h3>
+                )}
+
+                <h3> Please subscribe inorder to see the content</h3>
+                <div className="mt-3">
                   <Link href="/subscriptions">
-                    <a className="bg-indigo-500">Subscribe</a>
+                    <a className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                      Subscribe
+                    </a>
                   </Link>
                 </div>
               </div>

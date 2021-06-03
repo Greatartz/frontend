@@ -47,16 +47,19 @@ export default function LoginPopup({ toggle }) {
     const { value: email } = await Swal.fire({
       title: "Input email address",
       input: "email",
+      showCancelButton: "Cancel",
       inputLabel: "Your email address",
       inputPlaceholder: "Enter your email address",
     });
 
     if (email) {
-      console.log("excuting ....");
       axios
         .post(`${API_URL}/auth/forgot-password`, { email: email })
         .then((res) => {
           console.log("forgettiing ", res.data);
+        })
+        .catch((err) => {
+          console.log("error ", err);
         });
     }
   };

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/client";
 import Link from "next/link";
 import Ok from "@material-ui/icons/VerifiedUser";
-import { API_URL } from "../config/index";
+import { API_URL, BASE_URL } from "../config/index";
 
 export default function RegisterPopup({ toggle }) {
   const [name, setName] = useState("");
@@ -12,6 +13,7 @@ export default function RegisterPopup({ toggle }) {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [nomatch, setNomatch] = useState(0);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const renderPassword = () => {
     if (nomatch === 0) {
@@ -20,7 +22,7 @@ export default function RegisterPopup({ toggle }) {
       return <span className="text-red-500">Password are not matched!</span>;
     } else {
       return (
-        <span className="text-green-500">
+        <span className="text-blue-400">
           <Ok />
         </span>
       );
@@ -44,15 +46,19 @@ export default function RegisterPopup({ toggle }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (confirm === "" || password === "" || name === "" || email === "") {
+      setLoading(false);
       Swal.fire(
         "Invalid",
         "Please cheeck that you fill all form correctly",
         "error"
       );
     } else if (confirm !== password) {
+      setLoading(false);
       Swal.fire("Invalid", "Password are not matched!", "error");
     } else if (password.length < 6) {
+      setLoading(false);
       Swal.fire("Invalid", "Password must be at least 6 character!", "error");
     } else {
       const registerInfo = {
@@ -75,7 +81,7 @@ export default function RegisterPopup({ toggle }) {
         const res = await signIn("credentials", {
           email: email,
           password: password,
-          callbackUrl: `/`,
+          callbackUrl: BASE_URL,
           redirect: false,
         });
         if (res?.error) {
@@ -93,7 +99,11 @@ export default function RegisterPopup({ toggle }) {
   };
   return (
     <>
-      <form method="POST" className="flex flex-col" onSubmit={handleSubmit}>
+      <form
+        method="POST"
+        className="flex flex-col pt-3 md:pt-8 md:w-full"
+        onSubmit={handleSubmit}
+      >
         <input
           type="text"
           className="block border border-grey-light w-full p-3 rounded mb-4"
@@ -132,9 +142,9 @@ export default function RegisterPopup({ toggle }) {
         {renderPassword()}
         <button
           type="submit"
-          className="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-800 focus:outline-none my-1"
+          className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8"
         >
-          Create Account
+          {loading ? <CircularProgress className="p-2" /> : "Create Account"}
         </button>
       </form>
       <div className="text-center text-sm text-grey-dark mt-4">

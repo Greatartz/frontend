@@ -16,6 +16,7 @@ const providers = [
         });
 
         if (user) {
+          user.data.password = credentials.password;
           return { status: "success", data: user.data };
         }
       } catch (e) {
@@ -32,12 +33,14 @@ const callbacks = {
       token.accessToken = user.data.jwt;
       token.name = user.data.user.username;
       token.email = user.data.user.email;
+      token.password = user.data.password;
     }
 
     return token;
   },
 
   async session(session, token) {
+    session.passwordMain = token.password;
     session.accessToken = token.accessToken;
     return session;
   },
