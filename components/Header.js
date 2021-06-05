@@ -175,7 +175,7 @@ export default function Header({ categories, about }) {
             </Link>
           </h1>
           <p className="text-center mt-5 lg:hidden">
-            <MailOutlineIcon className="mr-1" /> hassanim430@gmail.com
+            <MailOutlineIcon className="mr-1" /> {about[0].email}
           </p>
         </div>
 
