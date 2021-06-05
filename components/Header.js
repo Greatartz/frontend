@@ -17,7 +17,7 @@ import { Button } from "@material-ui/core";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-export default function Header({ categories }) {
+export default function Header({ categories, about }) {
   const router = useRouter();
   const [session, loading] = useSession();
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -163,7 +163,7 @@ export default function Header({ categories }) {
         <div className="hidden sm:hidden md:hidden lg:flex">
           <div className="self-center">
             <p>
-              <MailOutlineIcon className="mr-1" /> hassanim430@gmail.com
+              <MailOutlineIcon className="mr-1" /> {about[0].email}
             </p>
           </div>
         </div>
@@ -171,7 +171,7 @@ export default function Header({ categories }) {
         <div className="text-center">
           <h1 className="text-5xl uppercase">
             <Link href="/">
-              <a>Mitch Cumm</a>
+              <a> {about[0].name} </a>
             </Link>
           </h1>
           <p className="text-center mt-5 lg:hidden">
