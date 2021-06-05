@@ -91,6 +91,10 @@
   .youtube {
     color: #115294;
   }
+  .slick-list .slick-track .slick-slide .text-center{
+	  width:98%;
+	  margin: 0 auto;
+  }
 }
 
 @layer components {
