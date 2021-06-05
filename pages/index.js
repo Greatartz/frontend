@@ -13,9 +13,11 @@ export default function Home({ resCatagory }) {
   return (
     <Layout>
 	  <NextSeo {...SEO} />	
-      {resCatagory.map((i) => (
-        <HomeCatagory category={i} key={`h-${i.id}`} />
-      ))}
+      <div className="mb-10">
+			{resCatagory.map((i) => (
+				<HomeCatagory category={i} key={`h-${i.id}`} />
+			))}
+	  </div>
     </Layout>
   );
 }
