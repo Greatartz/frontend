@@ -9,6 +9,9 @@ module.exports = {
         link:     '#0068ff',
         borderColor:   '#FFA028',
         bgColor:   '#eaeaea',
+      },
+      width:{
+      	'9/10' : '98%'
       }
     },
   },

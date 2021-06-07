@@ -5,12 +5,13 @@ import CloseIcon from "@material-ui/icons/Close";
 import Link from "next/link";
 import { useSession } from "next-auth/client";
 import { BASE_URL } from "../config";
+import Subscriptions from "./Subscriptions";
 const AlertSubscribe = ({ show, currentLink }) => {
-  console.log("c", currentLink);
   const [session, loading] = useSession();
   const [showModal, setShowModal] = useState(show);
   const [loginModel, setLoginModel] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const [showPlan, setShowPlan] = useState(false);
   const handlePriority = (value) => {
     if (value) {
       setShowModal(false);
@@ -48,11 +49,13 @@ const AlertSubscribe = ({ show, currentLink }) => {
                 <h3> Please subscribe inorder to see the content</h3>
                 <div className="mt-3 flex flex-col justify-center content-between text-center">
                   <div>
-                    <Link href={`/subscriptions?next=${currentLink}`}>
-                      <a className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Subscribe
-                      </a>
-                    </Link>
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      onClick={() => setShowPlan(true)}
+                    >
+                      Subscribe
+                    </button>
+                    {showPlan ? <Subscriptions next={currentLink} /> : null}
                   </div>
 
                   <div className="mt-2">

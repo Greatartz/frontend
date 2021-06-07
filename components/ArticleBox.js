@@ -4,7 +4,7 @@ import Link from "next/link";
 const ArticleBox = ({ post }) => {
   return (
     <>
-      <div className="text-center shadow border-b-4 border-borderColor pb-5">
+      <div className="text-center shadow border-b-4 border-borderColor pb-5 w-9/10 mx-auto">
         <div className="w-full cursor-pointer">
           <Link href={`/single/${post.slug}`}>
             <img

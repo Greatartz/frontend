@@ -26,7 +26,6 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
         if (session) {
           const email = session.user.email;
           axios.post(`/api/payment/isSubscribed/${email}`).then(({ data }) => {
-            console.log("d", data);
             if (data.subscribed == false) {
               setLoadAlert(true);
             } else {

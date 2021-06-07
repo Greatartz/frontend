@@ -45,14 +45,14 @@ export default function Plane({
   };
 
   return (
-    <div className="shadow rounded text-center">
+    <div className="shadow rounded">
       <div className="w-full p-5">
         <img src={image} className="h-auto max-h-52 w-full object-content" />
       </div>
 
       <div className="p-10 pt-0">
         <h2 className="mb-5">{name}</h2>
-        <p className="leading-loose">{desc}</p>
+        <p>{desc}</p>
         <p className="font-bold">Cost: {cost} </p>
         <div className="my-5">
           <button
