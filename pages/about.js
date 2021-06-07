@@ -63,14 +63,13 @@ const AboutPage = ({data}) => {
 		</Layout>
 	)
 }
-export async function getStaticProps() {
+
+AboutPage.getInitialProps = async (ctx) => {
 	
   const res = await fetch(`${API_URL}/abouts`)
   const data = await res.json()
-
-  return {
-    props: { data }, // will be passed to the page component as props
-  }
+  
+  return { data }
 }
 
 export default AboutPage;

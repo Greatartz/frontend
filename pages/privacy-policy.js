@@ -3,7 +3,7 @@ import RichText from "../components/RichText";
 import Layout from "../components/Layout";
 import { NextSeo } from 'next-seo';
 
-export default function Privacy({data}) {
+const Privacy = ({data}) => {
 	
 	const SEO = {
 		title: 'Page | Privacy',
@@ -25,14 +25,13 @@ export default function Privacy({data}) {
   );
 }
 
-export async function getStaticProps() {
+
+Privacy.getInitialProps = async (ctx) => {
 	
   const res = await fetch(`${API_URL}/privacies`)
   const data = await res.json()
-	
-   console.log(data)		
-	
-  return {
-    props: { data }, // will be passed to the page component as props
-  }
+  
+  return { data }
 }
+
+export default Privacy;

@@ -174,7 +174,7 @@ const ContactPage = ({data}) => {
 					</div>
 					
 					<div className="text-center sm:text-center md:text-left lg:text-left">
-						<h3 className="capitalize mt-8 mb-3">Adress</h3>
+						<h3 className="capitalize mt-8 mb-3">Address</h3>
 						<p>
 							{data[0].address}
 						</p>
@@ -187,14 +187,12 @@ const ContactPage = ({data}) => {
 	);
 }
 
-export async function getStaticProps() {
+ContactPage.getInitialProps = async (ctx) => {
 	
   const res = await fetch(`${API_URL}/abouts`)
   const data = await res.json()
-
-  return {
-    props: { data }, // will be passed to the page component as props
-  }
+  
+  return { data }
 }
 
- export default ContactPage;
+export default ContactPage;
