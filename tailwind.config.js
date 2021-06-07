@@ -9,7 +9,13 @@ module.exports = {
         link:     '#0068ff',
         borderColor:   '#FFA028',
         bgColor:   '#eaeaea',
-      }
+      },
+	  minHeight: {
+		'custom': '475px',
+	  },
+	  width: {
+		'customW': '45%'  
+	  }
     },
   },
   variants: {
