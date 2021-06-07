@@ -17,7 +17,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
   const SEO = {
     title: `Single | ${post[0].seo_title}`,
     description: `Description | ${post[0].seo_description}`,
-	canonical: `${BASE_URL}/${post[0].slug}`
+    canonical: `${BASE_URL}/${post[0].slug}`,
   };
   useEffect(() => {
     console.log("start checking");
@@ -155,9 +155,8 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
   );
 };
 
-export async function getServerSideProps({ params }) {
-  const { slug } = params;
-
+SinglePage.getInitialProps = async (ctx) => {
+  const { slug } = ctx.query;
   const request_post = await fetch(`${API_URL}/posts?slug=${slug}`);
   const res_post = await request_post.json();
 
@@ -174,12 +173,10 @@ export async function getServerSideProps({ params }) {
   const res_user_posts = await req_user_posts.json();
 
   return {
-    props: {
-      post: res_post,
-      rel_posts: res_related_posts,
-      rel_user: res_user_posts,
-    },
+    post: res_post,
+    rel_posts: res_related_posts,
+    rel_user: res_user_posts,
   };
-}
+};
 
 export default SinglePage;
