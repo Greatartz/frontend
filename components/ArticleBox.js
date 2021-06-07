@@ -4,7 +4,7 @@ import Link from "next/link";
 const ArticleBox = ({ post }) => {
   return (
     <>
-      <div className="text-center shadow border-b-4 border-borderColor pb-5 w-9/10 mx-auto">
+      <div className="text-center shadow border-b-4 border-borderColor pb-5 h-custom">
         <div className="w-full cursor-pointer">
           <Link href={`/single/${post.slug}`}>
             <img
@@ -23,15 +23,15 @@ const ArticleBox = ({ post }) => {
           <h2 className="text-3xl mb-3">
             <Link href={`/single/${post.slug}`}>
               <a className="border-b-2 border-white hover:border-borderColor">
-                {post.title.length > 30
-                  ? `${post.title.substring(0, 30)}...`
+                {post.title.length > 20
+                  ? `${post.title.substring(0, 20)}...`
                   : post.title}
               </a>
             </Link>
           </h2>
           <p className="px-2">
-            {post.excerpt.length > 150
-              ? `${post.excerpt.substring(0, 150)}...`
+            {post.excerpt.length > 100
+              ? `${post.excerpt.substring(0, 100)}...`
               : post.excerpt}
           </p>
           <span className="inline-block mt-3">
