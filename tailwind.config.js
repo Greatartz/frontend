@@ -12,6 +12,9 @@ module.exports = {
       },
 	  minHeight: {
 		'custom': '475px',
+	  },
+	  width: {
+		'customW': '45%'  
 	  }
     },
   },

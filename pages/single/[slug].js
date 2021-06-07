@@ -12,6 +12,7 @@ import { useSession } from "next-auth/client";
 import axios from "axios";
 
 const SinglePage = ({ post, rel_posts, rel_user }) => {
+		
   const [loadAlert, setLoadAlert] = useState(false);
   const [session, loading] = useSession();
   const SEO = {
@@ -60,7 +61,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
         <section className="singleContent flex flex-wrap">
           <div className="w-full sm:w-full md:w-full lg:w-9/12">
             <div className="singleFeatureImage mt-10 my-5">
-              <img src={`${post[0].featured_image.formats.large.url}`} />
+              <img src={`${post[0].featured_image.formats.large.url}`} className="w-full object-cover h-auto" />
             </div>
             <div className="content">
 			
