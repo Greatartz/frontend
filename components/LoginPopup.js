@@ -42,27 +42,6 @@ export default function LoginPopup({ toggle }) {
       setVisible(false);
     }
   };
-
-  const handleReset = async () => {
-    const { value: email } = await Swal.fire({
-      title: "Input email address",
-      input: "email",
-      showCancelButton: "Cancel",
-      inputLabel: "Your email address",
-      inputPlaceholder: "Enter your email address",
-    });
-
-    if (email) {
-      axios
-        .post(`${API_URL}/auth/forgot-password`, { email: email })
-        .then((res) => {
-          console.log("forgettiing ", res.data);
-        })
-        .catch((err) => {
-          console.log("error ", err);
-        });
-    }
-  };
   return (
     <>
       <form className="flex flex-col pt-3 md:pt-8 md:w-full">
@@ -119,13 +98,6 @@ export default function LoginPopup({ toggle }) {
               Register here.
             </a>
             <br />
-            Forget Your Password?
-            <a
-              className="underline font-semibold cursor-pointer hover:underline"
-              onClick={handleReset}
-            >
-              Reset Password
-            </a>
           </p>
         </div>
         {/* forgot password */}

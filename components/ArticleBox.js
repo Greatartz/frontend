@@ -4,12 +4,12 @@ import Link from "next/link";
 const ArticleBox = ({ post }) => {
   return (
     <>
-      <div className="text-center shadow border-b-4 border-borderColor pb-5 h-custom">
+      <div className="text-center shadow border-b-4 border-borderColor pb-5 mx-2 min-h-custom">
         <div className="w-full cursor-pointer">
           <Link href={`/single/${post.slug}`}>
             <img
               className="catImage rounded-t"
-              src={`${post.featured_image.formats.thumbnail.url}`}
+              src={`${post.featured_image.formats.medium.url}`}
             />
           </Link>
         </div>

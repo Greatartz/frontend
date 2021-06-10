@@ -13,7 +13,7 @@ const Categories = ({ posts, total_length, page, res_category }) => {
 
   const SEO = {
     title: ` Category | ${slug}`,
-    description: ` Description | ${res_category[0].description}`,
+    description: ` MITCH CUMM | ${res_category[0].description}`,
   };
 
   return (
@@ -34,13 +34,13 @@ const Categories = ({ posts, total_length, page, res_category }) => {
         </h1>
       )}
 
-      <section className="row mt-10">
+      <section className="row mt-10 max-w-myMaxWidth">
         {posts.map((post) => (
           <ArticleBox key={`article-cat-${post.id}`} post={post} />
         ))}
       </section>
 
-      <section className="w-11/12 mx-auto my-10 flex justify-between">
+      <section className="w-11/12 mx-auto my-10 flex justify-between max-w-myMaxWidth">
         {page > 1 && (
           <Link href={`/category/${slug}?page=${page - 1}`}>
             <a className="bg-borderColor text-white rounded py-2 px-5">Prev</a>
@@ -57,8 +57,10 @@ const Categories = ({ posts, total_length, page, res_category }) => {
   );
 };
 
-export async function getServerSideProps({ params, query: { page = 1 } }) {
-  const { slug } = params;
+Categories.getInitialProps = async ({
+  query: { slug },
+  query: { page = 1 },
+}) => {
   const request_category = await fetch(`${API_URL}/categories?name=${slug}`);
   const res_category = await request_category.json();
   const id = res_category[0].id;
@@ -76,7 +78,7 @@ export async function getServerSideProps({ params, query: { page = 1 } }) {
   );
   const posts = await res.json();
 
-  return { props: { posts, page: +page, total_length, res_category } };
-}
+  return { posts, page: +page, total_length, res_category };
+};
 
 export default Categories;
