@@ -13,6 +13,9 @@ module.exports = {
       minHeight: {
         custom: "475px",
       },
+      maxHeight: {
+        small: "200px",
+      },
       width: {
         customW: "45%",
       },

@@ -4,17 +4,17 @@ import Link from "next/link";
 const ArticleBox = ({ post }) => {
   return (
     <>
-      <div className="text-center shadow border-b-4 border-borderColor pb-5 mx-2 min-h-custom">
+      <div className="text-center shadow border-b-4 border-borderColor pb-5 mx-2 md:min-h-custom">
         <div className="w-full cursor-pointer">
           <Link href={`/single/${post.slug}`}>
             <img
-              className="catImage rounded-t"
+              className="catImage rounded-t max-h-small"
               src={`${post.featured_image.formats.medium.url}`}
             />
           </Link>
         </div>
 
-        <div className="content">
+        <div className="content max-h-small">
           <span className="text-subTitle block mt-2">
             <Link href={`/category/${post.category.name}`}>
               <a>{post.category.name}</a>
