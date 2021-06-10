@@ -1,17 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LoginPopup from "./LoginPopup";
-import RegisterPopup from "./RegisterPopup";
+import axios from "axios";
 import CloseIcon from "@material-ui/icons/Close";
 import Link from "next/link";
 import { useSession } from "next-auth/client";
 import { BASE_URL } from "../config";
-import Subscriptions from "./Subscriptions";
+import { CircularProgress } from "@material-ui/core";
+import Plane from "./Plane";
 const AlertSubscribe = ({ show, currentLink }) => {
   const [session, loading] = useSession();
   const [showModal, setShowModal] = useState(show);
   const [loginModel, setLoginModel] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const [showPlan, setShowPlan] = useState(false);
+  // const [processing, setProcessing] = useState(false);
+  const [planModal, setPlanModal] = useState(false);
+  const [dataPlane, setDataPlanes] = useState(null);
+  const [isemail, setIsemail] = useState(false);
+
+  useEffect(() => {
+    if (session) {
+      setIsemail(true);
+    }
+    axios.post(`/api/payment/loadPlans`).then(({ data }) => {
+      setDataPlanes(data);
+    });
+  }, []);
   const handlePriority = (value) => {
     if (value) {
       setShowModal(false);
@@ -21,6 +34,7 @@ const AlertSubscribe = ({ show, currentLink }) => {
       setShowModal(true);
     }
   };
+
   return (
     <>
       {showModal ? (
@@ -51,11 +65,10 @@ const AlertSubscribe = ({ show, currentLink }) => {
                   <div>
                     <button
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                      onClick={() => setShowPlan(true)}
+                      onClick={() => setPlanModal(true)}
                     >
                       Subscribe
                     </button>
-                    {showPlan ? <Subscriptions next={currentLink} /> : null}
                   </div>
 
                   <div className="mt-2">
@@ -75,7 +88,7 @@ const AlertSubscribe = ({ show, currentLink }) => {
       {/* login popup */}
       {loginModel && (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-black">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -103,6 +116,45 @@ const AlertSubscribe = ({ show, currentLink }) => {
         </>
       )}
       {/* end loginPopu */}
+      {planModal ? (
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-visible fixed inset-0 z-50 outline-none focus:outline-none bg-black">
+          <div className="w-11/12 sm:w-11/12 sm:mx-auto md:w-2/4 lg:w-customW my-6">
+            {/*content*/}
+            <div className="border-0 rounded-lg shadow-lg flex flex-col w-full bg-white outline-none h-full focus:outline-none">
+              {/*body*/}
+              <h4 className="m-2">Subscription Planes</h4>
+              <div className="leading-loose flex flex-col md:flex-row">
+                {dataPlane ? (
+                  dataPlane.map((i, n) => (
+                    <Plane
+                      key={`plan-d-${n}`}
+                      after={currentLink}
+                      priceId={i.priceId}
+                      cost={i.price}
+                      desc={i.productDesc}
+                      name={i.productName}
+                      image={i.productImage}
+                      haveEmail={isemail}
+                    />
+                  ))
+                ) : (
+                  <div className="text-center">
+                    <CircularProgress />
+                  </div>
+                )}
+              </div>
+              <button
+                className="text-lg bg-red-400 focus:outline-none"
+                onClick={() => setPlanModal(false)}
+              >
+                <span className="p-2 text-black font-bold my-2">Cancel</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </>
   );
 };

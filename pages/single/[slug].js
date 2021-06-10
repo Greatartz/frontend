@@ -12,7 +12,6 @@ import { useSession } from "next-auth/client";
 import axios from "axios";
 
 const SinglePage = ({ post, rel_posts, rel_user }) => {
-		
   const [loadAlert, setLoadAlert] = useState(false);
   const [session, loading] = useSession();
   const SEO = {
@@ -38,12 +37,12 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
         }
       }
     }, 5000);
-  }, [loading]);
+  }, [loading, session]); //check subscribtion according to session
 
   return (
     <Layout>
       <NextSeo {...SEO} />
-      <main className="w-11/12 mx-auto py-10 singlePageContent">
+      <main className="w-11/12 mx-auto py-10 singlePageContent max-w-myMaxWidth">
         <section className="singleHeader">
           <h3 className="text-xl border-b-2 border-borderColor inline-block my-5 py-1 capitalize">
             <Link href={`/category/${post[0].category.name}`}>
@@ -60,23 +59,27 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
         <section className="singleContent flex flex-wrap">
           <div className="w-full sm:w-full md:w-full lg:w-9/12">
             <div className="singleFeatureImage mt-10 my-5">
-              <img src={`${post[0].featured_image.formats.large.url}`} className="w-full object-cover h-auto" />
+              <img
+                src={`${post[0].featured_image.formats.large.url}`}
+                className="w-full object-cover h-auto"
+              />
             </div>
             <div className="content">
-			
               <section className="tags mb-5">
-			  
-				<p className="singleDate text-subTitle my-5 text-xl">
-					<span>{new Date(post[0].updated_at).toLocaleDateString()}</span> -{" "}
-					<span>
-					  <Link href={`/author/${post[0].author.id}`}>
-						<a className="cursor-pointer border-b-2 border-white hover:border-borderColor">
-						  {post[0].author.firstname} {post[0].author.lastname}
-						</a>
-					  </Link>
-					</span>
-				</p>
-			  
+                <p className="singleDate text-subTitle my-5 text-xl">
+                  <span>
+                    {new Date(post[0].updated_at).toLocaleDateString()}
+                  </span>{" "}
+                  -{" "}
+                  <span>
+                    <Link href={`/author/${post[0].author.id}`}>
+                      <a className="cursor-pointer border-b-2 border-white hover:border-borderColor">
+                        {post[0].author.firstname} {post[0].author.lastname}
+                      </a>
+                    </Link>
+                  </span>
+                </p>
+
                 {post[0].tags.map((tag) => (
                   <Link href={`/tag/${tag.id}`} key={`tag-link-${tag.id}`}>
                     <span className="bg-borderColor p-2 rounded text-white mr-2">
@@ -84,7 +87,6 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
                     </span>
                   </Link>
                 ))}
-				
               </section>
 
               <section id="content">
@@ -138,14 +140,14 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
         </section>
       </main>
 
-      <main className="w-full">
+      <main className="w-full max-w-myMaxWidth lg:mx-auto">
         <hr className="my-5" />
         <h1 className="w-11/12 mx-auto">Related Posts:</h1>
         <section className="related_posts row mt-5">
           {rel_posts
             .filter((rel_posts) => rel_posts.id != post[0].id)
             .map((post) => (
-              <ArticleBox post={post} key={`aricle-single-${post.id}`} />
+              <ArticleBox post={post} key={`aricle-single-filter-${post.id}`} />
             ))}
         </section>
       </main>

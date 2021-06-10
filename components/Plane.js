@@ -7,7 +7,6 @@ import { PK_STRIPE } from "../config";
 export default function Plane({
   name,
   priceId,
-  productId,
   desc,
   cost,
   image,
@@ -45,12 +44,12 @@ export default function Plane({
   };
 
   return (
-    <div className="shadow rounded">
-      <div className="w-full p-5">
-        <img src={image} className="h-auto max-h-52 w-full object-content" />
+    <div className="shadow rounded w-1/2">
+      <div className="p-5">
+        <img src={image} className="h-auto max-h-52 w-1/2 object-content" />
       </div>
 
-      <div className="p-10 pt-0">
+      <div className="pt-0 px-4">
         <h2 className="mb-5">{name}</h2>
         <p>{desc}</p>
         <p className="font-bold">Cost: {cost} </p>

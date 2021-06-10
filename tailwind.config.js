@@ -16,6 +16,9 @@ module.exports = {
       width: {
         customW: "45%",
       },
+      maxWidth: {
+        myMaxWidth: "1400px",
+      },
     },
   },
   variants: {

@@ -14,7 +14,7 @@ export default function Home({ resCatagory }) {
       <NextSeo {...SEO} />
       <div className="mb-10">
         {resCatagory.map((i) => (
-          <HomeCatagory category={i} key={`h-${i.id}`} />
+          <HomeCatagory category={i} key={`home-show-${i.id}`} />
         ))}
       </div>
     </Layout>

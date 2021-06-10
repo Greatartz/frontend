@@ -20,15 +20,15 @@ const SearchPage = ({ posts }) => {
       </section>
 
       <section className="row">
-        {posts.map((post) => (
-          <ArticleBox post={post} />
+        {posts.map((post, n) => (
+          <ArticleBox post={post} key={`search-${n}`} />
         ))}
       </section>
     </Layout>
   );
 };
 
-export async function getServerSideProps({ query: { term } }) {
+SearchPage.getInitialProps = async ({ query: { term } }) => {
   const query = qs.stringify({
     _where: {
       _or: [{ title_contains: term }, { excerpt_contains: term }],
@@ -37,10 +37,9 @@ export async function getServerSideProps({ query: { term } }) {
 
   const res = await fetch(`${API_URL}/posts?${query}`);
   const posts = await res.json();
-
   return {
-    props: { posts },
+    posts,
   };
-}
+};
 
 export default SearchPage;

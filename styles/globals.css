@@ -1,13 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-@import "~slick-carousel/slick/slick.css"; 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+@import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
 @layer base {
-  *{
-     font-family: 'Poppins';
+  * {
+    font-family: "Poppins";
   }
   h1 {
     font-size: 35px;
@@ -28,25 +28,30 @@
   p {
     font-size: 18px;
   }
+  .slick-dots li button:before {
+    font-size: 13px !important;
+  }
 }
 @layer utilities {
-  .singlePageContent ul { 
-    list-style-type: disc; 
-    list-style-position: inside; 
+  .singlePageContent ul {
+    list-style-type: disc;
+    list-style-position: inside;
   }
-  .singlePageContent ol { 
-      list-style-type: decimal; 
-      list-style-position: inside; 
+  .singlePageContent ol {
+    list-style-type: decimal;
+    list-style-position: inside;
   }
-  .singlePageContent ul ul,.singlePageContent ol ul { 
-      list-style-type: circle; 
-      list-style-position: inside; 
-      margin-left: 15px; 
+  .singlePageContent ul ul,
+  .singlePageContent ol ul {
+    list-style-type: circle;
+    list-style-position: inside;
+    margin-left: 15px;
   }
-  .singlePageContent ol ol,.singlePageContent ul ol { 
-      list-style-type: lower-latin; 
-      list-style-position: inside; 
-      margin-left: 15px; 
+  .singlePageContent ol ol,
+  .singlePageContent ul ol {
+    list-style-type: lower-latin;
+    list-style-position: inside;
+    margin-left: 15px;
   }
   .catImage {
     width: 100%;
@@ -89,11 +94,6 @@
   .linkedin,
   .youtube {
     color: #115294;
-  }
-  .slick-list .slick-track .slick-slide .text-center{
-	  width:98%;
-	  margin: 0 auto;
-	  min-height: 475px;
   }
 }
 
