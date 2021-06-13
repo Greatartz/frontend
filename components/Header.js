@@ -16,6 +16,7 @@ import RegisterPopup from "./RegisterPopup";
 import { Button } from "@material-ui/core";
 import Swal from "sweetalert2";
 import axios from "axios";
+import DynamicPlans from "./DynamicPlans";
 
 export default function Header({ categories, about }) {
   const router = useRouter();
@@ -25,15 +26,18 @@ export default function Header({ categories, about }) {
   const [term, setTerm] = useState("");
   const [toggle, setToggle] = useState(false);
   const [showSetting, setShowSetting] = useState(false);
+  const [subscribeModal, setSubscribeModal] = useState(false);
   //for setting ..
   //userData
   const [userFull, setUserFull] = useState(null);
   const [password, setPassword] = useState("");
   const [blind, setBlind] = useState(true);
+  const [isEmail, setIsemail] = useState(false);
   //when loadin finished and there is session
   useEffect(() => {
     if (!loading) {
       if (session) {
+        setIsemail(true);
         const jwt = session.accessToken;
         axios
           .get(`${API_URL}/users/me`, {
@@ -161,10 +165,18 @@ export default function Header({ categories, about }) {
     <nav className="relative flex flex-wrap items-center justify-between bg-white shadow">
       <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 py-8">
         <div className="hidden sm:hidden md:hidden lg:flex">
-          <div className="self-center">
+          <div className="self-center flex flex-col justify-center">
             <p>
               <MailOutlineIcon className="mr-1" /> {about[0].email}
             </p>
+            <button
+              className="self-center
+             border border-solid border-black
+              focus:outline-none w-1/2"
+              onClick={() => setSubscribeModal(true)}
+            >
+              Subscribe
+            </button>
           </div>
         </div>
 
@@ -318,7 +330,7 @@ export default function Header({ categories, about }) {
                     </>
                   ) : (
                     <>
-                      <LoginPopup toggle={handleToggle} />
+                      <LoginPopup toggle={handleToggle} mainPage={true} />
                     </>
                   )}
                 </div>
@@ -411,6 +423,26 @@ export default function Header({ categories, about }) {
         </>
       ) : null}
       {/* end setting */}
+      {subscribeModal ? (
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-visible fixed inset-0 z-50 outline-none focus:outline-none bg-black">
+          <div className="w-11/12 sm:w-11/12 sm:mx-auto md:w-2/4 lg:w-customW my-6">
+            {/*content*/}
+            <div className="border-0 rounded-lg shadow-lg flex flex-col w-full bg-white outline-none h-full focus:outline-none">
+              {/*body*/}
+              <h4 className="m-2">Subscription Plans</h4>
+              <div className="leading-loose flex flex-col md:flex-row">
+                <DynamicPlans isemail={isEmail} />
+              </div>
+              <button
+                className="text-lg bg-red-400 focus:outline-none"
+                onClick={() => setSubscribeModal(false)}
+              >
+                <span className="p-2 text-black font-bold my-2">Cancel</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </nav>
   );
 }

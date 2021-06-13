@@ -7,6 +7,7 @@ import { useSession } from "next-auth/client";
 import { BASE_URL } from "../config";
 import { CircularProgress } from "@material-ui/core";
 import Plane from "./Plane";
+import DynamicPlans from "./DynamicPlans";
 const AlertSubscribe = ({ show, currentLink }) => {
   const [session, loading] = useSession();
   const [showModal, setShowModal] = useState(show);
@@ -21,9 +22,6 @@ const AlertSubscribe = ({ show, currentLink }) => {
     if (session) {
       setIsemail(true);
     }
-    axios.post(`/api/payment/loadPlans`).then(({ data }) => {
-      setDataPlanes(data);
-    });
   }, []);
   const handlePriority = (value) => {
     if (value) {
@@ -106,7 +104,7 @@ const AlertSubscribe = ({ show, currentLink }) => {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <LoginPopup />
+                  <LoginPopup mainPage={false} />
                 </div>
                 {/*footer*/}
               </div>
@@ -122,26 +120,9 @@ const AlertSubscribe = ({ show, currentLink }) => {
             {/*content*/}
             <div className="border-0 rounded-lg shadow-lg flex flex-col w-full bg-white outline-none h-full focus:outline-none">
               {/*body*/}
-              <h4 className="m-2">Subscription Planes</h4>
+              <h4 className="m-2">Subscription Plans</h4>
               <div className="leading-loose flex flex-col md:flex-row">
-                {dataPlane ? (
-                  dataPlane.map((i, n) => (
-                    <Plane
-                      key={`plan-d-${n}`}
-                      after={currentLink}
-                      priceId={i.priceId}
-                      cost={i.price}
-                      desc={i.productDesc}
-                      name={i.productName}
-                      image={i.productImage}
-                      haveEmail={isemail}
-                    />
-                  ))
-                ) : (
-                  <div className="text-center">
-                    <CircularProgress />
-                  </div>
-                )}
+                <DynamicPlans isemail={isemail} nextLink={currentLink} />
               </div>
               <button
                 className="text-lg bg-red-400 focus:outline-none"

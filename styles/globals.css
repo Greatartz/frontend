@@ -28,9 +28,6 @@
   p {
     font-size: 18px;
   }
-  .slick-dots > li > button:before {
-    font-size: 13px !important;
-  }
 }
 @layer utilities {
   .singlePageContent ul {

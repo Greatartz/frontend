@@ -3,12 +3,10 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Swal from "sweetalert2";
 import { signIn } from "next-auth/client";
 import { useRouter } from "next/router";
-import axios from "axios";
 import Visible from "@material-ui/icons/Visibility";
 import Blind from "@material-ui/icons/VisibilityOff";
-import { API_URL } from "../config";
 
-export default function LoginPopup({ toggle }) {
+export default function LoginPopup({ toggle, mainPage }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -88,18 +86,20 @@ export default function LoginPopup({ toggle }) {
         </button>
       </form>
       <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-        <div className="pt-12 pb-12">
-          <p>
-            Don't have an account?
-            <a
-              className="underline font-semibold cursor-pointer hover:underline"
-              onClick={() => toggle(true)}
-            >
-              Register here.
-            </a>
-            <br />
-          </p>
-        </div>
+        {mainPage && (
+          <div className="pt-12 pb-12">
+            <p>
+              Don't have an account?
+              <a
+                className="underline font-semibold cursor-pointer hover:underline"
+                onClick={() => toggle(true)}
+              >
+                Register here.
+              </a>
+              <br />
+            </p>
+          </div>
+        )}
         {/* forgot password */}
       </div>
     </>

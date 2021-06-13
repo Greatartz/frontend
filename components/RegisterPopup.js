@@ -157,15 +157,14 @@ export default function RegisterPopup({ toggle }) {
         </Link>
       </div>
 
-      <div className="text-grey-dark mt-6">
+      <div className="text-grey-dark mt-6 ml-3">
         Already have an account?
         <a
-          className="underline font-semibold cursor-pointer hover:underline"
+          className="underline font-semibold cursor-pointer hover:underline ml-1"
           onClick={() => toggle(false)}
         >
           Log In
         </a>
-        .
       </div>
     </>
   );

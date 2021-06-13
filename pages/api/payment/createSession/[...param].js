@@ -9,7 +9,6 @@ export default async function handler(req, res) {
     const priceId = data[0];
     const email = data[1];
     const after = data[2];
-    console.log("inside ai af", after);
     const stripe = new Stripe(SK_STRIPE, { apiVersion: "2020-08-27" });
     const session = await stripe.checkout.sessions.create({
       success_url: `${origin}/order?session_id=ok&next=${after}`,
@@ -23,7 +22,6 @@ export default async function handler(req, res) {
   } else {
     const priceId = data[0];
     const after = data[1];
-    console.log("inside ai af", after);
 
     const stripe = new Stripe(SK_STRIPE, { apiVersion: "2020-08-27" });
     const session = await stripe.checkout.sessions.create({
