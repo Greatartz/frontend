@@ -50,17 +50,17 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
             </Link>
           </h3>
           <h1 className="text-5xl leading-snug">
-            <span className="border-b-2 border-white hover:border-borderColor">
+            <span className="border-b-2 border-white hover:border-borderColor cursor-pointer">
               {post[0].title}
             </span>
           </h1>
         </section>
 
         <section className="singleContent flex flex-wrap">
-          <div className="w-full sm:w-full md:w-full lg:w-9/12">
+          <div className="w-full lg:w-9/12">
             <div className="singleFeatureImage mt-10 my-5">
               <img
-                src={`${post[0].featured_image.formats.large.url}`}
+                src={`${post[0].featured_image.formats.medium.url}`}
                 className="w-full object-cover h-auto"
               />
             </div>

@@ -58,7 +58,7 @@ function order({
               : `You have successfully subscribed , with the following email: ${customerEmail}`}{" "}
           </h3>
           <div>
-            <Link href={`/single/${next}`}>
+            <Link href={next == "undefined" ? BASE_URL : `/single/${next}`}>
               <span>Continue your artical</span>
             </Link>
           </div>

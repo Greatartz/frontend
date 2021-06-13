@@ -13,6 +13,7 @@ export default function Plane({
   haveEmail,
   after,
 }) {
+  console.log(" have email ", haveEmail);
   const [session, loading] = useSession();
   const [processing, setProcessing] = useState(false);
   const handleBuy = async () => {
@@ -44,33 +45,33 @@ export default function Plane({
   };
 
   return (
-    <div className="shadow rounded w-1/2">
-      <div className="p-5">
-        <img src={image} className="h-auto max-h-52 w-1/2 object-content" />
+    <div className="shadow rounded w-1/2 flex flex-col justify-between py-2 text-center">
+      <div className="mx-auto pt-1 w-60 h-auto">
+        <img src={image} className="max-w-full max-h-full block" />
+      </div>
+      <div className="my-5">
+        <button
+          onClick={handleBuy}
+          disabled={processing}
+          className="focus:outline-none"
+        >
+          {processing ? (
+            <CircularProgress />
+          ) : (
+            <span
+              className="px-5 py-3 rounded-lg shadow-lg bg-indigo-500 
+      text-white uppercase tracking-wider font-semibold text-sm sm:text-base"
+            >
+              Subscribe Now!
+            </span>
+          )}
+        </button>
       </div>
 
       <div className="pt-0 px-4">
         <h2 className="mb-5">{name}</h2>
         <p>{desc}</p>
         <p className="font-bold">Cost: {cost} </p>
-        <div className="my-5">
-          <button
-            onClick={handleBuy}
-            disabled={processing}
-            className="focus:outline-none"
-          >
-            {processing ? (
-              <CircularProgress />
-            ) : (
-              <span
-                className="px-5 py-3 rounded-lg shadow-lg bg-indigo-500 
-      text-white uppercase tracking-wider font-semibold text-sm sm:text-base"
-              >
-                Subscibe Now!
-              </span>
-            )}
-          </button>
-        </div>
       </div>
     </div>
   );
