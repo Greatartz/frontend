@@ -53,7 +53,7 @@ const AlertSubscribe = ({ show, currentLink }) => {
                     Already subscribed ?
                     <button
                       onClick={() => handlePriority(true)}
-                      className="border-b-2 border-borderColor"
+                      className="border-b-2 border-borderColor ml-1"
                     >
                       Sign In
                     </button>
@@ -64,16 +64,15 @@ const AlertSubscribe = ({ show, currentLink }) => {
                 <div className="mt-3 flex flex-col justify-center content-between text-center">
                   <div>
                     <button
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      className="border-b-2 border-borderColor mx-4 focus:outline-none"
                       onClick={() => setPlanModal(true)}
                     >
                       Subscribe
                     </button>
-                  </div>
-
-                  <div className="mt-2">
                     <Link href={BASE_URL || "/"}>
-                      <a className="border-b-2 border-borderColor">Home</a>
+                      <span className="border-b-2 border-borderColor mx-2 cursor-pointer pb-1">
+                        Home
+                      </span>
                     </Link>
                   </div>
                 </div>
@@ -94,9 +93,7 @@ const AlertSubscribe = ({ show, currentLink }) => {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">
-                    {toggle ? "Register" : "Login"}
-                  </h3>
+                  <h3 className="text-3xl font-semibold">Login</h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => handlePriority(false)}
