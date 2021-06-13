@@ -1,6 +1,5 @@
 import { signout, signOut, useSession } from "next-auth/client";
 import { API_URL, BASE_URL } from "../config/index";
-import Link from "next/link";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useRouter } from "next/router";
@@ -17,7 +16,7 @@ import { Button } from "@material-ui/core";
 import Swal from "sweetalert2";
 import axios from "axios";
 import DynamicPlans from "./DynamicPlans";
-
+import Link from "next/link";
 export default function Header({ categories, about }) {
   const router = useRouter();
   const [session, loading] = useSession();
@@ -65,23 +64,31 @@ export default function Header({ categories, about }) {
       inputLabel: "New Password:",
     });
     if (value) {
-      axios
-        .put(
-          `${API_URL}/users/${id}`,
-          { password: value },
-          { headers: { Authorization: `Bearer ${session.accessToken}` } }
-        )
-        .then(({ data }) => {
-          Swal.fire({
-            title: "Security",
-            text: "Password changed! you should sign in again",
-            icon: "success",
-            showConfirmButton: "Ok",
-          }).then(() => {
-            signout({ redirect: false });
-            setShowSetting(false);
+      if (value.length >= 6) {
+        axios
+          .put(
+            `${API_URL}/users/${id}`,
+            { password: value },
+            { headers: { Authorization: `Bearer ${session.accessToken}` } }
+          )
+          .then(() => {
+            Swal.fire({
+              title: "Security",
+              text: "Password changed! you should sign in again",
+              icon: "success",
+              showConfirmButton: "Ok",
+            }).then(() => {
+              signout({ redirect: false });
+              setShowSetting(false);
+            });
           });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Your password must be at least 6 characters!",
+          icon: "error",
         });
+      }
     }
   };
 
@@ -94,23 +101,31 @@ export default function Header({ categories, about }) {
       inputLabel: "New Username:",
     });
     if (value) {
-      axios
-        .put(
-          `${API_URL}/users/${id}`,
-          { username: value },
-          { headers: { Authorization: `Bearer ${session.accessToken}` } }
-        )
-        .then(({ data }) => {
-          Swal.fire({
-            title: "Security",
-            text: "Username changed! you should sign in again",
-            icon: "success",
-            showConfirmButton: "Ok",
-          }).then(() => {
-            signout({ redirect: false });
-            setShowSetting(false);
+      if (value.length >= 4) {
+        axios
+          .put(
+            `${API_URL}/users/${id}`,
+            { username: value },
+            { headers: { Authorization: `Bearer ${session.accessToken}` } }
+          )
+          .then(() => {
+            Swal.fire({
+              title: "Security",
+              text: "Username changed! you should sign in again",
+              icon: "success",
+              showConfirmButton: "Ok",
+            }).then(() => {
+              signout({ redirect: false });
+              setShowSetting(false);
+            });
           });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Username must be at least 4 characters!",
+          icon: "error",
         });
+      }
     }
   };
   const handleSubmit = (e) => {
@@ -118,9 +133,7 @@ export default function Header({ categories, about }) {
     router.push(`/search?term=${term}`);
     setTerm("");
   };
-  const handleCloseIcon = () => {
-    setOpen(false);
-  };
+
   const handleToggle = (value) => {
     setToggle(value);
   };
@@ -131,48 +144,21 @@ export default function Header({ categories, about }) {
     setShowSetting(false);
     signOut({ redirect: false, callbackUrl: BASE_URL });
   };
-  const handleUpdate = () => {
-    Swal.fire({
-      title: "Do you want to save the changes?",
-      showCancelButton: true,
-      confirmButtonText: `Save`,
-      denyButtonText: `Cancel`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        const jwt = session.accessToken;
-        axios
-          .put(
-            `${API_URL}/users/${userId}`,
-            {
-              username: username,
-              email: email,
-              password: password,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${jwt}`,
-              },
-            }
-          )
-          .then(({ data }) => {
-            console.log("succefully updated");
-          });
-      }
-    });
-  };
+
   return (
-    <nav className="relative flex flex-wrap items-center justify-between bg-white shadow">
+    <nav className="relative flex flex-wrap items-center justify-between bg-white max-w-myMaxWidth mx-auto">
       <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 py-8">
         <div className="hidden sm:hidden md:hidden lg:flex">
           <div className="self-center flex flex-col justify-center">
-            <p>
-              <MailOutlineIcon className="mr-1" /> {about[0].email}
-            </p>
+            <div>
+              <a href={`mailto:${about[0].email}`}>
+                <MailOutlineIcon className="mr-1" /> {about[0].email}
+              </a>
+            </div>
             <button
               className="self-center
              border border-solid border-black
-              focus:outline-none w-1/2"
+              focus:outline-none w-1/2 mt-3"
               onClick={() => setSubscribeModal(true)}
             >
               Subscribe
@@ -306,7 +292,11 @@ export default function Header({ categories, about }) {
       {/* model */}
       {showModal ? (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div
+            className="justify-center items-center flex
+           overflow-x-hidden overflow-y-auto fixed inset-0
+            z-50 outline-none focus:outline-none max-w-myMaxWidth mx-auto"
+          >
             <div className="relative w-auto my-6 mx-auto md:w-96 max-w-3xl">
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -345,7 +335,11 @@ export default function Header({ categories, about }) {
       {/* setting */}
       {showSetting ? (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div
+            className="justify-center items-center
+           flex overflow-x-hidden overflow-y-auto fixed
+            inset-0 z-50 outline-none focus:outline-none"
+          >
             <div className="relative w-auto my-6 mx-auto md:w-96 max-w-4xl">
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -363,8 +357,8 @@ export default function Header({ categories, about }) {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <div className="mb-4 relative">
-                    Username:
+                  <label>Username:</label>
+                  <div className="mb-4 relative flex items-center">
                     <input
                       className="input border filled border-gray-400 appearance-none rounded w-full md:w-11/12 px-3 py-3 pt-3 pb-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
                       type="text"
@@ -372,7 +366,9 @@ export default function Header({ categories, about }) {
                       disabled
                       autoFocus
                     />
-                    <Edit onClick={changeName} />
+                    <div className="editUsername">
+                      <Edit onClick={changeName} />
+                    </div>
                   </div>
 
                   <div className="mb-4 relative">
@@ -385,9 +381,8 @@ export default function Header({ categories, about }) {
                       autoFocus
                     />
                   </div>
-
-                  <div className="mb-4 relative">
-                    Password:
+                  <label>Password:</label>
+                  <div className="mb-4 relative flex items-center">
                     <input
                       className="input border filled border-gray-400 appearance-none rounded w-full md:w-10/12 px-3 py-3 pt-3 pb-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
                       type={blind ? "password" : "text"}
@@ -395,23 +390,26 @@ export default function Header({ categories, about }) {
                       value={password}
                       autoFocus
                     />
-                    <br />
-                    <Edit className="mx-2" onClick={changePassword} />
-                    {blind ? (
-                      <Blind onClick={() => setBlind(false)} />
-                    ) : (
-                      <Visible onClick={() => setBlind(true)} />
-                    )}
+                    <div className="seePassword">
+                      {blind ? (
+                        <Blind onClick={() => setBlind(false)} />
+                      ) : (
+                        <Visible onClick={() => setBlind(true)} />
+                      )}
+                    </div>
+                    <div className="editPassword">
+                      <Edit className="mx-2" onClick={changePassword} />
+                    </div>
                   </div>
 
                   <div className="p-1">
                     <Button
                       variant="outlined"
-                      color="secondary"
+                      color="default"
                       onClick={handleLogout}
                     >
                       Logout
-                      <ExitToAppIcon className="text-red-600 mx-2" />
+                      <ExitToAppIcon className="text-black mx-2" />
                     </Button>
                   </div>
                 </div>
@@ -424,12 +422,15 @@ export default function Header({ categories, about }) {
       ) : null}
       {/* end setting */}
       {subscribeModal ? (
-        <div className="justify-center items-center flex overflow-x-hidden overflow-y-visible fixed inset-0 z-50 outline-none focus:outline-none bg-black">
+        <div
+          className="justify-center items-center flex overflow-x-hidden overflow-y-visible
+         fixed inset-0 z-50 outline-none focus:outline-none bg-black max-w-myMaxWidth mx-auto"
+        >
           <div className="w-11/12 sm:w-11/12 sm:mx-auto md:w-2/4 lg:w-customW my-6">
             {/*content*/}
             <div className="border-0 rounded-lg shadow-lg flex flex-col w-full bg-white outline-none h-full focus:outline-none">
               {/*body*/}
-              <h4 className="m-2">Subscription Plans</h4>
+              <h3 className="m-2 text-center">Subscription Plans</h3>
               <div className="leading-loose flex flex-col md:flex-row">
                 <DynamicPlans isemail={isEmail} />
               </div>

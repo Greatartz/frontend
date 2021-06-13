@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import LoginPopup from "./LoginPopup";
-import axios from "axios";
 import CloseIcon from "@material-ui/icons/Close";
 import Link from "next/link";
 import { useSession } from "next-auth/client";
 import { BASE_URL } from "../config";
-import { CircularProgress } from "@material-ui/core";
-import Plane from "./Plane";
 import DynamicPlans from "./DynamicPlans";
 const AlertSubscribe = ({ show, currentLink }) => {
   const [session, loading] = useSession();
@@ -15,7 +12,6 @@ const AlertSubscribe = ({ show, currentLink }) => {
   const [toggle, setToggle] = useState(false);
   // const [processing, setProcessing] = useState(false);
   const [planModal, setPlanModal] = useState(false);
-  const [dataPlane, setDataPlanes] = useState(null);
   const [isemail, setIsemail] = useState(false);
 
   useEffect(() => {
@@ -36,19 +32,25 @@ const AlertSubscribe = ({ show, currentLink }) => {
   return (
     <>
       {showModal ? (
-        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-black">
+        <div
+          className="alertSubscribtion
+         justify-center items-center
+          flex overflow-x-hidden overflow-y-auto
+           fixed inset-0 z-50 outline-none
+            focus:outline-none bg-black max-w-myMaxWidth mx-auto"
+        >
           <div className="relative w-11/12 sm:w-11/12 sm:mx-auto md:w-2/4 lg:w-customW my-6">
             {/*content*/}
             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
               {/*header*/}
-              <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t bg-bgColor">
+              <div className="flex justify-center p-5 border-b border-solid border-blueGray-200 rounded-t bg-bgColor">
                 <h2>Mitch Cumm</h2>
               </div>
               {/*body*/}
               <div className="relative p-6 flex-auto leading-loose">
                 {!session && (
                   <h3>
-                    Already subscribed ?{" "}
+                    Already subscribed ?
                     <button
                       onClick={() => handlePriority(true)}
                       className="border-b-2 border-borderColor"
@@ -58,7 +60,7 @@ const AlertSubscribe = ({ show, currentLink }) => {
                   </h3>
                 )}
 
-                <h3> Please subscribe inorder to see the content</h3>
+                <h3> Please subscribe in order to see the content</h3>
                 <div className="mt-3 flex flex-col justify-center content-between text-center">
                   <div>
                     <button
@@ -86,7 +88,7 @@ const AlertSubscribe = ({ show, currentLink }) => {
       {/* login popup */}
       {loginModel && (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-black">
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-black max-w-myMaxWidth mx-auto">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -115,12 +117,12 @@ const AlertSubscribe = ({ show, currentLink }) => {
       )}
       {/* end loginPopu */}
       {planModal ? (
-        <div className="justify-center items-center flex overflow-x-hidden overflow-y-visible fixed inset-0 z-50 outline-none focus:outline-none bg-black">
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-visible fixed inset-0 z-50 outline-none focus:outline-none bg-black max-w-myMaxWidth mx-auto">
           <div className="w-11/12 sm:w-11/12 sm:mx-auto md:w-2/4 lg:w-customW my-6">
             {/*content*/}
             <div className="border-0 rounded-lg shadow-lg flex flex-col w-full bg-white outline-none h-full focus:outline-none">
               {/*body*/}
-              <h4 className="m-2">Subscription Plans</h4>
+              <h3 className="m-2 text-center">Subscription Plans</h3>
               <div className="leading-loose flex flex-col md:flex-row">
                 <DynamicPlans isemail={isemail} nextLink={currentLink} />
               </div>

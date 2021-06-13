@@ -3,6 +3,9 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { useRef } from "react";
 import "../styles/globals.css";
+import "../styles/reset-slick-theme.css";
+import "../styles/resetSlick.css";
+
 import SEO from "../next-seo.config.js";
 import { DefaultSeo } from "next-seo";
 
