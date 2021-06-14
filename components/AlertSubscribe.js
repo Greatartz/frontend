@@ -1,24 +1,26 @@
 import { useState, useEffect } from "react";
 import LoginPopup from "./LoginPopup";
 import CloseIcon from "@material-ui/icons/Close";
-import Link from "next/link";
 import { useSession } from "next-auth/client";
 import { BASE_URL } from "../config";
+import { Button } from "@material-ui/core";
 import DynamicPlans from "./DynamicPlans";
+import { useRouter } from "next/router";
 const AlertSubscribe = ({ show, currentLink }) => {
   const [session, loading] = useSession();
   const [showModal, setShowModal] = useState(show);
   const [loginModel, setLoginModel] = useState(false);
-  const [toggle, setToggle] = useState(false);
-  // const [processing, setProcessing] = useState(false);
   const [planModal, setPlanModal] = useState(false);
   const [isemail, setIsemail] = useState(false);
-
+  const router = useRouter();
   useEffect(() => {
     if (session) {
       setIsemail(true);
     }
   }, []);
+  const handleRedirection = () => {
+    router.push(BASE_URL);
+  };
   const handlePriority = (value) => {
     if (value) {
       setShowModal(false);
@@ -59,23 +61,28 @@ const AlertSubscribe = ({ show, currentLink }) => {
                     </button>
                   </h3>
                 )}
-
                 <h3> Please subscribe in order to see the content</h3>
-                <div className="mt-3 flex flex-col justify-center content-between text-center">
+                <div className="mt-3 flex justify-around items-center flex-col sm:flex-row">
                   <div>
-                    <button
-                      className="border-b-2 border-borderColor mx-4 focus:outline-none"
+                    <Button
+                      variant="outlined"
+                      className="focus:outline-none"
                       onClick={() => setPlanModal(true)}
                     >
                       Subscribe
-                    </button>
-                    <Link href={BASE_URL || "/"}>
-                      <span className="border-b-2 border-borderColor mx-2 cursor-pointer pb-1">
-                        Home
-                      </span>
-                    </Link>
+                    </Button>
+                  </div>
+                  <div className="py-2 sm:py-0">
+                    <Button
+                      variant="outlined"
+                      onClick={handleRedirection}
+                      className="focus: outline-none"
+                    >
+                      Home
+                    </Button>
                   </div>
                 </div>
+                {/* parents */}
               </div>
               {/*footer*/}
             </div>

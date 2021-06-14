@@ -101,12 +101,12 @@ export default function RegisterPopup({ toggle }) {
     <>
       <form
         method="POST"
-        className="flex flex-col pt-3 md:pt-8 md:w-full"
+        className="flex flex-col md:pt-2 md:w-full md:min-w-smallMinWidth"
         onSubmit={handleSubmit}
       >
         <input
           type="text"
-          className="block border border-grey-light w-full p-3 rounded mb-4"
+          className="block border border-grey-light p-2 md:w-3/4 md:p-3 rounded mb-4"
           name="fullname"
           placeholder="Full Name"
           value={name}
@@ -116,7 +116,7 @@ export default function RegisterPopup({ toggle }) {
         <input
           type="email"
           className="block border border-grey-light
-                 w-full p-3 rounded mb-4"
+          p-2 md:w-3/4 md:p-3 rounded mb-4"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -124,7 +124,7 @@ export default function RegisterPopup({ toggle }) {
 
         <input
           type="password"
-          className="block border border-grey-light w-full p-3 rounded mb-4"
+          className="block border border-grey-light p-2 md:w-3/4 md:p-3 rounded mb-4"
           name="password"
           placeholder="Password"
           value={password}
@@ -133,7 +133,7 @@ export default function RegisterPopup({ toggle }) {
         <input
           type="password"
           className={`block border border-grey-light
-                 w-full p-3 rounded mb-4 ${nomatch ? "border-red" : ""}`}
+          p-2 md:w-3/4 md:p-3 rounded mb-4 ${nomatch ? "border-red" : ""}`}
           name="confirm_password"
           placeholder="Confirm Password"
           value={confirm}
@@ -142,22 +142,22 @@ export default function RegisterPopup({ toggle }) {
         {renderPassword()}
         <button
           type="submit"
-          className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8"
+          className="bg-black text-white md:w-3/4 font-bold text-lg hover:bg-gray-700 p-2 mt-2"
         >
           {loading ? <CircularProgress className="p-2" /> : "Create Account"}
         </button>
       </form>
-      <div className="text-center text-sm text-grey-dark mt-4">
-        By signing up, you agree to the
+      <div className="text-center text-sm text-grey-dark mt-4 md:text-lg">
+        <span> By signing up, you agree to the </span>
         <Link
           className="no-underline border-b border-grey-dark text-grey-dark ml-1"
           href="/privacy-policy"
         >
-          Privacy Policy
+          Privacy Policy !
         </Link>
       </div>
 
-      <div className="text-grey-dark mt-6 ml-3">
+      <div className="text-grey-dark mt-6 ml-3 md:text-lg">
         Already have an account?
         <a
           className="underline font-semibold cursor-pointer hover:underline ml-1"

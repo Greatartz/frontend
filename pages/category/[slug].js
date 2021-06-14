@@ -27,20 +27,23 @@ const Categories = ({ posts, total_length, page, res_category }) => {
       )}
 
       {posts.length > 0 && (
-        <h1 className="text-center mt-10">
-          <span className="border-2 border-borderColor p-1 rounded capitalize">
-            {slug}
-          </span>
-        </h1>
+        <>
+          <h1 className="text-center mt-10">
+            <span className="p-1 rounded capitalize">{slug}</span>
+          </h1>
+          <div className="w-1/3 mx-auto mt-2">
+            <hr className="border border-borderColor border-solid" />
+          </div>
+        </>
       )}
 
-      <section className="row mt-10 max-w-myMaxWidth">
+      <section className="row mt-10">
         {posts.map((post) => (
           <ArticleBox key={`article-cat-${post.id}`} post={post} />
         ))}
       </section>
 
-      <section className="w-11/12 mx-auto my-10 flex justify-between max-w-myMaxWidth">
+      <section className="w-11/12 mx-auto my-10 flex justify-between">
         {page > 1 && (
           <Link href={`/category/${slug}?page=${page - 1}`}>
             <a className="bg-borderColor text-white rounded py-2 px-5">Prev</a>

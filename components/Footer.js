@@ -6,7 +6,7 @@ import YouTubeIcon from "@material-ui/icons/YouTube";
 
 export default function Footer({ categories, about }) {
   return (
-    <footer className="border-t-2 border-bgColor pb-6 max-w-myMaxWidth mx-auto">
+    <div className="border-t-2 border-bgColor pb-6">
       <section className="bg-bgColor pt-8">
         <div className="w-11/12 mx-auto px-4">
           <div className="flex flex-wrap text-center lg:text-left">
@@ -141,6 +141,6 @@ export default function Footer({ categories, about }) {
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   );
 }

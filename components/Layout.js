@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
         />
       </Head>
 
-      <header>
+      <header className="max-w-myMaxWidthHeader mx-auto">
         {/* if both request load */}
         {header.isFetched && about.isFetched ? (
           <Header categories={header.data.data} about={about.data.data} />
@@ -36,9 +36,9 @@ const Layout = ({ children }) => {
         )}
       </header>
       {/*  load show content */}
-      <section>{children}</section>
+      <section className="max-w-myMaxWidth mx-auto">{children}</section>
 
-      <footer>
+      <footer className="max-w-myMaxWidth mx-auto">
         {/* both query load */}
         {header.isFetched && about.isFetched ? (
           <Footer categories={header.data.data} about={about.data.data} />

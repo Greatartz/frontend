@@ -43,5 +43,4 @@ Home.getInitialProps = async () => {
     resCatagory,
     posts,
   };
-  //check subscribtion
 };
