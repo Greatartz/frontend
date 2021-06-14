@@ -42,8 +42,8 @@ export default function LoginPopup({ toggle, mainPage }) {
   };
   return (
     <>
-      <form className="flex flex-col pt-3 md:pt-8 md:w-full">
-        <div className="flex flex-col pt-4">
+      <form className="flex flex-col md:pt-2 md:w-full">
+        <div className="flex flex-col pt-2 md:pt-4">
           <label htmlFor="email" className="text-lg">
             Email
           </label>
@@ -87,7 +87,7 @@ export default function LoginPopup({ toggle, mainPage }) {
       </form>
       <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
         {mainPage && (
-          <div className="pt-12 pb-12">
+          <div className="pt-4 pb-4">
             <p>
               Don't have an account?
               <a

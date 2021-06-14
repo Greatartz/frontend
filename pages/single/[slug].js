@@ -42,7 +42,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
   return (
     <Layout>
       <NextSeo {...SEO} />
-      <main className="w-11/12 mx-auto py-10 singlePageContent max-w-myMaxWidth">
+      <main className="w-11/12 mx-auto py-10 singlePageContent">
         <section className="singleHeader">
           <h3 className="text-xl border-b-2 border-borderColor inline-block my-5 py-1 capitalize">
             <Link href={`/category/${post[0].category.name}`}>
@@ -140,7 +140,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
         </section>
       </main>
 
-      <main className="w-full max-w-myMaxWidth lg:mx-auto">
+      <main className="w-full">
         <hr className="my-5" />
         <h1 className="w-11/12 mx-auto">Related Posts:</h1>
         <section className="related_posts row mt-5">

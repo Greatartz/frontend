@@ -146,23 +146,22 @@ export default function Header({ categories, about }) {
   };
 
   return (
-    <nav className="relative flex flex-wrap items-center justify-between bg-white max-w-myMaxWidth mx-auto">
+    <nav className="relative flex flex-wrap items-center justify-between bg-white">
       <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 py-8">
         <div className="hidden sm:hidden md:hidden lg:flex">
           <div className="self-center flex flex-col justify-center">
-            <div>
+            <div className="pb-1">
               <a href={`mailto:${about[0].email}`}>
                 <MailOutlineIcon className="mr-1" /> {about[0].email}
               </a>
             </div>
-            <button
-              className="self-center
-             border border-solid border-black
-              focus:outline-none w-1/2 mt-3"
+            <Button
+              variant="outlined"
+              className="self-center focus:outline-none w-1/2"
               onClick={() => setSubscribeModal(true)}
             >
-              Subscribe
-            </button>
+              <span className="capitalize"> Subscribe</span>
+            </Button>
           </div>
         </div>
 
@@ -295,14 +294,14 @@ export default function Header({ categories, about }) {
           <div
             className="justify-center items-center flex
            overflow-x-hidden overflow-y-auto fixed inset-0
-            z-50 outline-none focus:outline-none max-w-myMaxWidth mx-auto"
+            z-50 outline-none focus:outline-none max-w-myMaxWidth mx-auto bg-gray-500 bg-opacity-30"
           >
-            <div className="relative w-auto my-6 mx-auto md:w-96 max-w-3xl">
+            <div className="relative my-3 mx-auto w-auto">
               {/*content*/}
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-4/5 mx-auto bg-white outline-none focus:outline-none">
                 {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">
+                <div className="flex items-start justify-between p-2 md:p-5 border-b border-solid border-blueGray-200 rounded-t">
+                  <h3 className="text-lg md:text-3xl font-semibold">
                     {toggle ? "Register" : "Login"}
                   </h3>
                   <button
@@ -313,7 +312,7 @@ export default function Header({ categories, about }) {
                   </button>
                 </div>
                 {/*body*/}
-                <div className="relative p-6 flex-auto">
+                <div className="relative p-2 md:p-6 flex-auto">
                   {toggle ? (
                     <>
                       <RegisterPopup toggle={handleToggle} />
@@ -328,7 +327,6 @@ export default function Header({ categories, about }) {
               </div>
             </div>
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
       {/* end model */}

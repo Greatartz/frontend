@@ -26,13 +26,13 @@ const AuthorPosts = ({ posts, total_length, page }) => {
         </span>
       </h1>
 
-      <section className="row mt-10 max-w-myMaxWidth">
+      <section className="row mt-10">
         {posts.map((post) => (
           <ArticleBox post={post} key={`author-p-${post.id}`} />
         ))}
       </section>
 
-      <section className="w-11/12 mx-auto my-10 flex justify-between max-w-myMaxWidth">
+      <section className="w-11/12 mx-auto my-10 flex justify-between">
         {page > 1 && (
           <Link href={`/author/${id}?page=${page - 1}`}>
             <a className="bg-borderColor text-white rounded py-2 px-5">Prev</a>

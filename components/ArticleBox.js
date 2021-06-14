@@ -1,4 +1,3 @@
-import { API_URL } from "../config/index";
 import Link from "next/link";
 
 const ArticleBox = ({ post }) => {
