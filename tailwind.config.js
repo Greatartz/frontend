@@ -12,9 +12,13 @@ module.exports = {
       },
       minHeight: {
         custom: "475px",
+        small: "220px",
+        medium: "280px",
       },
       maxHeight: {
-        small: "200px",
+        small: "340px",
+        smImage: "200px",
+        revise: "200px",
       },
       width: {
         customW: "45%",
