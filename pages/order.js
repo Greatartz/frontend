@@ -126,11 +126,11 @@ export default function Order({
   }
 }
 
-Order.getInitialProps = async ({
+export async function getServerSideProps({
   query: { session_id },
   query: { next },
   query: { plan },
-}) => {
+}) {
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, "0");
   let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
@@ -139,9 +139,11 @@ Order.getInitialProps = async ({
 
   if (session_id == "ok") {
     return {
-      ok: true,
-      next,
-      plan,
+      props: {
+        ok: true,
+        next,
+        plan,
+      },
     };
   } else {
     const stripe = new Stripe(SK_STRIPE, { apiVersion: "2020-08-27" });
@@ -178,23 +180,27 @@ Order.getInitialProps = async ({
           });
         });
       return {
-        ok: true,
-        login: false,
-        customerName,
-        customerEmail,
-        next,
-        plan,
+        props: {
+          ok: true,
+          login: false,
+          customerName,
+          customerEmail,
+          next,
+          plan,
+        },
       };
     } else {
       return {
-        ok: false,
-        login: false,
-        customerName,
-        customerEmail,
-        password,
-        next,
-        plan,
+        props: {
+          ok: false,
+          login: false,
+          customerName,
+          customerEmail,
+          password,
+          next,
+          plan,
+        },
       };
     }
   }
-};
+}
