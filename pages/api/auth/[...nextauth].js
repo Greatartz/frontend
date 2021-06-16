@@ -30,6 +30,7 @@ const callbacks = {
   // Getting the JWT token from API response
   async jwt(token, user) {
     if (user) {
+      token.userId = user.data.user.id;
       token.accessToken = user.data.jwt;
       token.name = user.data.user.username;
       token.email = user.data.user.email;
@@ -41,6 +42,7 @@ const callbacks = {
 
   async session(session, token) {
     session.passwordMain = token.password;
+    session.idCard = token.userId;
     session.accessToken = token.accessToken;
     return session;
   },

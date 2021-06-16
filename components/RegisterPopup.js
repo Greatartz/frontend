@@ -74,29 +74,26 @@ export default function RegisterPopup({ toggle }) {
         },
         body: JSON.stringify(registerInfo),
       });
-
-      const res = await register.json();
-      if (res.jwt) {
-        //
-        const res = await signIn("credentials", {
+      const result = await register.json();
+      if (result.statusCode === 400) {
+        Swal.fire("Invalid", result.message[0].messages[0].message, "error");
+        setLoading(false);
+        setEmail("");
+        setPassword("");
+        setConfirm("");
+      } else {
+        const requestSignIn = await signIn("credentials", {
           email: email,
           password: password,
           callbackUrl: BASE_URL,
           redirect: false,
-        });
-        if (res?.error) {
-          setLoading(false);
-          Swal.fire("Invalid Login", "username or password is incorrect");
-        }
-        if (res.url) {
+        }).then(() => {
           router.reload();
-        }
-        //
-      } else {
-        Swal.fire("Invalid", res.message[0].messages[0].message, "error");
+        });
       }
-    }
-  };
+    } //check step1 block
+  }; //function block
+
   return (
     <>
       <form

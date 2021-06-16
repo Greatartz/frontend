@@ -13,15 +13,14 @@ export default function Plane({
   haveEmail,
   after,
 }) {
-  console.log(" have email ", haveEmail);
   const [session, loading] = useSession();
   const [processing, setProcessing] = useState(false);
-  const handleBuy = async () => {
+  const handleBuy = async (planName) => {
     setProcessing(true);
     if (haveEmail) {
       const email = session.user.email;
       const { data } = await axios.post(
-        `/api/payment/createSession/${priceId}/${email}/${after}`
+        `/api/payment/createSession/${priceId}/${email}/${after}/${planName}`
       );
       const recivedId = data.sessionId;
       const stripe = await loadStripe(PK_STRIPE);
@@ -32,7 +31,7 @@ export default function Plane({
       }
     } else {
       const { data } = await axios.post(
-        `/api/payment/createSession/${priceId}/${after}`
+        `/api/payment/createSession/${priceId}/${after}/${planName}`
       );
       const recivedId = data.sessionId;
       const stripe = await loadStripe(PK_STRIPE);
@@ -45,13 +44,13 @@ export default function Plane({
   };
 
   return (
-    <div className="shadow rounded w-1/2 flex flex-col justify-between py-2 text-center">
-      <div className="mx-auto pt-1 w-60 h-auto">
+    <div className="shadow rounded sm:w-1/2 flex flex-col justify-between py-2 text-center">
+      <div className="mx-auto pt-1 w-40 sm:w-50 md:w-50 lg:w-56 h-auto">
         <img src={image} className="max-w-full max-h-full block" />
       </div>
       <div className="my-5">
         <button
-          onClick={handleBuy}
+          onClick={() => handleBuy(name)}
           disabled={processing}
           className="focus:outline-none"
         >

@@ -97,11 +97,11 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
               <section className="location grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <p className="text-title">
                   Location:
-                  <span className="font-bold">{post[0].location}</span>
+                  <span className="font-bold pl-1">{post[0].location}</span>
                 </p>
                 <p className="text-title">
                   Author:
-                  <span className="font-bold border-b-2 border-white hover:border-borderColor">
+                  <span className="font-bold border-b-2 border-white hover:border-borderColor pl-1">
                     <Link href={`/author/${post[0].author.id}`}>
                       <a className="cursor-pointer">
                         {post[0].author.firstname} {post[0].author.lastname}
