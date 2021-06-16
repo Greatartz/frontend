@@ -29,11 +29,10 @@ const Categories = ({ posts, total_length, page, res_category }) => {
       {posts.length > 0 && (
         <>
           <h1 className="text-center mt-10">
-            <span className="p-1 rounded capitalize">{slug}</span>
+            <span className="p-1 rounded capitalize border-b border-borderColor">
+              {slug}
+            </span>
           </h1>
-          <div className="w-1/3 mx-auto mt-2">
-            <hr className="border border-borderColor border-solid" />
-          </div>
         </>
       )}
 

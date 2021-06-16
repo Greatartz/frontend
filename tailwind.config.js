@@ -26,6 +26,9 @@ module.exports = {
       minWidth: {
         smallMinWidth: "500px",
       },
+      height: {
+        myHeight: "90vh",
+      },
     },
   },
   variants: {

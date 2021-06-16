@@ -42,7 +42,7 @@ export default function HomeCatagory({ category, posts }) {
   return (
     <>
       <main>
-        <h1 className="w-11/12 text-3xl mt-10 mb-5 ml-2">
+        <h1 className="w-11/12 text-3xl mt-10 mb-5 mx-auto pl-2">
           <Link href={`/category/${category.name}`}>
             <a className="border-b-2 border-borderColor inline-block pb-2 capitalize">
               {category.name}
@@ -52,7 +52,7 @@ export default function HomeCatagory({ category, posts }) {
           <p className="block text-lg mt-2">{category.description}</p>
         </h1>
 
-        <div className="w-11/12">
+        <div className="w-11/12 mx-auto">
           <Slider {...settings}>
             {posts.map((part) => (
               <ArticleBox post={part} key={part.id} />

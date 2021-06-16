@@ -116,32 +116,43 @@ const AlertSubscribe = ({ show, currentLink }) => {
               </div>
             </div>
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       )}
       {/* end loginPopu */}
       {planModal ? (
-        <div className="justify-center items-center flex overflow-x-hidden overflow-y-visible fixed inset-0 z-50 outline-none focus:outline-none bg-black max-w-myMaxWidth mx-auto">
-          <div className="w-11/12 sm:w-11/12 sm:mx-auto md:w-2/4 lg:w-customW my-6">
-            {/*content*/}
-            <div className="border-0 rounded-lg shadow-lg flex flex-col w-full bg-white outline-none h-full focus:outline-none">
-              {/*body*/}
-              <h3 className="m-2 text-center">Subscription Plans</h3>
-              <div className="leading-loose flex flex-col md:flex-row">
-                <DynamicPlans isemail={isemail} nextLink={currentLink} />
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-black max-w-myMaxWidth mx-auto">
+            <div className="relative w-11/12 my-6 mx-auto max-w-3xl h-myHeight sm:h-myHeight md:h-auto">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold">
+                    Subscription Plans
+                  </h3>
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={() => setPlanModal(false)}
+                  >
+                    <CloseIcon className="text-black" />
+                  </button>
+                </div>
+                {/*body*/}
+                <div className="relative leading-loose flex flex-col sm:flex-row">
+                  <DynamicPlans isemail={isemail} />
+                </div>
+                <button
+                  className="text-lg bg-red-400 focus:outline-none"
+                  onClick={() => setPlanModal(false)}
+                >
+                  <span className="p-2 text-black font-bold my-2">Cancel</span>
+                </button>
+                {/*footer*/}
               </div>
-              <button
-                className="text-lg bg-red-400 focus:outline-none"
-                onClick={() => setPlanModal(false)}
-              >
-                <span className="p-2 text-black font-bold my-2">Cancel</span>
-              </button>
             </div>
           </div>
-        </div>
-      ) : (
-        ""
-      )}
+        </>
+      ) : null}
     </>
   );
 };
