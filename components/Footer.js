@@ -1,8 +1,9 @@
-import Link from "next/link";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import YouTubeIcon from "@material-ui/icons/YouTube";
+import { BASE_URL } from "../config";
+import Link from "next/link";
 
 export default function Footer({ categories, about }) {
   return (

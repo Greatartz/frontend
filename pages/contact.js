@@ -210,43 +210,58 @@ const ContactPage = ({ data }) => {
           </div>
         </div>
       </section>
-      <section className="flex justify-center my-2">
-        <div className="letter w-full sm:w-2/3 md:w-1/2 lg:h-2/5">
-          <div className="bg-bgColor w-full p-8 rounded-md">
+      <section className="container mx-auto">
+        <hr />
+      </section>
+
+      <section className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-5 gap-5">
+        <div className="bg-bgColor w-full p-8 rounded-md">
+          <div>
+            <h1 className="capitalize mb-3">news letter</h1>
+          </div>
+
+          <form method="POST" onSubmit={handleNewsLetter}>
             <div>
-              <h1 className="capitalize mb-3">News Letter</h1>
+              <input
+                type="email"
+                className="inputField w-full my-2 py-3 px-2 rounded-md focus:outline-none"
+                placeholder="Your Email *"
+                value={letterEmail}
+                onChange={(e) => setLetterEmail(e.target.value)}
+              />
             </div>
 
-            <form method="POST" onSubmit={handleNewsLetter}>
-              <div>
-                <input
-                  type="email"
-                  className="inputField w-full my-2 py-3 px-2 rounded-md focus:outline-none"
-                  placeholder="Your Email *"
-                  value={letterEmail}
-                  onChange={(e) => setLetterEmail(e.target.value)}
-                />
-              </div>
+            <div>
+              <input
+                type="text"
+                className="inputField w-full my-2 py-3 px-2 rounded-md focus:outline-none"
+                placeholder="Subject *"
+                value={letterSubject}
+                onChange={(e) => setLetterSubject(e.target.value)}
+              />
+            </div>
 
-              <div>
-                <input
-                  type="text"
-                  className="inputField w-full my-2 py-3 px-2 rounded-md focus:outline-none"
-                  placeholder="Subject *"
-                  value={letterSubject}
-                  onChange={(e) => setLetterSubject(e.target.value)}
-                />
-              </div>
+            <div className="text-right">
+              <button
+                type="submit"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+        {/* details for details news letter  */}
+        <div>
+          <div>
+            <h1 className="capitalize mt-8 text-center sm:text-center md:text-left lg:text-left">
+              {" "}
+              News Letter
+            </h1>
+          </div>
 
-              <div className="text-right">
-                <button
-                  type="submit"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
+          <div className="text-center sm:text-center md:text-left lg:text-left">
+            <p>{data[0].newsLetterDescription}</p>
           </div>
         </div>
       </section>
