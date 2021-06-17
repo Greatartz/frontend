@@ -20,7 +20,6 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
     canonical: `${BASE_URL}/${post[0].slug}`,
   };
   useEffect(() => {
-    console.log("start checking");
     setTimeout(() => {
       if (!loading) {
         if (session) {
@@ -40,7 +39,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
   }, [loading, session]); //check subscribtion according to session
 
   return (
-    <Layout>
+    <Layout isHide={loadAlert} afterLink={post[0].slug}>
       <NextSeo {...SEO} />
       <main className="w-11/12 mx-auto py-10 singlePageContent">
         <section className="singleHeader">
@@ -151,12 +150,6 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
             ))}
         </section>
       </main>
-      {/*model */}
-      {loadAlert ? (
-        <AlertSubscribe show={loadAlert} currentLink={post[0].slug} />
-      ) : (
-        ""
-      )}
     </Layout>
   );
 };

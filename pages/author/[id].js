@@ -20,8 +20,8 @@ const AuthorPosts = ({ posts, total_length, page }) => {
   return (
     <Layout>
       <NextSeo {...SEO} />
-      <h1 className="text-center mt-10">
-        <span className="border-2 border-borderColor p-1 rounded">
+      <h1 className="text-center mt-10 capitalize">
+        <span className="border-b-2 border-borderColor p-1 rounded">
           {posts[0].author.firstname} {posts[0].author.lastname}
         </span>
       </h1>

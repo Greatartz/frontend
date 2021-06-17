@@ -139,7 +139,7 @@ const AlertSubscribe = ({ show, currentLink }) => {
                 </div>
                 {/*body*/}
                 <div className="relative leading-loose flex flex-col sm:flex-row">
-                  <DynamicPlans isemail={isemail} />
+                  <DynamicPlans isemail={isemail} nextLink={currentLink} />
                 </div>
                 <button
                   className="text-lg bg-red-400 focus:outline-none"
