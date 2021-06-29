@@ -14,22 +14,25 @@ export default function LoginPopup({ toggle, mainPage }) {
   const router = useRouter();
 
   const handleLogin = async (e) => {
-    setLoading(true);
     e.preventDefault();
+    if (email == "" || password) {
+      Swal.fire("Required Field", "email and password are required!");
+    } else {
+      setLoading(true);
+      const res = await signIn("credentials", {
+        email: email,
+        password: password,
+        callbackUrl: `/`,
+        redirect: false,
+      });
 
-    const res = await signIn("credentials", {
-      email: email,
-      password: password,
-      callbackUrl: `/`,
-      redirect: false,
-    });
-
-    if (res?.error) {
-      setLoading(false);
-      Swal.fire("Invalid Login", "username or password is incorrect");
-    }
-    if (res.url) {
-      router.reload();
+      if (res?.error) {
+        setLoading(false);
+        Swal.fire("Invalid Login", "username or password is incorrect");
+      }
+      if (res.url) {
+        router.reload();
+      }
     }
   };
 
@@ -42,7 +45,7 @@ export default function LoginPopup({ toggle, mainPage }) {
   };
   return (
     <>
-      <form className="flex flex-col md:pt-2 md:w-full">
+      <form className="flex flex-col md:pt-2 md:w-full" method="post">
         <div className="flex flex-col pt-2 md:pt-4">
           <label htmlFor="email" className="text-lg">
             Email
@@ -50,7 +53,7 @@ export default function LoginPopup({ toggle, mainPage }) {
           <input
             type="email"
             id="email"
-            required
+            required={true}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.com"
@@ -68,6 +71,7 @@ export default function LoginPopup({ toggle, mainPage }) {
               type={visible ? "text" : "password"}
               placeholder="Password"
               id="password"
+              required={true}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="shadow appearance-none

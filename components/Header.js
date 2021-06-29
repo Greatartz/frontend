@@ -17,11 +17,15 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import DynamicPlans from "./DynamicPlans";
 import Link from "next/link";
-export default function Header({ categories, about }) {
+export default function Header({
+  categories,
+  about,
+  showLoginModel,
+  clickLogin,
+}) {
   const router = useRouter();
   const [session, loading] = useSession();
   const [navbarOpen, setNavbarOpen] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [term, setTerm] = useState("");
   const [toggle, setToggle] = useState(false);
   const [showSetting, setShowSetting] = useState(false);
@@ -192,10 +196,7 @@ export default function Header({ categories, about }) {
         <div className="hidden sm:hidden md:hidden lg:flex ml-auto">
           <p className="self-center">
             {!session && (
-              <a
-                className="anchor cursor-pointer"
-                onClick={() => setShowModal(true)}
-              >
+              <a className="anchor cursor-pointer" onClick={clickLogin}>
                 Sign in <PersonIcon />
               </a>
             )}
@@ -222,10 +223,7 @@ export default function Header({ categories, about }) {
 
           <p className="self-center lg:hidden">
             {!session && (
-              <a
-                className="anchor cursor-pointer"
-                onClick={() => setShowModal(true)}
-              >
+              <a className="anchor cursor-pointer" onClick={clickLogin}>
                 Sign in <PersonIcon />
               </a>
             )}
@@ -254,7 +252,7 @@ export default function Header({ categories, about }) {
             </li>
             {categories.map((data) => (
               <li className="nav-item" key={`${data.id}`}>
-                <Link href={`/category/${data.name}`}>
+                <Link href={`/category/${encodeURIComponent(data.name)}`}>
                   <a
                     category={data.id}
                     className={`${
@@ -302,7 +300,7 @@ export default function Header({ categories, about }) {
         {/*  menu collapse */}
       </div>
       {/* model */}
-      {showModal ? (
+      {showLoginModel ? (
         <>
           <div
             className="justify-center items-center flex
@@ -319,7 +317,7 @@ export default function Header({ categories, about }) {
                   </h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setShowModal(false)}
+                    onClick={clickLogin}
                   >
                     <CloseIcon className="text-black" />
                   </button>

@@ -6,8 +6,10 @@ first make sure about adding some values to vercel enviroment!!
 
 ### 1 - NEXT_PUBLIC_API_URL
 
-    for stapi Note: remove last s;ash while adding the value example:
+    for stapi Note: remove last slash while adding the value example:
     https://myStapiApi.com this is ok.but https://myStapiApi.com/ No it will error
+
+if this dos'nt set default api url is https://mitch-cumm-api.herokuapp.com
 
 ### 2- NEXT_PUBLIC_BASE_URL
 

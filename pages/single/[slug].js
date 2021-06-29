@@ -19,24 +19,24 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
     description: `Description | ${post[0].seo_description}`,
     canonical: `${BASE_URL}/${post[0].slug}`,
   };
-  useEffect(() => {
-    setTimeout(() => {
-      if (!loading) {
-        if (session) {
-          const email = session.user.email;
-          axios.post(`/api/payment/isSubscribed/${email}`).then(({ data }) => {
-            if (data.subscribed == false) {
-              setLoadAlert(true);
-            } else {
-              setLoadAlert(false);
-            }
-          });
-        } else {
-          setLoadAlert(true);
-        }
-      }
-    }, 5000);
-  }, [loading, session]); //check subscribtion according to session
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     if (!loading) {
+  //       if (session) {
+  //         const email = session.user.email;
+  //         axios.post(`/api/payment/isSubscribed/${email}`).then(({ data }) => {
+  //           if (data.subscribed == false) {
+  //             setLoadAlert(true);
+  //           } else {
+  //             setLoadAlert(false);
+  //           }
+  //         });
+  //       } else {
+  //         setLoadAlert(true);
+  //       }
+  //     }
+  //   }, 5000);
+  // }, [loading, session]); //check subscribtion according to session
 
   return (
     <Layout isHide={loadAlert} afterLink={post[0].slug}>
@@ -44,7 +44,9 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
       <main className="w-11/12 mx-auto py-10 singlePageContent">
         <section className="singleHeader">
           <h3 className="text-xl border-b-2 border-borderColor inline-block my-5 py-1 capitalize">
-            <Link href={`/category/${post[0].category.name}`}>
+            <Link
+              href={`/category/${encodeURIComponent(post[0].category.name)}`}
+            >
               {post[0].category.name}
             </Link>
           </h3>
@@ -71,7 +73,9 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
                   </span>{" "}
                   -{" "}
                   <span>
-                    <Link href={`/author/${post[0].author.id}`}>
+                    <Link
+                      href={`/author/${encodeURIComponent(post[0].author.id)}`}
+                    >
                       <a className="cursor-pointer border-b-2 border-white hover:border-borderColor">
                         {post[0].author.firstname} {post[0].author.lastname}
                       </a>
@@ -80,10 +84,13 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
                 </p>
 
                 {post[0].tags.map((tag) => (
-                  <Link href={`/tag/${tag.id}`} key={`tag-link-${tag.id}`}>
-                    <span className="bg-borderColor p-2 rounded text-white mr-2">
+                  <Link
+                    href={`/tag/${encodeURIComponent(tag.id)}`}
+                    key={`tag-link-${tag.id}`}
+                  >
+                    <a className="bg-borderColor p-2 rounded text-white mr-2">
                       {tag.title}
-                    </span>
+                    </a>
                   </Link>
                 ))}
               </section>
@@ -101,7 +108,9 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
                 <p className="text-title">
                   Author:
                   <span className="font-bold border-b-2 border-white hover:border-borderColor pl-1">
-                    <Link href={`/author/${post[0].author.id}`}>
+                    <Link
+                      href={`/author/${encodeURIComponent(post[0].author.id)}`}
+                    >
                       <a className="cursor-pointer">
                         {post[0].author.firstname} {post[0].author.lastname}
                       </a>
@@ -122,7 +131,9 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
           {/* / col-1 */}
           <div className="w-full sm:w-full md:w-full lg:w-3/12">
             <h2 className="border-2 border-borderColor p-1 rounded text-center w-11/12 mx-auto mt-10 mb-5">
-              <Link href={`/author/${rel_user[0].author.id}`}>
+              <Link
+                href={`/author/${encodeURIComponent(rel_user[0].author.id)}`}
+              >
                 <a className="cursor-pointer">
                   {rel_user[0].author.firstname} {rel_user[0].author.lastname}
                 </a>

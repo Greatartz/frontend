@@ -2,10 +2,11 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import YouTubeIcon from "@material-ui/icons/YouTube";
-import { BASE_URL } from "../config";
+import InstagramIcon from "@material-ui/icons/Instagram";
+
 import Link from "next/link";
 
-export default function Footer({ categories, about }) {
+export default function Footer({ categories, about, onClick }) {
   return (
     <div className="border-t-2 border-bgColor pb-6">
       <section className="bg-bgColor pt-8">
@@ -25,6 +26,15 @@ export default function Footer({ categories, about }) {
                     <FacebookIcon />
                   </a>
                 </button>
+                <button
+                  className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  type="button"
+                >
+                  <a href={about[0].instagram} target="_blank">
+                    <InstagramIcon />
+                  </a>
+                </button>
+
                 <button
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
@@ -108,18 +118,12 @@ export default function Footer({ categories, about }) {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/">
-                        <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm capitalize">
-                          Sign Up
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/">
-                        <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm capitalize">
-                          Sing In
-                        </a>
-                      </Link>
+                      <button
+                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm capitalize"
+                        onClick={onClick}
+                      >
+                        Sing In
+                      </button>
                     </li>
                   </ul>
                 </div>

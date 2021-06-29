@@ -1,6 +1,6 @@
 import ArticleBox from "../components/ArticleBox";
-import Link from "next/link";
 import Slider from "react-slick";
+import Link from "next/link";
 
 export default function HomeCatagory({ category, posts }) {
   const settings = {
@@ -43,7 +43,7 @@ export default function HomeCatagory({ category, posts }) {
     <>
       <main>
         <h1 className="w-11/12 text-3xl mt-10 mb-5 mx-auto pl-2">
-          <Link href={`/category/${category.name}`}>
+          <Link href={`/category/${encodeURIComponent(category.name)}`}>
             <a className="border-b-2 border-borderColor inline-block pb-2 capitalize">
               {category.name}
             </a>

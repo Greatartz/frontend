@@ -5,15 +5,21 @@ import Spinner from "@material-ui/core/CircularProgress";
 import Header from "./Header";
 import Footer from "./Footer";
 import AlertSubscribe from "./AlertSubscribe";
+import { useState } from "react";
 import Head from "next/head";
 const Layout = ({ children, isHide = false, afterLink }) => {
+  const [showLoginModel, setShowLoginModel] = useState(false);
+  const globalLogin = () => {
+    const reverse = !showLoginModel;
+    setShowLoginModel(reverse);
+    console.log("Hi global", showLoginModel);
+  };
   //fetch categories using React-query
   const header = useQuery("headerCat", () =>
     axios.get(`${API_URL}/categories`)
   );
   const about = useQuery("headerAbout", () => axios.get(`${API_URL}/abouts`));
   if (isHide) {
-    console.log("check ", afterLink);
     return <AlertSubscribe show={isHide} currentLink={afterLink} />;
   } else {
     return (
@@ -31,7 +37,12 @@ const Layout = ({ children, isHide = false, afterLink }) => {
         <header className="max-w-myMaxWidthHeader mx-auto">
           {/* if both request load */}
           {header.isFetched && about.isFetched ? (
-            <Header categories={header.data.data} about={about.data.data} />
+            <Header
+              categories={header.data.data}
+              about={about.data.data}
+              showLoginModel={showLoginModel}
+              clickLogin={globalLogin}
+            />
           ) : (
             <div className="flex h-screen">
               <div className="m-auto">
@@ -46,7 +57,11 @@ const Layout = ({ children, isHide = false, afterLink }) => {
         <footer className="max-w-myMaxWidth mx-auto">
           {/* both query load */}
           {header.isFetched && about.isFetched ? (
-            <Footer categories={header.data.data} about={about.data.data} />
+            <Footer
+              categories={header.data.data}
+              about={about.data.data}
+              onClick={globalLogin}
+            />
           ) : (
             <div className="flex h-screen">
               <div className="m-auto">
