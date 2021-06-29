@@ -19,24 +19,24 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
     description: `Description | ${post[0].seo_description}`,
     canonical: `${BASE_URL}/${post[0].slug}`,
   };
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     if (!loading) {
-  //       if (session) {
-  //         const email = session.user.email;
-  //         axios.post(`/api/payment/isSubscribed/${email}`).then(({ data }) => {
-  //           if (data.subscribed == false) {
-  //             setLoadAlert(true);
-  //           } else {
-  //             setLoadAlert(false);
-  //           }
-  //         });
-  //       } else {
-  //         setLoadAlert(true);
-  //       }
-  //     }
-  //   }, 5000);
-  // }, [loading, session]); //check subscribtion according to session
+  useEffect(() => {
+    setTimeout(() => {
+      if (!loading) {
+        if (session) {
+          const email = session.user.email;
+          axios.post(`/api/payment/isSubscribed/${email}`).then(({ data }) => {
+            if (data.subscribed == false) {
+              setLoadAlert(true);
+            } else {
+              setLoadAlert(false);
+            }
+          });
+        } else {
+          setLoadAlert(true);
+        }
+      }
+    }, 5000);
+  }, [loading, session]); //check subscribtion according to session
 
   return (
     <Layout isHide={loadAlert} afterLink={post[0].slug}>

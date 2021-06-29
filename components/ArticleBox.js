@@ -8,7 +8,11 @@ const ArticleBox = ({ post }) => {
           <Link href={`/single/${encodeURIComponent(post.slug)}`}>
             <img
               className="catImage rounded-t max-h-smImage"
-              src={`${post.featured_image.formats.small.url}`}
+              src={`${
+                post.featured_image.formats != null
+                  ? post.featured_image.formats.small.url
+                  : post.featured_image.url
+              }`}
             />
           </Link>
         </div>
