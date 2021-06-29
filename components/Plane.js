@@ -45,9 +45,13 @@ export default function Plane({
 
   return (
     <div className="shadow rounded sm:w-1/2 flex flex-col justify-between py-2 text-center">
-      <div className="mx-auto pt-1 w-40 sm:w-50 md:w-50 lg:w-56 h-auto">
-        <img src={image} className="max-w-full max-h-full block" />
-      </div>
+      {image != null ? (
+        <div className="mx-auto pt-1 w-40 sm:w-50 md:w-50 lg:w-56 h-auto">
+          <img src={image} className="max-w-full max-h-full block" />
+        </div>
+      ) : (
+        ""
+      )}
       <div className="my-5">
         <button
           onClick={() => handleBuy(name)}
