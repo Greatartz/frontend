@@ -44,7 +44,7 @@ export default function Plane({
   };
 
   return (
-    <div className="shadow rounded sm:w-1/2 flex flex-col justify-between py-2 text-center">
+    <div className="shadow rounded sm:w-1/2 flex flex-col justify-center items-center py-3 text-center">
       {image != null ? (
         <div className="mx-auto pt-1 w-40 sm:w-50 md:w-50 lg:w-56 h-auto">
           <img src={image} className="max-w-full max-h-full block" />
@@ -52,7 +52,7 @@ export default function Plane({
       ) : (
         ""
       )}
-      <div className="my-5">
+      <div className="sm:my-2 md:my-3">
         <button
           onClick={() => handleBuy(name)}
           disabled={processing}
@@ -72,9 +72,9 @@ export default function Plane({
       </div>
 
       <div className="pt-0 px-4">
-        <h2 className="mb-5">{name}</h2>
-        <p>{desc}</p>
-        <p className="font-bold">Cost: {cost} </p>
+        <h2 className="sm:my-2 md:my-3">{name}</h2>
+        <p className="sm:text-lg md:text-xl leading-loose">{desc}</p>
+        <p className="font-bold md:text-2xl sm:text-xl my-1">Cost: {cost} </p>
       </div>
     </div>
   );
