@@ -118,12 +118,12 @@ export default function Footer({ categories, about, onClick }) {
                       </Link>
                     </li>
                     <li>
-                      <button
-                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm capitalize"
+                      <a
+                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm capitalize focus:outline-none cursor-pointer "
                         onClick={onClick}
                       >
-                        Sing In
-                      </button>
+                        Sing In/up
+                      </a>
                     </li>
                   </ul>
                 </div>

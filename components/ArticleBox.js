@@ -22,8 +22,8 @@ const ArticleBox = ({ post }) => {
           <h2 className="text-xl font-semibold sm:font-medium sm:text-2xl md:text-3xl mb-3">
             <Link href={`/single/${encodeURIComponent(post.slug)}`}>
               <a className="border-b-2 border-white hover:border-borderColor">
-                {post.title.length > 20
-                  ? `${post.title.substring(0, 20)}...`
+                {post.title.length > 30
+                  ? `${post.title.substring(0, 40)}...`
                   : post.title}
               </a>
             </Link>
