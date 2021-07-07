@@ -17,7 +17,7 @@ export default function Footer({ categories, about, onClick }) {
               <h5 className="text-lg mt-0 mb-2 text-blueGray-600">
                 Find us on any of these platforms.
               </h5>
-              <div className="mt-6 lg:mb-0 mb-6">
+              {/* <div className="mt-6 lg:mb-0 mb-6">
                 <button
                   className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
@@ -59,7 +59,7 @@ export default function Footer({ categories, about, onClick }) {
                     <YouTubeIcon />
                   </a>
                 </button>
-              </div>
+              </div> */}
             </div>
             <div className="w-full lg:w-6/12 px-4">
               <div className="flex flex-wrap items-top mb-6">
