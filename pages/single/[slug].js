@@ -61,7 +61,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
           <div className="w-full lg:w-9/12">
             <div className="singleFeatureImage mt-10 my-5">
               <img
-                src={`${post[0].featured_image.formats.medium.url}`}
+                src={`${post[0].featured_image?.formats?.medium?.url}`}
                 className="w-full object-cover h-auto"
               />
             </div>
@@ -169,7 +169,7 @@ SinglePage.getInitialProps = async (ctx) => {
   const { slug } = ctx.query;
   const request_post = await fetch(`${API_URL}/posts?slug=${slug}`);
   const res_post = await request_post.json();
-
+  console.log(res_post)
   const cat = res_post[0].category.id;
   const req_related_posts = await fetch(
     `${API_URL}/posts?category=${cat}&_limit=3`
