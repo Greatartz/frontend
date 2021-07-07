@@ -159,11 +159,11 @@ const ContactPage = ({ data }) => {
 
           <div className="text-center sm:text-center md:text-left lg:text-left">
             <h3 className="capitalize mt-8 mb-3">Email & Phone</h3>
-            <p>{data[0].phone}</p>
+            {/* <p>{data[0].phone}</p> */}
             <p>{data[0].email}</p>
           </div>
 
-          <div className="text-center sm:text-center md:text-left lg:text-left">
+          {/* <div className="text-center sm:text-center md:text-left lg:text-left">
             <h3 className="capitalize mt-8 mb-3">follow us</h3>
             <div className="lg:mb-0 mb-6">
               <button
@@ -202,12 +202,12 @@ const ContactPage = ({ data }) => {
                 </a>
               </button>
             </div>
-          </div>
+          </div> */}
 
-          <div className="text-center sm:text-center md:text-left lg:text-left">
+          {/* <div className="text-center sm:text-center md:text-left lg:text-left">
             <h3 className="capitalize mt-8 mb-3">Address</h3>
             <p>{data[0].address}</p>
-          </div>
+          </div> */}
         </div>
       </section>
       <section className="container mx-auto">
