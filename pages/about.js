@@ -33,7 +33,7 @@ const AboutPage = ({ data }) => {
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500">
                   <img
                     alt="..."
-                    src={data[0].banner.url}
+                    src={data[0].banner?.url}
                     className="w-full align-middle rounded-t-lg"
                   />
                   <blockquote className="relative p-8 mb-4">
