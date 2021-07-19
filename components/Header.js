@@ -140,6 +140,7 @@ export default function Header({
               )
               .then(() => {
                 setShowSetting(false);
+                setSubscribed(false);
               });
           }
         });
