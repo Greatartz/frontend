@@ -18,17 +18,6 @@ export default function RichText({ doc }) {
 
     return slf.renderToken(tokens, idx, options);
   };
-  // for text
-  // md.renderer.rules.text = (tokens, idx, options, env, slf) => {
-  //   let text = tokens[idx];
-  //   text.attrs[text.attrIndex("alt")][1] = slf.renderInlineAsText(
-  //     token.children,
-  //     options,
-  //     env
-  //   );
-  //   console.log("rich t ", text);
-  //   return slf.renderToken(tokens, idx, options);
-  // };
   let result = md.render(doc);
   return <>{parse(result)}</>;
 }

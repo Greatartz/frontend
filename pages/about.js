@@ -56,7 +56,7 @@ const AboutPage = ({ data }) => {
   );
 };
 
-AboutPage.getInitialProps = async (ctx) => {
+AboutPage.getInitialProps = async () => {
   const res = await fetch(`${API_URL}/abouts`);
   const data = await res.json();
 

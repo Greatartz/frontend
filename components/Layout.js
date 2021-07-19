@@ -12,7 +12,6 @@ const Layout = ({ children, isHide = false, afterLink }) => {
   const globalLogin = () => {
     const reverse = !showLoginModel;
     setShowLoginModel(reverse);
-    console.log("Hi global", showLoginModel);
   };
   //fetch categories using React-query
   const header = useQuery("headerCat", () =>

@@ -15,7 +15,7 @@ export default function LoginPopup({ toggle, mainPage }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (email == "" || password) {
+    if (email == "" || password == "") {
       Swal.fire("Required Field", "email and password are required!");
     } else {
       setLoading(true);
@@ -53,7 +53,7 @@ export default function LoginPopup({ toggle, mainPage }) {
           <input
             type="email"
             id="email"
-            required={true}
+            disabled={loading}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.com"
@@ -71,7 +71,7 @@ export default function LoginPopup({ toggle, mainPage }) {
               type={visible ? "text" : "password"}
               placeholder="Password"
               id="password"
-              required={true}
+              disabled={loading}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="shadow appearance-none

@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import PersonIcon from "@material-ui/icons/Person";
 import MenuIcon from "@material-ui/icons/Menu";
+import Cancle from "@material-ui/icons/Cancel";
 import CloseIcon from "@material-ui/icons/Close";
 import Visible from "@material-ui/icons/Visibility";
 import Edit from "@material-ui/icons/Edit";
@@ -17,6 +18,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import DynamicPlans from "./DynamicPlans";
 import Link from "next/link";
+
 export default function Header({
   categories,
   about,
@@ -36,31 +38,43 @@ export default function Header({
   const [password, setPassword] = useState("");
   const [blind, setBlind] = useState(true);
   const [isEmail, setIsemail] = useState(false);
-  //when loadin finished and there is session
+  //for subscribtion
+  const [subscribed, setSubscribed] = useState(false);
+  const [customerId, setCustomerId] = useState("");
+  //when loading session of Next Auth finished
   useEffect(() => {
-    if (!loading) {
-      if (session) {
-        setIsemail(true);
-        const jwt = session.accessToken;
-        axios
-          .get(`${API_URL}/users/me`, {
-            headers: {
-              Authorization: `Bearer ${jwt}`,
-            },
-          })
-          .then(({ data }) => {
-            setUserFull(data);
-            setPassword(session.passwordMain);
-          })
-          .catch((err) => {
-            //jwt expired
-            signOut({ redirect: false, url: BASE_URL });
-          });
-      } else {
-        setIsemail(false);
-      }
+    if (session) {
+      setIsemail(true);
+      const jwt = session.accessToken;
+      axios
+        .get(`${API_URL}/users/me`, {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        })
+        .then(({ data }) => {
+          setUserFull(data);
+          setPassword(session.passwordMain);
+          // IF SUBSCRIBED
+          axios
+            .post(`/api/payment/isSubscribed/${data.email}`)
+            .then(({ data }) => {
+              if (data.subscribed) {
+                setSubscribed(true);
+                setCustomerId(data.customerId);
+              }
+            });
+          //END
+        })
+        .catch((err) => {
+          //jwt expired
+          signOut({ redirect: false, url: BASE_URL });
+        });
+    } else {
+      setIsemail(false);
     }
-  }, [loading, session]);
+  }, [loading]);
+
   const changePassword = async () => {
     const id = userFull.id;
     const { value } = await Swal.fire({
@@ -97,7 +111,21 @@ export default function Header({
       }
     }
   };
-
+  const handleCancle = async () => {
+    const { value } = await Swal.fire({
+      input: "text",
+      showCancelButton: "Cancle",
+      inputLabel: "Enter Your Email",
+      inputPlaceholder: "Email",
+    });
+    if (value) {
+      if (value === userFull.email) {
+        axios.post(`/api/payment/cancle/${customerId}`).then(({ data }) => {
+          console.log("data cancle", data);
+        });
+      }
+    }
+  };
   const changeName = async () => {
     const id = userFull.id;
     const { value } = await Swal.fire({
@@ -410,6 +438,21 @@ export default function Header({
                       <Edit className="mx-2" onClick={changePassword} />
                     </div>
                   </div>
+
+                  {subscribed ? (
+                    <>
+                      <div className="mb-4 relative flex items-center">
+                        <Button
+                          variant="outlined"
+                          color="default"
+                          onClick={handleCancle}
+                        >
+                          Cancle Subscription
+                          <Cancle className="text-black mx-2" />
+                        </Button>
+                      </div>
+                    </>
+                  ) : null}
 
                   <div className="p-1">
                     <Button
