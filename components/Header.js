@@ -13,7 +13,7 @@ import Edit from "@material-ui/icons/Edit";
 import Blind from "@material-ui/icons/VisibilityOff";
 import LoginPopup from "./LoginPopup";
 import RegisterPopup from "./RegisterPopup";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import Swal from "sweetalert2";
 import axios from "axios";
 import DynamicPlans from "./DynamicPlans";
@@ -41,6 +41,7 @@ export default function Header({
   //for subscribtion
   const [subscribed, setSubscribed] = useState(false);
   const [customerId, setCustomerId] = useState("");
+  const [cancleLoading, setCancleLoading] = useState(false);
   //when loading session of Next Auth finished
   useEffect(() => {
     if (session) {
@@ -120,8 +121,15 @@ export default function Header({
     });
     if (value) {
       if (value === userFull.email) {
+        setCancleLoading(true);
         axios.post(`/api/payment/cancle/${customerId}`).then(({ data }) => {
-          console.log("data cancle", data);
+          if (data) {
+            axios.put(
+              `${API_URL}/users/${userFull.id}`,
+              { plan: "cancled", PlanBuyDate: getDate() },
+              { headers: { Authorization: `Bearer ${session.accessToken}` } }
+            );
+          }
         });
       }
     }
@@ -447,8 +455,14 @@ export default function Header({
                           color="default"
                           onClick={handleCancle}
                         >
-                          Cancle Subscription
-                          <Cancle className="text-black mx-2" />
+                          {cancleLoading ? (
+                            <CircularProgress color="secondary" size="38px" />
+                          ) : (
+                            <>
+                              Cancle Subscription
+                              <Cancle className="text-black mx-2" />
+                            </>
+                          )}
                         </Button>
                       </div>
                     </>
