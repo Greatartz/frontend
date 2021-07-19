@@ -124,11 +124,15 @@ export default function Header({
         setCancleLoading(true);
         axios.post(`/api/payment/cancle/${customerId}`).then(({ data }) => {
           if (data) {
-            axios.put(
-              `${API_URL}/users/${userFull.id}`,
-              { plan: "cancled", PlanBuyDate: getDate() },
-              { headers: { Authorization: `Bearer ${session.accessToken}` } }
-            );
+            axios
+              .put(
+                `${API_URL}/users/${userFull.id}`,
+                { plan: "cancled", PlanBuyDate: getDate() },
+                { headers: { Authorization: `Bearer ${session.accessToken}` } }
+              )
+              .then(() => {
+                setShowSetting(false);
+              });
           }
         });
       }
