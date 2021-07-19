@@ -35,7 +35,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
           setLoadAlert(true);
         }
       }
-    }, 8000);
+    }, 6000);
   }, [loading, session]); //check subscribtion according to session
 
   return (
