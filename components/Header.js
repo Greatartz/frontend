@@ -2,7 +2,6 @@ import { signout, signOut, useSession } from "next-auth/client";
 import { API_URL, BASE_URL } from "../config/index";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import Cancle from "@material-ui/icons/Cancel";
 import { useRouter } from "next/router";
 import { getDate } from "../utils";
 import { useEffect, useState } from "react";
