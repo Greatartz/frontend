@@ -61,7 +61,10 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
           <div className="w-full lg:w-9/12">
             <div className="singleFeatureImage mt-10 my-5">
               <img
-                src={`${post[0].featured_image.formats.medium.url}`}
+                src={`${
+                  post[0]?.featured_image?.formats?.medium?.url ||
+                  post[0]?.featured_image?.url
+                }`}
                 className="w-full object-cover h-auto"
               />
             </div>

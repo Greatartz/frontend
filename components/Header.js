@@ -2,7 +2,9 @@ import { signout, signOut, useSession } from "next-auth/client";
 import { API_URL, BASE_URL } from "../config/index";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import Cancle from "@material-ui/icons/Cancel";
 import { useRouter } from "next/router";
+import { getDate } from "../utils";
 import { useEffect, useState } from "react";
 import PersonIcon from "@material-ui/icons/Person";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -36,7 +38,60 @@ export default function Header({
   const [password, setPassword] = useState("");
   const [blind, setBlind] = useState(true);
   const [isEmail, setIsemail] = useState(false);
+  const [checked, setChecked] = useState(false);
+  //
+  const [subData, setSubData] = useState(null);
   //when loadin finished and there is session
+  const cancleSubscibtion = () => {
+    if (subData?.subId) {
+      Swal.fire({
+        title: "Enter your username",
+        input: "text",
+        inputAttributes: {
+          autocapitalize: "off",
+        },
+        showCancelButton: true,
+        confirmButtonText: "Unsubscribe",
+        showLoaderOnConfirm: true,
+        preConfirm: (login) => {
+          if (login !== userFull?.username) {
+            Swal.fire({
+              title: `incorrect username`,
+              icon: "error",
+            });
+            return;
+          }
+          return fetch(`/api/payment/cancleSub/${subData?.subId}`, {
+            method: "POST",
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(response.statusText);
+              }
+              return response.json();
+            })
+            .catch((error) => {
+              Swal.showValidationMessage(`Request failed: ${error}`);
+            });
+        },
+        allowOutsideClick: () => !Swal.isLoading(),
+      }).then(async (result) => {
+        console.log("result", result);
+        if (result?.value?.status === "canceled" || result?.value) {
+          await axios.put(
+            `${API_URL}/users/${userFull?.id}`,
+            { plan: "cancled", PlanBuyDate: getDate() },
+            { headers: { Authorization: `Bearer ${session.accessToken}` } }
+          );
+          Swal.fire({
+            title: "You have unsubscribed successfully",
+            icon: "success",
+          });
+          setSubData(null);
+        }
+      });
+    }
+  };
   useEffect(() => {
     if (!loading) {
       if (session) {
@@ -61,6 +116,18 @@ export default function Header({
       }
     }
   }, [loading, session]);
+  useEffect(() => {
+    async function checkSubscribe() {
+      const { data } = await axios.post(
+        `/api/payment/getSubId/${userFull?.email}`
+      );
+      setSubData(data);
+      setChecked(true);
+    }
+    if (userFull?.id && !checked) {
+      checkSubscribe();
+    }
+  }, [userFull]);
   const changePassword = async () => {
     const id = userFull.id;
     const { value } = await Swal.fire({
@@ -371,7 +438,7 @@ export default function Header({
                     <input
                       className="input border filled border-gray-400 appearance-none rounded w-full md:w-11/12 px-3 py-3 pt-3 pb-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
                       type="text"
-                      value={userFull.username}
+                      value={userFull?.username}
                       disabled
                       autoFocus
                     />
@@ -385,7 +452,7 @@ export default function Header({
                     <input
                       className="input border filled border-gray-400 appearance-none rounded w-full md:w-11/12 px-3 py-3 pt-3 pb-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
                       type="email"
-                      value={userFull.email}
+                      value={userFull?.email}
                       disabled
                       autoFocus
                     />
@@ -410,7 +477,18 @@ export default function Header({
                       <Edit className="mx-2" onClick={changePassword} />
                     </div>
                   </div>
-
+                  {subData?.subId && (
+                    <div className="p-1">
+                      <Button
+                        variant="outlined"
+                        color="default"
+                        onClick={cancleSubscibtion}
+                      >
+                        Cancel Subscribtion
+                        <Cancle className="text-black mx-2" />
+                      </Button>
+                    </div>
+                  )}
                   <div className="p-1">
                     <Button
                       variant="outlined"

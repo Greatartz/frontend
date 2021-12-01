@@ -13,11 +13,6 @@ const AlertSubscribe = ({ show, currentLink }) => {
   const [planModal, setPlanModal] = useState(false);
   const [isemail, setIsemail] = useState(false);
   const router = useRouter();
-  useEffect(() => {
-    if (session) {
-      setIsemail(true);
-    }
-  }, []);
   const handleRedirection = () => {
     router.push(BASE_URL);
   };
@@ -30,7 +25,11 @@ const AlertSubscribe = ({ show, currentLink }) => {
       setShowModal(true);
     }
   };
-
+  useEffect(() => {
+    if (session) {
+      setIsemail(true);
+    }
+  }, []);
   return (
     <>
       {showModal ? (

@@ -4,6 +4,7 @@ import { API_URL, BASE_URL, SK_STRIPE } from "../config";
 import { signIn, useSession } from "next-auth/client";
 import Layout from "../components/Layout";
 import { useEffect, useState } from "react";
+import { getDate } from "../utils";
 import axios from "axios";
 import { CircularProgress, Link } from "@material-ui/core";
 import { NextSeo } from "next-seo";
@@ -19,17 +20,6 @@ export default function Order({
 }) {
   const [session, loading] = useSession();
   const [processing, setProcessing] = useState(true);
-  // time
-  const getDate = () => {
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, "0");
-    let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-    let yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + "-" + dd;
-    return today;
-  };
-
-  //end time
   if (!loading && session) {
     const jwt = session.accessToken;
     const id = session.idCard;

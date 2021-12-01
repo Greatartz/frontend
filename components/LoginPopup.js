@@ -7,21 +7,25 @@ import Visible from "@material-ui/icons/Visibility";
 import Blind from "@material-ui/icons/VisibilityOff";
 
 export default function LoginPopup({ toggle, mainPage }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+  });
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (email == "" || password) {
+    console.log("in", inputs);
+    if (inputs.email == "" || inputs.password == "") {
       Swal.fire("Required Field", "email and password are required!");
+      return;
     } else {
       setLoading(true);
       const res = await signIn("credentials", {
-        email: email,
-        password: password,
+        email: inputs.email,
+        password: inputs.password,
         callbackUrl: `/`,
         redirect: false,
       });
@@ -52,10 +56,11 @@ export default function LoginPopup({ toggle, mainPage }) {
           </label>
           <input
             type="email"
-            id="email"
-            required={true}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={inputs.email}
+            onChange={(e) =>
+              setInputs({ ...inputs, [e.target.name]: e.target.value })
+            }
             placeholder="your@email.com"
             className="shadow appearance-none border
                       rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
@@ -70,10 +75,11 @@ export default function LoginPopup({ toggle, mainPage }) {
             <input
               type={visible ? "text" : "password"}
               placeholder="Password"
-              id="password"
-              required={true}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              value={inputs.password}
+              onChange={(e) =>
+                setInputs({ ...inputs, [e.target.name]: e.target.value })
+              }
               className="shadow appearance-none
                       border rounded w-11/12 py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
             />

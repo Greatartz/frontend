@@ -146,11 +146,19 @@ export default function RegisterPopup({ toggle }) {
       </form>
       <div className="text-center text-sm text-grey-dark mt-4 md:text-lg">
         <span> By signing up, you agree to the </span>
-        <Link
-          className="no-underline border-b border-grey-dark text-grey-dark ml-1"
-          href="/privacy-policy"
-        >
-          Privacy Policy !
+        <Link href="/privacy-policy">
+          <a className="underline font-semibold border-b border-grey-dark text-grey-dark ml-1">
+            {" "}
+            Privacy &#38; Policy !{" "}
+          </a>
+        </Link>
+        <br />
+        <span> and </span>
+        <Link href="/terms-and-services">
+          <a className="underline border-b border-grey-dark font-semibold text-grey-dark ml-1">
+            {" "}
+            Terms &#38; services
+          </a>
         </Link>
       </div>
 

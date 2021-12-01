@@ -8,6 +8,7 @@ export default function DynamicPlans({ isemail, nextLink }) {
   const [dataPlane, setDataPlanes] = useState(null);
   useEffect(() => {
     axios.post(`/api/payment/loadPlans`).then(({ data }) => {
+      console.log(data);
       setDataPlanes(data);
       setLoad(true);
     });

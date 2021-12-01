@@ -3,7 +3,6 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import InstagramIcon from "@material-ui/icons/Instagram";
-
 import Link from "next/link";
 
 export default function Footer({ categories, about, onClick }) {
@@ -118,6 +117,13 @@ export default function Footer({ categories, about, onClick }) {
                       </Link>
                     </li>
                     <li>
+                      <Link href="/terms-and-services">
+                        <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm capitalize">
+                          Terms&#38;Services
+                        </a>
+                      </Link>
+                    </li>
+                    <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm capitalize focus:outline-none cursor-pointer "
                         onClick={onClick}
@@ -132,9 +138,7 @@ export default function Footer({ categories, about, onClick }) {
           </div>
         </div>
       </section>
-
       <hr className="mb-6 border-blueGray-300" />
-
       <div className="flex flex-wrap items-center md:justify-between justify-center">
         <div className="w-full md:w-4/12 px-4 mx-auto text-center">
           <div className="text-sm text-blueGray-500 font-semibold py-1">
@@ -142,7 +146,6 @@ export default function Footer({ categories, about, onClick }) {
             <a className="text-blueGray-500 hover:text-blueGray-800">
               Mitch Cumm
             </a>
-            .
           </div>
         </div>
       </div>
