@@ -17,7 +17,6 @@ export default function LoginPopup({ toggle, mainPage }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("in", inputs);
     if (inputs.email == "" || inputs.password == "") {
       Swal.fire("Required Field", "email and password are required!");
       return;

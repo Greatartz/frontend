@@ -23,7 +23,7 @@ export default function DynamicPlans({ isemail, nextLink }) {
             cost={i.price}
             desc={i.productDesc}
             name={i.productName}
-            image={i.productImage}
+            image={i.productImage || null}
             after={nextLink}
             haveEmail={isemail}
           />

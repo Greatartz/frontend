@@ -2,20 +2,21 @@ import { useState, useEffect } from "react";
 import LoginPopup from "./LoginPopup";
 import CloseIcon from "@material-ui/icons/Close";
 import { useSession } from "next-auth/client";
-import { BASE_URL } from "../config";
 import { Button } from "@material-ui/core";
 import DynamicPlans from "./DynamicPlans";
-import { useRouter } from "next/router";
+import Link from "next/link";
 const AlertSubscribe = ({ show, currentLink }) => {
   const [session, loading] = useSession();
   const [showModal, setShowModal] = useState(show);
   const [loginModel, setLoginModel] = useState(false);
   const [planModal, setPlanModal] = useState(false);
   const [isemail, setIsemail] = useState(false);
-  const router = useRouter();
-  const handleRedirection = () => {
-    router.push(BASE_URL);
-  };
+  useEffect(() => {
+    if (session) {
+      setIsemail(true);
+    }
+  }, []);
+
   const handlePriority = (value) => {
     if (value) {
       setShowModal(false);
@@ -71,14 +72,10 @@ const AlertSubscribe = ({ show, currentLink }) => {
                       Subscribe
                     </Button>
                   </div>
-                  <div className="py-2 sm:py-0">
-                    <Button
-                      variant="outlined"
-                      onClick={handleRedirection}
-                      className="focus: outline-none"
-                    >
-                      Home
-                    </Button>
+                  <div className="py-2 sm:py-0 border px-4 rounded">
+                    <Link href="/">
+                      <a>HOME</a>
+                    </Link>
                   </div>
                 </div>
                 {/* parents */}

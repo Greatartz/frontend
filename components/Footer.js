@@ -128,7 +128,7 @@ export default function Footer({ categories, about, onClick }) {
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm capitalize focus:outline-none cursor-pointer "
                         onClick={onClick}
                       >
-                        Sing In/up
+                        Sign In/up
                       </a>
                     </li>
                   </ul>
@@ -144,7 +144,7 @@ export default function Footer({ categories, about, onClick }) {
           <div className="text-sm text-blueGray-500 font-semibold py-1">
             Copyright © {new Date().getFullYear()} Reserved by{" "}
             <a className="text-blueGray-500 hover:text-blueGray-800">
-              Mitch Cumm
+              Mitch Cumm, LLC
             </a>
           </div>
         </div>

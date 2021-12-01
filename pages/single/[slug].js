@@ -35,7 +35,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
           setLoadAlert(true);
         }
       }
-    }, 5000);
+    }, 6000);
   }, [loading, session]); //check subscribtion according to session
 
   return (
@@ -172,7 +172,6 @@ SinglePage.getInitialProps = async (ctx) => {
   const { slug } = ctx.query;
   const request_post = await fetch(`${API_URL}/posts?slug=${slug}`);
   const res_post = await request_post.json();
-
   const cat = res_post[0].category.id;
   const req_related_posts = await fetch(
     `${API_URL}/posts?category=${cat}&_limit=3`
