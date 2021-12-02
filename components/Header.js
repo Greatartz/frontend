@@ -106,16 +106,6 @@ export default function Header({
         .then(({ data }) => {
           setUserFull(data);
           setPassword(session.passwordMain);
-          // IF SUBSCRIBED
-          axios
-            .post(`/api/payment/isSubscribed/${data.email}`)
-            .then(({ data }) => {
-              if (data.subscribed) {
-                setSubscribed(true);
-                setCustomerId(data.customerId);
-              }
-            });
-          //END
         })
         .catch((err) => {
           //jwt expired
@@ -193,7 +183,6 @@ export default function Header({
               )
               .then(() => {
                 setShowSetting(false);
-                setSubscribed(false);
               });
           }
         });

@@ -79,7 +79,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
                     <Link
                       href={`/author/${encodeURIComponent(post[0].author.id)}`}
                     >
-                      <a className="cursor-pointer border-b-2 border-white hover:border-borderColor">
+                      <a className="cursor-pointer border-b-2 border-white hover:border-borderColor capitalize">
                         {post[0].author.firstname} {post[0].author.lastname}
                       </a>
                     </Link>
@@ -106,7 +106,9 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
               <section className="location grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <p className="text-title">
                   Location:
-                  <span className="font-bold pl-1">{post[0].location}</span>
+                  <span className="font-bold pl-1 capitalize">
+                    {post[0].location}
+                  </span>
                 </p>
                 <p className="text-title">
                   Author:
@@ -114,7 +116,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
                     <Link
                       href={`/author/${encodeURIComponent(post[0].author.id)}`}
                     >
-                      <a className="cursor-pointer">
+                      <a className="cursor-pointer capitalize">
                         {post[0].author.firstname} {post[0].author.lastname}
                       </a>
                     </Link>
@@ -145,7 +147,11 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
 
             <div className="grid grid-cols-1 gap-5 w-11/12 mx-auto">
               {rel_user.map((data, n) => (
-                <ArticleBox post={data} key={`single-artical-${n}`} />
+                <ArticleBox
+                  isSideBar={true}
+                  post={data}
+                  key={`single-artical-${n}`}
+                />
               ))}
             </div>
           </div>{" "}

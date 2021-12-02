@@ -159,55 +159,10 @@ const ContactPage = ({ data }) => {
 
           <div className="text-center sm:text-center md:text-left lg:text-left">
             <h3 className="capitalize mt-8 mb-3">Email & Phone</h3>
-            {/* <p>{data[0].phone}</p> */}
-            <p>{data[0].email}</p>
+            <p>{data[0]?.email}</p>
+            <p className="my-1">{data[0]?.phone}</p>
+            <p>{data[0]?.address}</p>
           </div>
-
-          {/* <div className="text-center sm:text-center md:text-left lg:text-left">
-            <h3 className="capitalize mt-8 mb-3">follow us</h3>
-            <div className="lg:mb-0 mb-6">
-              <button
-                className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                type="button"
-              >
-                <a href={data[0].facebook} target="_blank">
-                  <FacebookIcon />
-                </a>
-              </button>
-
-              <button
-                className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                type="button"
-              >
-                <a href={data[0].twitter} target="_blank">
-                  <TwitterIcon />
-                </a>
-              </button>
-
-              <button
-                className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                type="button"
-              >
-                <a href={data[0].linkedin} target="_blank">
-                  <LinkedInIcon />
-                </a>
-              </button>
-
-              <button
-                className="bg-white facebook shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                type="button"
-              >
-                <a href={data[0].youtube} target="_blank">
-                  <YouTubeIcon />
-                </a>
-              </button>
-            </div>
-          </div> */}
-
-          {/* <div className="text-center sm:text-center md:text-left lg:text-left">
-            <h3 className="capitalize mt-8 mb-3">Address</h3>
-            <p>{data[0].address}</p>
-          </div> */}
         </div>
       </section>
       <section className="container mx-auto">
@@ -269,11 +224,10 @@ const ContactPage = ({ data }) => {
   );
 };
 
-ContactPage.getInitialProps = async (ctx) => {
+export async function getServerSideProps() {
   const res = await fetch(`${API_URL}/abouts`);
   const data = await res.json();
-
-  return { data };
-};
+  return { props: { data } };
+}
 
 export default ContactPage;

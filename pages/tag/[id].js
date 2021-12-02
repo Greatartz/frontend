@@ -49,7 +49,10 @@ const TagPosts = ({ posts, total_length, page, tag_title }) => {
   );
 };
 
-TagPosts.getInitialProps = async ({ query: { id }, query: { page = 1 } }) => {
+export async function getServerSideProps({
+  query: { id },
+  query: { page = 1 },
+}) {
   const tagName = await fetch(`${API_URL}/tags?id=${id}`);
   const tag = await tagName.json();
   const tag_title = tag[0].title;
@@ -68,11 +71,13 @@ TagPosts.getInitialProps = async ({ query: { id }, query: { page = 1 } }) => {
   const posts = await res.json();
 
   return {
-    posts,
-    page: +page,
-    total_length,
-    tag_title,
+    props: {
+      posts,
+      page: +page,
+      total_length,
+      tag_title,
+    },
   };
-};
+}
 
 export default TagPosts;

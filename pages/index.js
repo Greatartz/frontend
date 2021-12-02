@@ -25,7 +25,7 @@ export default function Home({ resCatagory, posts }) {
   );
 }
 
-Home.getInitialProps = async () => {
+export async function getServerSideProps() {
   const reqCatagory = await fetch(`${API_URL}/categories`);
   const resCatagory = await reqCatagory.json();
   const posts = await Promise.all(
@@ -40,7 +40,9 @@ Home.getInitialProps = async () => {
   );
 
   return {
-    resCatagory,
-    posts,
+    props: {
+      resCatagory,
+      posts,
+    },
   };
-};
+}

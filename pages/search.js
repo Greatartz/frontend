@@ -28,7 +28,7 @@ const SearchPage = ({ posts }) => {
   );
 };
 
-SearchPage.getInitialProps = async ({ query: { term } }) => {
+export async function getServerSideProps({ query: { term } }) {
   const query = qs.stringify({
     _where: {
       _or: [{ title_contains: term }, { excerpt_contains: term }],
@@ -38,8 +38,10 @@ SearchPage.getInitialProps = async ({ query: { term } }) => {
   const res = await fetch(`${API_URL}/posts?${query}`);
   const posts = await res.json();
   return {
-    posts,
+    props: {
+      posts,
+    },
   };
-};
+}
 
 export default SearchPage;
