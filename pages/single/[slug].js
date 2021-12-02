@@ -139,7 +139,7 @@ const SinglePage = ({ post, rel_posts, rel_user }) => {
               <Link
                 href={`/author/${encodeURIComponent(rel_user[0].author.id)}`}
               >
-                <a className="cursor-pointer">
+                <a className="cursor-pointer capitalize">
                   {rel_user[0].author.firstname} {rel_user[0].author.lastname}
                 </a>
               </Link>

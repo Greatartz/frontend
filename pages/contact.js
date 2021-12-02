@@ -1,8 +1,7 @@
 import Layout from "../components/Layout";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import LinkedInIcon from "@material-ui/icons/LinkedIn";
-import YouTubeIcon from "@material-ui/icons/YouTube";
+import EmailIcon from "@material-ui/icons/EmailOutlined";
+import PhoneIcon from "@material-ui/icons/PhoneOutlined";
+import LocationCityOutlined from "@material-ui/icons/LocationCityOutlined";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
@@ -158,10 +157,20 @@ const ContactPage = ({ data }) => {
           </div>
 
           <div className="text-center sm:text-center md:text-left lg:text-left">
-            <h3 className="capitalize mt-8 mb-3">Email & Phone</h3>
-            <p>{data[0]?.email}</p>
-            <p className="my-1">{data[0]?.phone}</p>
-            <p>{data[0]?.address}</p>
+            <h3 className="capitalize mt-8 mb-3">
+              Email&#44; Phone &#38; Address
+            </h3>
+            <p>
+              <EmailIcon className="mb-1" />{" "}
+              <a href={`mailto:${data[0]?.email}`}>{data[0]?.email}</a>
+            </p>
+            <p className="my-1">
+              {" "}
+              <PhoneIcon className="mb-1" /> {data[0]?.phone}
+            </p>
+            <p>
+              <LocationCityOutlined className="mb-1" /> {data[0]?.address}
+            </p>
           </div>
         </div>
       </section>

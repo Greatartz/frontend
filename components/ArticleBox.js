@@ -17,7 +17,7 @@ const ArticleBox = ({ post, isSideBar = false }) => {
             <a className="text-subTitle block mt-2">{post.category.name}</a>
           </Link>
         </div>
-        <div className="px-6 py-4">
+        <div className="px-6 py-4 text-center">
           <div className="font-bold text-xl mb-2">
             <Link href={`/single/${encodeURIComponent(post.slug)}`}>
               <a className="border-b-2 border-white hover:border-borderColor">
