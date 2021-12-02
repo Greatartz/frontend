@@ -144,7 +144,7 @@ export default function Footer({ categories, about, onClick }) {
           <div className="text-sm text-blueGray-500 font-semibold py-1">
             Copyright © {new Date().getFullYear()} Reserved by{" "}
             <a className="text-blueGray-500 hover:text-blueGray-800">
-              Mitch Cumm, LLC
+              Mitch Cumm
             </a>
           </div>
         </div>
