@@ -34,4 +34,4 @@ stripe secrect key
 
 #### Thast's All About frontend.
 
-### last-update 2021-12-01
+### last-update 20210-DEC-13
