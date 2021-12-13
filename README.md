@@ -4,6 +4,15 @@ This is a documentation for deploying this branch to vercel.
 
 first make sure about adding some values to vercel enviroment!!
 
+### important-1 - NEXT_PUBLIC_iPREGISTRY
+
+This tool is used for getting country code you can create your free account
+and get your key from : https://dashboard.ipregistry.co/
+
+### important-2 - NEXT_PUBLIC_PRODUCT_B_NAME , NEXT_PUBLIC_PRODUCT_A_NAME
+
+the name of 2 products from stripe dashboard for developed and undeveloped countries.
+
 ### 1 - NEXT_PUBLIC_API_URL
 
     for stapi Note: remove last slash while adding the value example:

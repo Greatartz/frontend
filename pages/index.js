@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import { API_URL } from "../config/index";
 import axios from "axios";
 import { NextSeo } from "next-seo";
+
 export default function Home({ resCatagory, posts }) {
   const SEO = {
     title: "Page | Home",

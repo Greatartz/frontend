@@ -14,7 +14,8 @@ import Edit from "@material-ui/icons/Edit";
 import Blind from "@material-ui/icons/VisibilityOff";
 import LoginPopup from "./LoginPopup";
 import RegisterPopup from "./RegisterPopup";
-import { Button, CircularProgress } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import { checkCookies, getCookie, setCookies } from "cookies-next";
 import Swal from "sweetalert2";
 import axios from "axios";
 import DynamicPlans from "./DynamicPlans";
@@ -77,7 +78,6 @@ export default function Header({
         },
         allowOutsideClick: () => !Swal.isLoading(),
       }).then(async (result) => {
-        console.log("result", result);
         if (result?.value?.status === "canceled" || result?.value) {
           await axios.put(
             `${API_URL}/users/${userFull?.id}`,
@@ -116,6 +116,16 @@ export default function Header({
     }
   }, [loading, session]);
   useEffect(() => {
+    // get country
+    async function getCountryCode() {
+      try {
+        const { data } = await axios.post(`/api/payment/getType`);
+        setCookies("code", data.code, { maxAge: 60 * 60 * 24 });
+      } catch {
+        console.error("error while getting country");
+      }
+    }
+
     async function checkSubscribe() {
       const { data } = await axios.post(
         `/api/payment/getSubId/${userFull?.email}`
@@ -125,6 +135,10 @@ export default function Header({
     }
     if (userFull?.id && !checked) {
       checkSubscribe();
+    }
+
+    if (!checkCookies("code")) {
+      getCountryCode();
     }
   }, [userFull]);
   const changePassword = async () => {

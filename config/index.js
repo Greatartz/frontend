@@ -5,4 +5,5 @@ const API_URL =
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "/";
 const PK_STRIPE = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || "";
 const SK_STRIPE = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY || "";
-export { API_URL, BASE_URL, PK_STRIPE, SK_STRIPE };
+const IPFINDER = process.env.NEXT_PUBLIC_iPREGISTRY;
+export { API_URL, BASE_URL, PK_STRIPE, SK_STRIPE, IPFINDER };

@@ -2,7 +2,7 @@ import Stripe from "stripe";
 import { SK_STRIPE } from "../../../config";
 export default async function handler(req, res) {
   if (req.method == "POST") {
-    const GROUPA = process.env.NEXT_PUBLIC_PRODUCT_A_NAME || "countrya";
+    const GROUPA = process.env.NEXT_PUBLIC_PRODUCT_B_NAME || "countryb";
     const stripe = new Stripe(SK_STRIPE, {
       apiVersion: "2020-08-27",
     });
@@ -10,15 +10,14 @@ export default async function handler(req, res) {
     let productsList = await stripe.products.list({
       active: true,
     });
-    let [groupA] = productsList.data.filter((i) => i.name == GROUPA);
+    let [groupB] = productsList.data.filter((i) => i.name == GROUPA);
     let prices = await stripe.prices.list({
       active: true,
-      product: String(groupA.id),
+      product: String(groupB.id),
       expand: ["data.product"],
     });
     const PRICES = [prices.data[0].unit_amount, prices.data[1].unit_amount];
-
-    const products = prices.data.map((item) => {
+    const products = prices.data.map((item, i) => {
       return {
         priceId: item.id,
         productName:
