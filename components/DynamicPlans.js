@@ -7,11 +7,14 @@ export default function DynamicPlans({ isemail, nextLink }) {
   const [load, setLoad] = useState(false);
   const [dataPlane, setDataPlanes] = useState(null);
   useEffect(() => {
-    axios.post(`/api/payment/loadPlans`).then(({ data }) => {
-      console.log(data);
-      setDataPlanes(data);
-      setLoad(true);
-    });
+    // get country
+    async function loadPlans() {
+      axios.post(`/api/payment/loadPlans`).then(({ data }) => {
+        setDataPlanes(data);
+        setLoad(true);
+      });
+    }
+    loadPlans();
   }, []);
   if (load) {
     return (

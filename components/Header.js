@@ -14,7 +14,7 @@ import Edit from "@material-ui/icons/Edit";
 import Blind from "@material-ui/icons/VisibilityOff";
 import LoginPopup from "./LoginPopup";
 import RegisterPopup from "./RegisterPopup";
-import { Button, CircularProgress } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import Swal from "sweetalert2";
 import axios from "axios";
 import DynamicPlans from "./DynamicPlans";
@@ -77,7 +77,6 @@ export default function Header({
         },
         allowOutsideClick: () => !Swal.isLoading(),
       }).then(async (result) => {
-        console.log("result", result);
         if (result?.value?.status === "canceled" || result?.value) {
           await axios.put(
             `${API_URL}/users/${userFull?.id}`,

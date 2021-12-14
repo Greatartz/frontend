@@ -11,11 +11,6 @@ const AlertSubscribe = ({ show, currentLink }) => {
   const [loginModel, setLoginModel] = useState(false);
   const [planModal, setPlanModal] = useState(false);
   const [isemail, setIsemail] = useState(false);
-  useEffect(() => {
-    if (session) {
-      setIsemail(true);
-    }
-  }, []);
 
   const handlePriority = (value) => {
     if (value) {
