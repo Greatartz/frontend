@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     });
     const PRICES = [prices.data[0].unit_amount, prices.data[1].unit_amount];
 
-    const products = prices.data.map((item) => {
+    const products = prices.data.map((item, i) => {
       return {
         priceId: item.id,
         productName:
