@@ -4,7 +4,7 @@ This is a documentation for deploying this branch to vercel.
 
 first make sure about adding some values to vercel enviroment!!
 
-### important-1 - NEXT_PUBLIC_iPREGISTRY
+### important-1 - NEXT_PUBLIC_IPREGISTRY
 
 This tool is used for getting country code you can create your free account
 and get your key from : https://dashboard.ipregistry.co/
