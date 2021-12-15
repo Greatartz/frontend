@@ -120,7 +120,7 @@ export default function Header({
     async function getCountryCode() {
       try {
         const { data } = await axios.post(`/api/payment/getType`);
-        setCookies("code", data.code, { maxAge: 60 * 60 * 24 });
+        setCookies("code", data?.code, { maxAge: 60 * 60 * 24 });
       } catch {
         console.error("error while getting country");
       }

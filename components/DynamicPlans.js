@@ -22,7 +22,6 @@ export default function DynamicPlans({ isemail, nextLink }) {
     async function getPlansByCategory(cat) {
       if (cat == "A") {
         axios.post(`/api/payment/loadPlans`).then(({ data }) => {
-          console.log(data);
           setDataPlanes(data);
           setLoad(true);
         });
@@ -46,7 +45,6 @@ export default function DynamicPlans({ isemail, nextLink }) {
     }
     if (checkCookies("code")) {
       const code = getCookie("code");
-
       axios.get(`${API_URL}/countries?code=${code}`).then(({ data }) => {
         if (data.length > 0) {
           getPlansByCategory(data[0]?.category);
@@ -56,7 +54,6 @@ export default function DynamicPlans({ isemail, nextLink }) {
       });
     } else {
       loadPlans();
-      console.log("load plans done");
     }
   }, []);
   if (load) {
