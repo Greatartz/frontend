@@ -2,7 +2,7 @@ This is a documentation for deploying this branch to vercel.
 
 ## Getting Started
 
-first make sure about adding some values to vercel enviroment!!
+first make sure about adding some values to vercel enviroment!
 
 ### important-1 - NEXT_PUBLIC_IPREGISTRY
 
