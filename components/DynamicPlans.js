@@ -1,6 +1,8 @@
 import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { API_URL } from "../config/index";
+import { checkCookies, getCookie, setCookies } from "cookies-next";
 import Plane from "./Plane";
 
 export default function DynamicPlans({ isemail, nextLink }) {
@@ -8,13 +10,54 @@ export default function DynamicPlans({ isemail, nextLink }) {
   const [dataPlane, setDataPlanes] = useState(null);
   useEffect(() => {
     // get country
-    async function loadPlans() {
-      axios.post(`/api/payment/loadPlans`).then(({ data }) => {
-        setDataPlanes(data);
-        setLoad(true);
-      });
+    async function getCountryCode() {
+      try {
+        const { data } = await axios.post(`/api/payment/getType`);
+        setCookies("code", data.code, { maxAge: 60 * 60 * 24 });
+        return data.code;
+      } catch {
+        console.error("error while getting country");
+      }
     }
-    loadPlans();
+    async function getPlansByCategory(cat) {
+      if (cat == "A") {
+        axios.post(`/api/payment/loadPlans`).then(({ data }) => {
+          console.log(data);
+          setDataPlanes(data);
+          setLoad(true);
+        });
+      } else {
+        axios.post(`/api/payment/loadPlansB`).then(({ data }) => {
+          setDataPlanes(data);
+          setLoad(true);
+        });
+      }
+    }
+    async function loadPlans() {
+      const code = await getCountryCode();
+      const { data } = await axios.get(`${API_URL}/countries?code=${code}`);
+
+      //search code category
+      if (data.length > 0) {
+        getPlansByCategory(data[0]?.category);
+      } else {
+        getPlansByCategory("A");
+      }
+    }
+    if (checkCookies("code")) {
+      const code = getCookie("code");
+
+      axios.get(`${API_URL}/countries?code=${code}`).then(({ data }) => {
+        if (data.length > 0) {
+          getPlansByCategory(data[0]?.category);
+        } else {
+          getPlansByCategory("A");
+        }
+      });
+    } else {
+      loadPlans();
+      console.log("load plans done");
+    }
   }, []);
   if (load) {
     return (
