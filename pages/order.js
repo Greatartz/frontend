@@ -11,7 +11,7 @@ import { NextSeo } from "next-seo";
 
 export default function Order({
   ok,
-  login = true,
+  login,
   customerName = "",
   customerEmail = "",
   password = "",
@@ -20,22 +20,26 @@ export default function Order({
 }) {
   const [session, loading] = useSession();
   const [processing, setProcessing] = useState(true);
-  if (!loading && session) {
-    const jwt = session.accessToken;
-    const id = session.idCard;
-    axios.put(
-      `${API_URL}/users/${id}`,
-      { plan: plan, PlanBuyDate: getDate() },
-      { headers: { Authorization: `Bearer ${jwt}` } }
-    );
-  }
-  useEffect(async () => {
-    if (password !== "") {
-      setProcessing(true);
+  const [isChecked, setIsChecked] = useState(false);
+  useEffect(() => {
+    async function updateUser() {
+      const jwt = session.accessToken;
+      const id = session.idCard;
+      await axios.put(
+        `${API_URL}/users/${id}`,
+        { plan: plan, PlanBuyDate: getDate() },
+        { headers: { Authorization: `Bearer ${jwt}` } }
+      );
+    }
+    if (login && session?.idCard) {
+      updateUser();
+    }
+  }, [login, session]);
+  useEffect(() => {
+    async function check() {
       const res = await signIn("credentials", {
         email: customerEmail,
         password: password,
-        callbackUrl: BASE_URL,
         redirect: false,
       });
       if (res.url && session) {
@@ -48,8 +52,13 @@ export default function Order({
         );
       }
       setProcessing(false);
+      setIsChecked(true);
     }
-  }, [loading]);
+    if (password !== "" && !isChecked) {
+      setProcessing(true);
+      check();
+    }
+  }, [password]);
 
   const SEO = {
     title: "Page | Result",
@@ -131,6 +140,7 @@ export async function getServerSideProps({
     return {
       props: {
         ok: true,
+        login: true,
         next,
         plan,
       },
