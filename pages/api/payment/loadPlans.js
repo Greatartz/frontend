@@ -2,7 +2,8 @@ import Stripe from "stripe";
 import { SK_STRIPE } from "../../../config";
 export default async function handler(req, res) {
   if (req.method == "POST") {
-    const GROUPA = process.env.NEXT_PUBLIC_PRODUCT_A_NAME || "countrya";
+    const GROUPA =
+      process.env.NEXT_PUBLIC_PRODUCT_A_NAME || "country-developed";
     const stripe = new Stripe(SK_STRIPE, {
       apiVersion: "2020-08-27",
     });
