@@ -62,8 +62,9 @@ export default function RegisterPopup({ toggle }) {
       Swal.fire("Invalid", "Password must be at least 6 character!", "error");
     } else {
       const registerInfo = {
-        username: name,
+        username: email,
         email: email,
+        full_name: name,
         password: password,
       };
       const register = await fetch(`${API_URL}/auth/local/register`, {

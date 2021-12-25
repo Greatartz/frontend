@@ -216,7 +216,7 @@ export default function Header({
         axios
           .put(
             `${API_URL}/users/${id}`,
-            { username: value },
+            { full_name: value },
             { headers: { Authorization: `Bearer ${session.accessToken}` } }
           )
           .then(() => {

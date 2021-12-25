@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import axios from "axios";
 import { API_URL } from "../../../config/index";
-import { data } from "autoprefixer";
 
 const providers = [
   Providers.Credentials({
@@ -32,7 +31,7 @@ const callbacks = {
     if (user) {
       token.userId = user.data.user.id;
       token.accessToken = user.data.jwt;
-      token.name = user.data.user.username;
+      token.name = user.data.user.full_name;
       token.email = user.data.user.email;
       token.password = user.data.password;
     }

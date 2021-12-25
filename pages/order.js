@@ -101,7 +101,7 @@ export default function Order({
                 system.
               </h3>
               <h3>
-                your generated details is here, feel free to change them through
+                your generated details is here, feel free to change them through{" "}
                 <strong>Settings</strong>.
               </h3>
               <h3>
@@ -156,9 +156,10 @@ export async function getServerSideProps({
       numbers: true,
     });
     const registerInfo = {
-      username: customerName,
+      username: customerEmail,
       email: customerEmail,
       password: password,
+      full_name: customerName,
     };
     const register = await fetch(`${API_URL}/auth/local/register`, {
       method: "POST",
