@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import AlertSubscribe from "./AlertSubscribe";
 import { useState } from "react";
 import Head from "next/head";
+
 const Layout = ({ children, isHide = false, afterLink }) => {
   const [showLoginModel, setShowLoginModel] = useState(false);
   const globalLogin = () => {

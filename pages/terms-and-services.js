@@ -14,7 +14,7 @@ const Privacy = ({ data }) => {
       <NextSeo {...SEO} />
 
       <div className="w-11/12 mx-auto my-10 singlePageContent">
-        <h1 className="text-center"> {data[0].title} </h1>
+        <h1 className="text-center"> {data[0]?.title} </h1>
         <div className="mt-5 w-11/12 text-xl my-2 contentApp">
           <RichText doc={data[0]?.content} />
         </div>

@@ -32,7 +32,7 @@ export async function getServerSideProps() {
   const posts = await Promise.all(
     resCatagory.map(async (cat) => {
       const main = await axios
-        .get(`${API_URL}/posts?category=${cat.id}&_limit=6&_sort=id:DESC`)
+        .get(`${API_URL}/posts?category=${cat?.id}&_limit=6&_sort=id:DESC`)
         .then(({ data }) => {
           return data;
         });

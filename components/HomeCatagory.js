@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function HomeCatagory({ category, posts }) {
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
@@ -43,19 +43,19 @@ export default function HomeCatagory({ category, posts }) {
     <>
       <main>
         <h1 className="w-11/12 text-3xl mt-10 mb-5 mx-auto pl-2">
-          <Link href={`/category/${encodeURIComponent(category.name)}`}>
+          <Link href={`/category/${encodeURIComponent(category?.name)}`}>
             <a className="border-b-2 border-borderColor inline-block pb-2 capitalize">
-              {category.name}
+              {category?.name}
             </a>
           </Link>
 
-          <p className="block text-lg mt-2">{category.description}</p>
+          <p className="block text-lg mt-2">{category?.description}</p>
         </h1>
 
         <div className="w-11/12 mx-auto">
           <Slider {...settings}>
             {posts.map((part) => (
-              <ArticleBox post={part} key={part.id} />
+              <ArticleBox post={part} key={`post-a-${part?.id}`} />
             ))}
           </Slider>
         </div>
